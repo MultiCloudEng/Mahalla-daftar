@@ -200,6 +200,12 @@ label.f,.f{display:flex;flex-direction:column;gap:6px;font-size:.84rem;font-weig
 .spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--ink);animation:sp 0.9s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
+.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:st}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-weight:500;counter-increment:st}
+.steps li::before{content:counter(st);width:34px;height:34px;border-radius:50%;background:var(--ink);color:#f5f7fc;display:grid;place-items:center;font-weight:700}
+.steps .ico{display:inline-flex;vertical-align:-5px;width:24px;height:24px;color:var(--ink)}
+.banner .bt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.banner .bt small{font-weight:500;opacity:.85}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--text);color:var(--card);
   border-radius:16px;padding:8px 8px 8px 16px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:.95rem;width:max-content;max-width:calc(100% - 32px);box-shadow:var(--shadow);min-height:52px}
 .toast span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px}
@@ -259,7 +265,7 @@ const T={
   setupT:"Bazani ulash",setupLead:"Supabase loyihangizdagi Project URL va anon (publishable) key ni kiriting: Project Settings → API.",
   url:"Project URL",key:"anon / publishable key",connect:"Ulash",badCfg:"URL https:// bilan boshlansin va key to'liq bo'lsin.",
   libFail:"Kerakli fayl yuklanmadi. Internetni tekshirib, sahifani yangilang.",
-  importT:n=>`Telefonda eski yozuvlar bor: ${n} ta mijoz. Hisobingizga ko'chirilsinmi?`,importYes:"Ko'chirish",importNo:"Kerak emas",imported:n=>`${n} ta mijoz ko'chirildi`},
+  importT:n=>`Telefonda eski yozuvlar bor: ${n} ta mijoz. Hisobingizga ko'chirilsinmi?`,instT:"Ilovani telefonga o'rnating",instSub:"Har safar link ochish shart emas: ekranda «Daftar» belgisi paydo bo'ladi.",instGo:"O'rnatish",instHow:"Ko'rsatish",later:"Keyinroq",instSheet:"Telefon ekraniga qo'shish",instDone:"Tayyor! Endi ilovani ekrandagi «Daftar» belgisidan oching.",iosSafari:"Avval bu sahifani <b>Safari</b> brauzerida oching (Telegram yoki boshqa ilova ichida bo'lmaydi).",iosShare:"Pastdagi <b>Ulashish</b> tugmasini bosing:",iosAdd:"Ro'yxatni pastga suring va <b>«Ekranga qo'shish»</b> (Add to Home Screen) ni bosing.",iosConfirm:"O'ng yuqoridagi <b>«Qo'shish»</b> (Add) ni bosing. Ekranda «Daftar» belgisi paydo bo'ladi.",andChrome:"Bu sahifani <b>Chrome</b> brauzerida oching.",andMenu:"O'ng yuqoridagi <b>⋮</b> (uch nuqta) tugmasini bosing.",andInstall:"<b>«Ilovani o'rnatish»</b> yoki <b>«Bosh ekranga qo'shish»</b> ni tanlang va tasdiqlang.",importYes:"Ko'chirish",importNo:"Kerak emas",imported:n=>`${n} ta mijoz ko'chirildi`},
  ru:{sub:"Долговая тетрадь",total:"Всего долгов",debtors:"должников",overdue:"просрочено",allPaid:"Все оплатили",search:"Имя или телефон…",
   all:"Все",owing:"Должны",late:"Просрочка",clear:"Оплатили",addDebt:"+ Записать долг",addPay:"Оплата",
   gLate:"Просрочено",gOwe:"Должники",gClear:"Без долга",
@@ -293,7 +299,7 @@ const T={
   setupT:"Подключение базы",setupLead:"Введите Project URL и anon (publishable) key из проекта Supabase: Project Settings → API.",
   url:"Project URL",key:"anon / publishable key",connect:"Подключить",badCfg:"URL должен начинаться с https://, ключ — полностью.",
   libFail:"Не загрузился нужный файл. Проверьте интернет и обновите страницу.",
-  importT:n=>`На телефоне есть старые записи: ${n} клиент(ов). Перенести в аккаунт?`,importYes:"Перенести",importNo:"Не нужно",imported:n=>`Перенесено клиентов: ${n}`}
+  importT:n=>`На телефоне есть старые записи: ${n} клиент(ов). Перенести в аккаунт?`,instT:"Установите приложение на телефон",instSub:"Не нужно каждый раз открывать ссылку: на экране появится значок «Daftar».",instGo:"Установить",instHow:"Показать",later:"Позже",instSheet:"Добавить на экран телефона",instDone:"Готово! Теперь открывайте приложение значком «Daftar» на экране.",iosSafari:"Сначала откройте эту страницу в браузере <b>Safari</b> (внутри Telegram или другого приложения не получится).",iosShare:"Нажмите кнопку <b>Поделиться</b> внизу:",iosAdd:"Прокрутите список вниз и нажмите <b>«На экран „Домой“»</b> (Add to Home Screen).",iosConfirm:"Нажмите <b>«Добавить»</b> справа вверху. На экране появится значок «Daftar».",andChrome:"Откройте эту страницу в браузере <b>Chrome</b>.",andMenu:"Нажмите <b>⋮</b> (три точки) справа вверху.",andInstall:"Выберите <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b> и подтвердите.",importYes:"Перенести",importNo:"Не нужно",imported:n=>`Перенесено клиентов: ${n}`}
 };
 
 const day=864e5,now=()=>Date.now();
@@ -376,22 +382,56 @@ function reminderText(c){
   return l.msg(c.name,S.shop.name||"",fmt(Math.max(0,m.b)),S.shop.card,extra);
 }
 
+/* ---------- install to home screen ---------- */
+let deferredPrompt=null,screen="";
+const UA=navigator.userAgent||"";
+const isStandalone=()=>(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(UA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const isIOSSafari=isIOS&&/Safari/i.test(UA)&&!/CriOS|FxiOS|EdgiOS|OPiOS|Telegram|Instagram|FBAN|FBAV|Line\//i.test(UA);
+const isAndroid=/android/i.test(UA);
+function rerender(){if(screen==="app")render();else if(screen==="auth")renderAuth()}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;rerender()});
+window.addEventListener("appinstalled",()=>{deferredPrompt=null;ls.set("daftar-installed","1");toast(L().instDone);rerender()});
+function installBanner(){
+  if(isStandalone()||ls.get("daftar-installed"))return "";
+  if((+ls.get("daftar-install-snooze")||0)>now())return "";
+  if(!deferredPrompt&&!isIOS&&!isAndroid)return "";
+  const l=L();
+  return `<div class="banner ink"><span class="bt"><span>📲 ${l.instT}</span><small>${l.instSub}</small></span>
+    <span class="bb"><button id="inst-go">${deferredPrompt?l.instGo:l.instHow}</button><button id="inst-later">${l.later}</button></span></div>`;
+}
+const SHARE_ICO='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg>';
+function installGuide(){
+  const l=L();
+  const steps=isIOS?[...(isIOSSafari?[]:[l.iosSafari]),l.iosShare+" "+SHARE_ICO,l.iosAdd,l.iosConfirm]:[l.andChrome,l.andMenu,l.andInstall];
+  sheet(l.instSheet,"ink",`<ol class="steps">${steps.map(x=>`<li><span>${x}</span></li>`).join("")}</ol>
+    <button class="btn soft" id="ig-ok">${l.later}</button>`);
+  document.getElementById("ig-ok").onclick=closeSheet;
+}
+function bindInstall(){
+  const go=document.getElementById("inst-go"),later=document.getElementById("inst-later");
+  if(go)go.onclick=async()=>{
+    if(deferredPrompt){const p=deferredPrompt;deferredPrompt=null;try{p.prompt();const r=await p.userChoice;if(r&&r.outcome==="accepted")ls.set("daftar-installed","1")}catch(e){}rerender()}
+    else installGuide()};
+  if(later)later.onclick=()=>{ls.set("daftar-install-snooze",String(now()+3*day));rerender()};
+}
+
 /* ---------- screens ---------- */
 function langBtn(){return `<button class="ghost" id="lgb" aria-label="${L().lang}">${S.lang==="uz"?"RU":"UZ"}</button>`}
 function bindLangBtn(rerender){const b=document.getElementById("lgb");if(b)b.onclick=()=>{setLang(S.lang==="uz"?"ru":"uz");rerender()}}
 function brandTop(){return `<div class="shop"><b>Mahalla Daftar</b><span>${L().sub}</span></div>`}
 
-function renderMessage(text,retryFn){
+function renderMessage(text,retryFn){screen="msg";
   showDock(false);tb.innerHTML=brandTop();
   app.innerHTML=`<div class="center"><div class="panel"><div>${esc(text)}</div>${retryFn?`<button class="btn ink" id="rt">${L().retry}</button>`:""}</div></div>`;
   if(retryFn)document.getElementById("rt").onclick=retryFn;
 }
-function renderLoading(){
+function renderLoading(){screen="loading";
   showDock(false);tb.innerHTML=brandTop();
   app.innerHTML=`<div class="center"><div class="panel"><div class="spin" role="progressbar" aria-label="${L().loading}"></div><div class="note">${L().loading}</div></div></div>`;
 }
 
-function renderSetup(errText){
+function renderSetup(errText){screen="setup";
   const l=L();showDock(false);tb.innerHTML=brandTop()+langBtn();bindLangBtn(()=>renderSetup(errText));
   app.innerHTML=`<section class="auth"><div class="auth-head"><img src="icon-192.png" alt=""><h1>${l.setupT}</h1></div>
    <p class="lead">${l.setupLead}</p>
@@ -417,11 +457,12 @@ function authError(e){
   return m||l.net;
 }
 function renderAuth(){
-  const l=L(),su=authMode==="signup";showDock(false);
+  const l=L(),su=authMode==="signup";showDock(false);screen="auth";
   tb.innerHTML=brandTop()+langBtn();bindLangBtn(renderAuth);
   app.innerHTML=`<section class="auth">
    <div class="auth-head"><img src="icon-192.png" alt=""><h1>Mahalla Daftar</h1></div>
    <p class="lead">${l.authLead}</p>
+   ${installBanner()}
    <div class="seg two" role="group"><button data-am="login" aria-pressed="${!su}">${l.login}</button><button data-am="signup" aria-pressed="${su}">${l.signup}</button></div>
    <form class="panel" id="af" novalidate>
     ${su?`<label class="f">${l.shop}<input id="a-shop" autocomplete="organization" value="${esc(pendingShop)}"></label>`:""}
@@ -431,6 +472,7 @@ function renderAuth(){
     ${authInfo?`<div class="infobox">${esc(authInfo)}</div>`:""}
     <button class="btn ink" type="submit" id="a-go">${su?l.signup:l.login}</button>
    </form></section>`;
+  bindInstall();
   app.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{authEmail=document.getElementById("a-email").value;authMode=b.dataset.am;authErr="";authInfo="";renderAuth()});
   document.getElementById("af").onsubmit=async e=>{
     e.preventDefault();
@@ -484,7 +526,7 @@ async function boot(){
 }
 
 /* ---------- list ---------- */
-function render(){showDock(true);view.name==="detail"?renderDetail():renderList()}
+function render(){showDock(true);screen="app";view.name==="detail"?renderDetail():renderList()}
 function offlineBanner(){return S.offline?`<div class="banner"><span>${L().offline}</span><button id="retry">${L().retry}</button></div>`:""}
 function bindOffline(){const r=document.getElementById("retry");if(r)r.onclick=()=>startApp()}
 function oldLocal(){
@@ -514,7 +556,7 @@ function renderList(){
     [l.gOwe,"",list.filter(r=>r.m.b>0&&!r.m.late).sort((a,b)=>(a.m.next||9e15)-(b.m.next||9e15)||b.m.b-a.m.b)],
     [l.gClear,"",list.filter(r=>r.m.b<=0).sort((a,b)=>b.m.t-a.m.t)]].filter(g=>g[2].length);
   const old=oldLocal();
-  app.innerHTML=`${offlineBanner()}
+  app.innerHTML=`${offlineBanner()}${installBanner()}
   ${old?`<div class="banner ink"><span>${l.importT(old.cs.length)}</span><span class="bb"><button id="imp">${l.importYes}</button><button id="impNo">${l.importNo}</button></span></div>`:""}
   <section class="hero" aria-live="polite">
    <div><div class="eyebrow">${l.total}</div><div class="big num">${fmt(total)}<small>so'm</small></div></div>
@@ -531,7 +573,7 @@ function renderList(){
      <div class="rows">${g.map(r=>rowHTML(r,l)).join("")}</div></section>`).join("")
    :`<div class="empty">${S.customers.length?l.nores:l.empty}</div>`}`;
   dockin.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
-  bindOffline();
+  bindOffline();bindInstall();
   document.getElementById("q").oninput=e=>{view.q=e.target.value;const p=e.target.selectionStart;renderList();const n=document.getElementById("q");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
   app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{view.filter=b.dataset.f;renderList()});
   app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{view={...view,name:"detail",cid:b.dataset.c};render();scrollTo(0,0)});
