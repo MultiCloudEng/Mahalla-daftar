@@ -314,7 +314,7 @@ function readCfg(){
   try{const c=JSON.parse(ls.get(CFG_KEY)||"null");if(c&&c.url&&c.anonKey)return c}catch(e){}
   return null;
 }
-let cfg=readCfg(),sb=null,user=null,pendingShop="";
+let cfg=readCfg(),sb=null,user=null,pendingShop=ls.get("daftar-pending-shop")||"";
 let S={lang:ls.get(LANG_KEY)==="ru"?"ru":"uz",shop:{name:"",card:""},customers:[],tx:[],inst:[],offline:false};
 const L=()=>T[S.lang]||T.uz;
 const dstr=t=>{const d=new Date(t);return d.getDate()+" "+(MON[S.lang]||MON.uz)[d.getMonth()]};
@@ -435,7 +435,7 @@ function renderAuth(){
   document.getElementById("af").onsubmit=async e=>{
     e.preventDefault();
     const email=document.getElementById("a-email").value.trim(),pw=document.getElementById("a-pw").value,er=document.getElementById("a-err"),go=document.getElementById("a-go");
-    authEmail=email;const sh=document.getElementById("a-shop");if(sh)pendingShop=sh.value.trim();
+    authEmail=email;const sh=document.getElementById("a-shop");if(sh){pendingShop=sh.value.trim();ls.set("daftar-pending-shop",pendingShop)}
     if(!email||!pw){er.textContent=l.needEmail;return}
     if(su&&pw.length<6){er.textContent=l.shortPw;return}
     go.disabled=true;er.textContent="";
@@ -461,7 +461,7 @@ async function startApp(){
   starting=false;
   if(pendingShop&&!S.shop.name&&!S.offline){
     try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:pendingShop,lang:S.lang},{onConflict:"owner_id"}));S.shop.name=pendingShop;saveCache()}catch(e){}
-    pendingShop="";
+    pendingShop="";ls.del("daftar-pending-shop");
   }
   view={name:"list",filter:"owing",q:""};render();
 }
