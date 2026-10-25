@@ -12,23 +12,22 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Daftar">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap">
 <style>
-/* Layout: single-column phone app. Sticky top bar, one hero figure (total debt), grouped list, fixed thumb bar at the bottom. Warm squared-notebook paper, ink-blue pen for primary actions. */
+/* Layout: single-column phone app. Sticky top bar, one hero figure, grouped list, fixed thumb bar. Warm squared-notebook paper, ink-blue pen for actions. */
 :root{
   --bg:#f6efe4; --grid:#ece1cf; --card:#fffaf2; --raise:#fffdf8; --line:#e5d8c4;
   --text:#2a211b; --muted:#7b6a5b; --faint:#a8978a;
   --ink:#27427c; --ink-soft:#e4e8f1;
   --debt:#b0412d; --debt-soft:#f6e1d8; --pay:#3b7548; --pay-soft:#e1eedb;
-  --warn:#9a5d00; --warn-soft:#fbe8c4; --margin:#d98b77;
+  --warn:#9a5d00; --warn-soft:#fbe8c4;
   --display:"Unbounded",system-ui,sans-serif; --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --shadow:0 1px 0 rgba(90,60,30,.06),0 6px 20px -10px rgba(90,60,30,.25);
   color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
+[hidden]{display:none!important}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;font-family:var(--body);font-size:17px;line-height:1.4;color:var(--text);background-color:var(--bg);
@@ -40,19 +39,17 @@ button{cursor:pointer;touch-action:manipulation}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:10px}
 .num{font-variant-numeric:tabular-nums}
 
-/* top bar */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid transparent}
 .topbar.scrolled{border-bottom-color:var(--line)}
 .tb-in,.main{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .tb-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
 .shop{min-width:0}
-.shop b{display:block;font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shop b{display:block;font-family:var(--display);font-weight:600;font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .shop span{font-size:.78rem;color:var(--muted)}
-.ghost{border:1px solid var(--line);background:var(--card);border-radius:14px;min-width:46px;height:46px;padding:0 14px;font-weight:600;color:var(--text)}
+.ghost{border:1px solid var(--line);background:var(--card);border-radius:14px;min-width:46px;height:46px;padding:0 14px;font-weight:600}
 .back{border:0;background:none;color:var(--ink);font-weight:600;min-height:46px;padding:0 4px;font-size:1rem}
 .main{padding-block:8px calc(120px + env(safe-area-inset-bottom,0px))}
 
-/* hero */
 .hero{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
 .eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
 .big{font-family:var(--display);font-weight:600;font-size:clamp(2rem,9.5vw,2.75rem);line-height:1.05;letter-spacing:-.02em;color:var(--debt)}
@@ -62,16 +59,17 @@ button{cursor:pointer;touch-action:manipulation}
 .stat b{font-size:1.05rem}
 .stat.late{background:var(--warn-soft);color:var(--warn)}
 .stat.ok{background:var(--pay-soft);color:var(--pay)}
+.split{display:flex;gap:16px;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}
+.split b{color:var(--text)}
 
-/* search + segmented */
 .tools{display:flex;flex-direction:column;gap:10px;margin-block:16px 6px}
 .search{width:100%;height:50px;border-radius:14px;border:1px solid var(--line);background:var(--raise);padding:0 16px;font-size:1rem}
 .search::placeholder{color:var(--faint)}
 .seg{display:grid;grid-template-columns:repeat(4,1fr);background:var(--grid);border-radius:14px;padding:4px;gap:4px}
-.seg button{border:0;background:none;border-radius:10px;min-height:40px;font-size:.86rem;font-weight:600;color:var(--muted);padding:0 4px}
+.seg.two{grid-template-columns:1fr 1fr}
+.seg button{border:0;background:none;border-radius:10px;min-height:40px;font-size:.88rem;font-weight:600;color:var(--muted);padding:0 4px}
 .seg button[aria-pressed="true"]{background:var(--raise);color:var(--text);box-shadow:0 1px 3px rgba(90,60,30,.15)}
 
-/* list */
 .group{margin-top:16px}
 .gh{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--muted)}
 .gh.late{color:var(--warn)}
@@ -79,7 +77,7 @@ button{cursor:pointer;touch-action:manipulation}
 .row{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:none;width:100%;text-align:left;min-height:68px}
 .row:first-child{border-top:0}
 .row:active{background:var(--grid)}
-.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--ink-soft);color:var(--ink);font-size:1rem}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--ink-soft);color:var(--ink);font-size:1rem;flex:none}
 .av.late{background:var(--warn-soft);color:var(--warn)}
 .av.ok{background:var(--pay-soft);color:var(--pay)}
 .who{min-width:0}
@@ -87,36 +85,38 @@ button{cursor:pointer;touch-action:manipulation}
 .sub{font-size:.82rem;color:var(--muted);margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .pill{font-size:.74rem;font-weight:700;border-radius:999px;padding:2px 8px;background:var(--warn-soft);color:var(--warn)}
 .pill.due{background:var(--ink-soft);color:var(--ink)}
+.pill.ok{background:var(--pay-soft);color:var(--pay)}
 .amt{font-weight:700;font-size:1.05rem;white-space:nowrap;text-align:right}
 .amt.debt{color:var(--debt)} .amt.ok{color:var(--pay);font-weight:600;font-size:.95rem}
-.example{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);border:1px dashed var(--line);border-radius:6px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.tag{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--ink-soft);border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:1px}
 .empty{text-align:center;color:var(--muted);padding:36px 16px;background:var(--card);border:1px dashed var(--line);border-radius:18px;margin-top:16px}
-.linkish{border:0;background:none;color:var(--muted);font-weight:600;padding:14px 4px;text-decoration:underline;text-underline-offset:3px;font-size:.9rem}
+.linkish{border:0;background:none;color:var(--muted);font-weight:600;padding:14px 4px;text-decoration:underline;text-underline-offset:3px;font-size:.9rem;text-align:left}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--warn-soft);color:var(--warn);border-radius:14px;padding:10px 10px 10px 14px;font-weight:600;font-size:.9rem;margin-bottom:12px}
+.banner.ink{background:var(--ink-soft);color:var(--ink);flex-wrap:wrap}
+.banner .bb{display:flex;gap:8px}
+.banner button{flex:none;border:0;border-radius:10px;min-height:40px;padding:0 12px;font-weight:700;background:var(--raise);color:inherit}
 
-/* bottom thumb bar */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:8;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
 .dock-in{max-width:528px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
-.btn{height:56px;border:0;border-radius:16px;font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center;padding:0 12px}
+.btn{height:56px;border:0;border-radius:16px;font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center;padding:0 12px;width:100%}
 .btn.debt{background:var(--debt);color:#fff8f2}
 .btn.pay{background:var(--pay);color:#f6fbf3}
 .btn.ink{background:var(--ink);color:#f5f7fc}
 .btn.soft{background:var(--raise);border:1px solid var(--line);color:var(--text);font-weight:600}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled{opacity:.5;cursor:progress}
 
-/* detail */
 .dh{display:flex;gap:14px;align-items:center}
 .dh .av{width:52px;height:52px;font-size:1.25rem}
 .dh h1{font-family:var(--display);font-weight:600;font-size:1.2rem;margin:0;line-height:1.2;text-wrap:balance;overflow-wrap:anywhere}
 .dh .ph{font-size:.9rem;color:var(--muted);margin-top:2px}
 .status{display:flex;gap:8px;flex-wrap:wrap}
 .status .pill{font-size:.82rem;padding:5px 10px}
-.status .pill.ok{background:var(--pay-soft);color:var(--pay)}
 .limit{display:flex;flex-direction:column;gap:6px}
 .limit .row2{display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted)}
 .bar{height:8px;border-radius:99px;background:var(--grid);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--ink);border-radius:99px}
-.bar i.hot{background:var(--debt)}
+.bar i.hot{background:var(--debt)} .bar i.ok{background:var(--pay)}
 .primary{margin-top:14px;display:flex;flex-direction:column;gap:8px}
 .tg{background:#2b8fc4;color:#fff}
 details.box{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:10px}
@@ -135,161 +135,387 @@ details.box .bd{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
 .h .x{grid-row:span 2;font-weight:700;white-space:nowrap}
 .h .x.debt{color:var(--debt)} .h .x.pay{color:var(--pay)}
 .inl{display:grid;grid-template-columns:1fr auto;gap:8px}
+.inl .btn{width:auto}
 
-/* sheet */
+.plans{display:flex;flex-direction:column;gap:8px}
+.plan{display:flex;flex-direction:column;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;width:100%}
+.plan:active{background:var(--grid)}
+.pl-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.pl-top b{min-width:0;overflow-wrap:anywhere}
+.pl-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.84rem;color:var(--muted);align-items:center}
+.kv{display:grid;grid-template-columns:1fr auto;gap:8px 12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.95rem}
+.kv span{color:var(--muted)} .kv b{text-align:right}
+.sched{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.si{display:grid;grid-template-columns:24px 1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border-top:1px solid var(--line);font-size:.93rem}
+.si:first-child{border-top:0}
+.si .n{color:var(--faint);font-weight:700}
+.si.next{background:var(--ink-soft)}
+.badge{font-size:.74rem;font-weight:700;border-radius:999px;padding:3px 8px;white-space:nowrap}
+.badge.paid{background:var(--pay-soft);color:var(--pay)} .badge.late{background:var(--warn-soft);color:var(--warn)}
+.badge.part{background:var(--ink-soft);color:var(--ink)} .badge.up{background:var(--grid);color:var(--muted)}
+.prev{background:var(--ink-soft);color:var(--ink);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.prev .pm{font-family:var(--display);font-weight:600;font-size:1.35rem}
+
 .scrim{position:fixed;inset:0;background:rgba(55,35,20,.38);z-index:20}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-height:94%;overflow:auto;background:var(--raise);border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(60,35,15,.2);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px calc(16px + env(safe-area-inset-bottom,0px))}
 .sheet .in{max-width:528px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .grab{width:42px;height:5px;border-radius:9px;background:var(--line);margin:2px auto 0}
 .sh-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.sh-head h2{margin:0;font-family:var(--display);font-weight:600;font-size:1.1rem}
+.sh-head h2{margin:0;font-family:var(--display);font-weight:600;font-size:1.1rem;overflow-wrap:anywhere}
 .sh-head h2.debt{color:var(--debt)} .sh-head h2.pay{color:var(--pay)} .sh-head h2.ink{color:var(--ink)}
-.x-btn{border:0;background:var(--grid);width:40px;height:40px;border-radius:50%;font-size:1.1rem;color:var(--muted)}
+.x-btn{border:0;background:var(--grid);width:40px;height:40px;border-radius:50%;font-size:1.1rem;color:var(--muted);flex:none}
 label.f,.f{display:flex;flex-direction:column;gap:6px;font-size:.84rem;font-weight:600;color:var(--muted)}
 .f input{height:52px;border-radius:14px;border:1px solid var(--line);background:var(--card);padding:0 14px;font-size:1.05rem;color:var(--text);width:100%}
 .f input.amount{height:72px;font-size:2.1rem;font-family:var(--display);font-weight:600;letter-spacing:-.02em}
-.f input.amount.debt{color:var(--debt)} .f input.amount.pay{color:var(--pay)}
+.f input.amount.debt{color:var(--debt)} .f input.amount.pay{color:var(--pay)} .f input.amount.ink{color:var(--ink)}
 .f input::placeholder{color:var(--faint)}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 14px;min-height:42px;font-weight:600;font-size:.92rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 14px;min-height:42px;font-weight:600;font-size:.92rem;color:var(--text)}
 .chip[aria-pressed="true"]{background:var(--ink);color:#f5f7fc;border-color:var(--ink)}
 .chip.full{border-color:var(--pay);color:var(--pay);background:var(--pay-soft)}
+.chips input.mini{width:96px;height:42px;border-radius:999px;border:1px solid var(--line);background:var(--card);padding:0 14px;font-weight:600;text-align:center}
 .picked{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 8px 8px 12px}
 .picked .who{display:flex;gap:10px;align-items:center;min-width:0}
 .picked .av{width:36px;height:36px;font-size:.9rem}
-.picked button{border:0;background:var(--grid);border-radius:10px;padding:0 12px;min-height:40px;font-weight:600;color:var(--ink)}
+.picked button{border:0;background:var(--grid);border-radius:10px;padding:0 12px;min-height:40px;font-weight:600;color:var(--ink);flex:none}
 .suggest{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .suggest button{border:0;border-top:1px solid var(--line);background:none;text-align:left;padding:0 14px;min-height:50px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .suggest button:first-child{border-top:0}
 .suggest .new{color:var(--ink);font-weight:600}
 .err{color:var(--debt);font-size:.88rem;font-weight:600;min-height:1.2em;margin:-6px 0}
 .warnbox{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.infobox{background:var(--pay-soft);color:var(--pay);border-radius:12px;padding:10px 14px;font-size:.92rem;font-weight:600}
 .sheet .sticky{position:sticky;bottom:calc(-16px - env(safe-area-inset-bottom,0px));background:var(--raise);padding-block:6px 4px}
-textarea{width:100%;min-height:110px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:10px;font-size:.8rem}
 .note{font-size:.85rem;color:var(--muted)}
 
+.auth{display:flex;flex-direction:column;gap:16px;padding-top:20px}
+.auth-head{display:flex;gap:14px;align-items:center}
+.auth-head img{width:56px;height:56px;border-radius:16px;box-shadow:var(--shadow)}
+.auth h1{font-family:var(--display);font-weight:600;font-size:1.45rem;margin:0}
+.lead{color:var(--muted);margin:0;max-width:44ch}
+.panel{display:flex;flex-direction:column;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.center{min-height:55vh;display:grid;place-items:center;text-align:center}
+.center .panel{max-width:420px;align-items:center}
+.spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--ink);animation:sp 0.9s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--text);color:var(--card);
-  border-radius:16px;padding:8px 8px 8px 16px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:.95rem;width:max-content;max-width:calc(100% - 32px);box-shadow:var(--shadow)}
-.toast span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  border-radius:16px;padding:8px 8px 8px 16px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:.95rem;width:max-content;max-width:calc(100% - 32px);box-shadow:var(--shadow);min-height:52px}
+.toast span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px}
 .toast button{border:0;background:var(--card);color:var(--text);border-radius:10px;min-height:40px;padding:0 12px;font-weight:700;flex:none}
 @media (prefers-reduced-motion:no-preference){
   .sheet{animation:up .2s cubic-bezier(.2,.8,.2,1)} @keyframes up{from{transform:translateY(40px);opacity:.5}}
   .toast{animation:tin .18s ease-out} @keyframes tin{from{opacity:0;transform:translate(-50%,8px)}}
 }
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
 </style>
-
-</head><body>
+</head>
+<body>
 <header class="topbar" id="topbar"><div class="tb-in" id="tb"></div></header>
 <main class="main" id="app"></main>
-<nav class="dock" id="dock"><div class="dock-in" id="dockin"></div></nav>
+<nav class="dock" id="dock" hidden><div class="dock-in" id="dockin"></div></nav>
 <div id="layer"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
 <script>
 (function(){
-const KEY="mahalla-daftar-v1";
+"use strict";
+const OLD_KEY="mahalla-daftar-v1",CFG_KEY="daftar-cfg",LANG_KEY="daftar-lang";
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+
 const T={
  uz:{sub:"Qarz daftari",total:"Jami qarz",debtors:"qarzdor",overdue:"muddati o'tgan",allPaid:"Hammasi to'langan",search:"Ism yoki telefon…",
   all:"Hammasi",owing:"Qarzdor",late:"Kechikkan",clear:"To'lagan",addDebt:"+ Qarz yozish",addPay:"To'lov",
   gLate:"Muddati o'tgan",gOwe:"Qarzdorlar",gClear:"Qarzi yo'q",
-  empty:"Hali yozuv yo'q. Pastdagi «Qarz yozish» tugmasini bosing.",nores:"Hech kim topilmadi.",
+  empty:"Hali mijoz yo'q. Pastdagi «Qarz yozish» tugmasi bilan birinchi yozuvni qiling.",nores:"Hech kim topilmadi.",
   back:"← Orqaga",balance:"Qarz qoldig'i",paid:"Qarzi yo'q",limit:"Limit",history:"Tarix",left:"qoldi",
   remind:"Telegramda eslatish",copy:"Matnni nusxalash",copied:"Nusxalandi",preview:"Eslatma matnini ko'rish",
-  debtT:"Qarz yozish",payT:"To'lov qabul qilish",who:"Kim oldi?",whoPay:"Kim to'ladi?",whoPh:"Ism yozing…",newC:"Yangi mijoz qo'shish",
+  debtT:"Qarz yozish",payT:"To'lov qabul qilish",who:"Kim oldi?",whoPay:"Kim to'ladi?",whoPh:"Ism yozing…",newC:"Yangi mijoz",
   phone:"Telefon (ixtiyoriy)",amount:"Summa, so'm",due:"Qachon to'laydi?",none:"Belgilanmagan",d3:"3 kun",w1:"1 hafta",m1:"1 oy",
   note:"Izoh (non, guruch…)",saveD:"Qarzni yozish",saveP:"To'lovni yozish",change:"O'zgartirish",full:"Hammasi",
   needWho:"Mijozni tanlang yoki ism yozing.",needAmt:"Summani kiriting.",
   savedD:"Qarz yozildi",savedP:"To'lov yozildi",undo:"Bekor",undone:"Bekor qilindi",
   overLimit:"Bu qarz bilan mijoz limitdan oshadi",dueOn:"muddat",lateBy:"kun kechikdi",dueIn:"To'lov",
   settings:"Sozlamalar",shop:"Do'kon nomi",card:"Karta raqami (eslatmada ko'rinadi)",lang:"Til",save:"Saqlash",saved:"Saqlandi",
-  backup:"Zaxira nusxa",bcopy:"Zaxirani nusxalash",brestore:"Zaxiradan tiklash",bpaste:"Zaxira matnini shu yerga qo'ying",
-  restored:"Ma'lumotlar tiklandi",bad:"Bu matn zaxira emas. To'liq nusxani qo'ying.",
-  wipeEx:"Namuna yozuvlarni o'chirish",example:"namuna",custSet:"Mijoz sozlamalari",del:"Mijozni o'chirish",delSure:"Ha, o'chirish",cancel:"Bekor",
-  setLimit:"Qarz limiti, so'm (0 = cheklovsiz)",
-  msg:(n,s,a,c)=>`Assalomu alaykum, ${n}!\n${s?s+" do'konidagi ":""}qarzingiz: ${a} so'm.\nQulay vaqtingizda to'lab qo'ysangiz, xursand bo'lamiz.${c?`\nKarta: ${c}`:""}\nRahmat!`,
-  stored:"Ma'lumotlar faqat shu telefonda saqlanadi. Vaqti-vaqti bilan zaxira oling."},
+  custSet:"Mijoz sozlamalari",del:"Mijozni o'chirish",delSure:"Ha, o'chirish",cancel:"Bekor",setLimit:"Qarz limiti, so'm (0 = cheklovsiz)",
+  msg:(n,s,a,c,x)=>`Assalomu alaykum, ${n}!\n${s?s+" do'konidagi ":""}qarzingiz: ${a} so'm.${x?"\n"+x:""}\nQulay vaqtingizda to'lab qo'ysangiz, xursand bo'lamiz.${c?`\nKarta: ${c}`:""}\nRahmat!`,
+  modeSimple:"Oddiy qarz",modeInst:"Muddatli to'lov",product:"Mahsulot (masalan: Samsung A15)",price:"Umumiy narx, so'm",downP:"Boshlang'ich to'lov, so'm (ixtiyoriy)",
+  months:"Necha oyga?",mo:"oy",perMonth:"Oyiga",firstPay:"Birinchi to'lov",lastPay:"Oxirgi to'lov",toDebt:"Qarzga yoziladi",saveI:"Muddatli to'lovni yozish",
+  needProduct:"Mahsulot nomini yozing.",needPrice:"Narxni kiriting.",badDown:"Boshlang'ich to'lov narxdan kam bo'lishi kerak.",badMonths:"Oylar soni 1 dan 60 gacha bo'lsin.",
+  savedI:"Muddatli to'lov yozildi",plansT:"Muddatli to'lovlar",paidOf:(a,b)=>`${a}/${b} oy to'landi`,nextPay:"Keyingi",done:"To'liq to'landi",
+  schedT:"To'lov jadvali",stPaid:"To'landi",stLate:"Kechikdi",stPart:"Qisman",stUp:"Kutilmoqda",acceptMonthly:"Oylik to'lovni qabul qilish",
+  target:"Qaysi qarzga?",toGeneral:"Oddiy qarz",splitGen:"Oddiy",splitInst:"Muddatli",priceTotal:"Umumiy narx",downLbl:"Boshlang'ich",paidLbl:"To'landi",leftLbl:"Qoldi",
+  nextLine:(a,d)=>`Navbatdagi muddatli to'lov: ${a} so'm (${d}).`,delPlan:"Muddatli to'lovni o'chirish",instTag:"muddatli",
+  login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol (kamida 6 belgi)",
+  authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
+  badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
+  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",
+  checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
+  logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
+  loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
+  offline:"Oflayn: oxirgi yuklangan ma'lumot. O'zgartirish uchun internet kerak.",retry:"Qayta urinish",offlineNoSave:"Internet yo'q. Hozir saqlab bo'lmaydi.",
+  setupT:"Bazani ulash",setupLead:"Supabase loyihangizdagi Project URL va anon (publishable) key ni kiriting: Project Settings → API.",
+  url:"Project URL",key:"anon / publishable key",connect:"Ulash",badCfg:"URL https:// bilan boshlansin va key to'liq bo'lsin.",
+  libFail:"Kerakli fayl yuklanmadi. Internetni tekshirib, sahifani yangilang.",
+  importT:n=>`Telefonda eski yozuvlar bor: ${n} ta mijoz. Hisobingizga ko'chirilsinmi?`,importYes:"Ko'chirish",importNo:"Kerak emas",imported:n=>`${n} ta mijoz ko'chirildi`},
  ru:{sub:"Долговая тетрадь",total:"Всего долгов",debtors:"должников",overdue:"просрочено",allPaid:"Все оплатили",search:"Имя или телефон…",
   all:"Все",owing:"Должны",late:"Просрочка",clear:"Оплатили",addDebt:"+ Записать долг",addPay:"Оплата",
   gLate:"Просрочено",gOwe:"Должники",gClear:"Без долга",
-  empty:"Записей пока нет. Нажмите «Записать долг» внизу.",nores:"Никого не найдено.",
+  empty:"Клиентов пока нет. Нажмите «Записать долг» внизу.",nores:"Никого не найдено.",
   back:"← Назад",balance:"Остаток долга",paid:"Долга нет",limit:"Лимит",history:"История",left:"осталось",
   remind:"Напомнить в Telegram",copy:"Скопировать текст",copied:"Скопировано",preview:"Показать текст напоминания",
-  debtT:"Записать долг",payT:"Принять оплату",who:"Кто взял?",whoPay:"Кто платит?",whoPh:"Введите имя…",newC:"Добавить нового клиента",
+  debtT:"Записать долг",payT:"Принять оплату",who:"Кто взял?",whoPay:"Кто платит?",whoPh:"Введите имя…",newC:"Новый клиент",
   phone:"Телефон (необязательно)",amount:"Сумма, сум",due:"Когда вернёт?",none:"Не указано",d3:"3 дня",w1:"1 неделя",m1:"1 месяц",
   note:"Заметка (хлеб, рис…)",saveD:"Записать долг",saveP:"Записать оплату",change:"Изменить",full:"Всё",
   needWho:"Выберите клиента или введите имя.",needAmt:"Введите сумму.",
   savedD:"Долг записан",savedP:"Оплата записана",undo:"Отмена",undone:"Отменено",
   overLimit:"С этим долгом клиент превысит лимит",dueOn:"срок",lateBy:"дн. просрочки",dueIn:"Оплата",
   settings:"Настройки",shop:"Название магазина",card:"Номер карты (видно в напоминании)",lang:"Язык",save:"Сохранить",saved:"Сохранено",
-  backup:"Резервная копия",bcopy:"Скопировать копию",brestore:"Восстановить",bpaste:"Вставьте текст резервной копии",
-  restored:"Данные восстановлены",bad:"Это не резервная копия. Вставьте полный текст.",
-  wipeEx:"Удалить примеры",example:"пример",custSet:"Настройки клиента",del:"Удалить клиента",delSure:"Да, удалить",cancel:"Отмена",
-  setLimit:"Лимит долга, сум (0 = без лимита)",
-  msg:(n,s,a,c)=>`Ассалому алайкум, ${n}!\nВаш долг${s?` в магазине «${s}»`:""}: ${a} сум.\nОплатите, пожалуйста, когда будет удобно.${c?`\nКарта: ${c}`:""}\nСпасибо!`,
-  stored:"Данные хранятся только на этом телефоне. Время от времени делайте копию."}
+  custSet:"Настройки клиента",del:"Удалить клиента",delSure:"Да, удалить",cancel:"Отмена",setLimit:"Лимит долга, сум (0 = без лимита)",
+  msg:(n,s,a,c,x)=>`Ассалому алайкум, ${n}!\nВаш долг${s?` в магазине «${s}»`:""}: ${a} сум.${x?"\n"+x:""}\nОплатите, пожалуйста, когда будет удобно.${c?`\nКарта: ${c}`:""}\nСпасибо!`,
+  modeSimple:"Обычный долг",modeInst:"Рассрочка",product:"Товар (например: Samsung A15)",price:"Полная цена, сум",downP:"Первый взнос, сум (необязательно)",
+  months:"На сколько месяцев?",mo:"мес.",perMonth:"В месяц",firstPay:"Первый платёж",lastPay:"Последний платёж",toDebt:"Пойдёт в долг",saveI:"Записать рассрочку",
+  needProduct:"Введите название товара.",needPrice:"Введите цену.",badDown:"Первый взнос должен быть меньше цены.",badMonths:"Срок от 1 до 60 месяцев.",
+  savedI:"Рассрочка записана",plansT:"Рассрочки",paidOf:(a,b)=>`оплачено ${a} из ${b} мес.`,nextPay:"Следующий",done:"Полностью оплачено",
+  schedT:"График платежей",stPaid:"Оплачено",stLate:"Просрочено",stPart:"Частично",stUp:"Ожидается",acceptMonthly:"Принять ежемесячный платёж",
+  target:"В счёт какого долга?",toGeneral:"Обычный долг",splitGen:"Обычный",splitInst:"Рассрочка",priceTotal:"Полная цена",downLbl:"Первый взнос",paidLbl:"Оплачено",leftLbl:"Осталось",
+  nextLine:(a,d)=>`Следующий платёж по рассрочке: ${a} сум (${d}).`,delPlan:"Удалить рассрочку",instTag:"рассрочка",
+  login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль (минимум 6 символов)",
+  authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
+  badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
+  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",
+  checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
+  logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
+  loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
+  offline:"Офлайн: последние загруженные данные. Для изменений нужен интернет.",retry:"Повторить",offlineNoSave:"Нет интернета. Сейчас сохранить нельзя.",
+  setupT:"Подключение базы",setupLead:"Введите Project URL и anon (publishable) key из проекта Supabase: Project Settings → API.",
+  url:"Project URL",key:"anon / publishable key",connect:"Подключить",badCfg:"URL должен начинаться с https://, ключ — полностью.",
+  libFail:"Не загрузился нужный файл. Проверьте интернет и обновите страницу.",
+  importT:n=>`На телефоне есть старые записи: ${n} клиент(ов). Перенести в аккаунт?`,importYes:"Перенести",importNo:"Не нужно",imported:n=>`Перенесено клиентов: ${n}`}
 };
-const day=864e5, now=()=>Date.now();
-function sample(){
-  const t=now(), c=(id,name,phone,limit)=>({id,name,phone,limit,ex:true});
-  return {lang:"uz",shop:{name:"Akmal aka do'koni",card:""},
-   customers:[c("c1","Dilshod (3-uy)","+998 90 123 45 67",500000),c("c2","Gulnora opa","+998 93 765 43 21",0),c("c3","Sardor usta","",300000),c("c4","Nodira","+998 97 111 22 33",0),c("c5","Bobur aka","",0)],
-   tx:[
-    {id:"t1",cid:"c1",type:"debt",amount:85000,note:"Guruch 5 kg, yog'",date:t-12*day,due:t-5*day,ex:true},
-    {id:"t2",cid:"c1",type:"debt",amount:42000,note:"Non, sut",date:t-3*day,due:null,ex:true},
-    {id:"t3",cid:"c1",type:"pay",amount:30000,note:"",date:t-2*day,due:null,ex:true},
-    {id:"t4",cid:"c2",type:"debt",amount:156000,note:"Shakar 10 kg",date:t-6*day,due:t+8*day,ex:true},
-    {id:"t5",cid:"c3",type:"debt",amount:270000,note:"Un, yog', choy",date:t-20*day,due:t-1*day,ex:true},
-    {id:"t6",cid:"c4",type:"debt",amount:60000,note:"",date:t-9*day,due:null,ex:true},
-    {id:"t7",cid:"c4",type:"pay",amount:60000,note:"",date:t-1*day,due:null,ex:true},
-    {id:"t8",cid:"c5",type:"debt",amount:38000,note:"Sigaret, suv",date:t-1*day,due:t+3*day,ex:true}]};
-}
-let S;
-try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
-if(!S||!Array.isArray(S.customers)||!Array.isArray(S.tx))S=sample();
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-const L=()=>T[S.lang]||T.uz;
-const uid=()=>Math.random().toString(36).slice(2,10);
+
+const day=864e5,now=()=>Date.now();
 const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g," ");
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const MON={uz:["yan","fev","mar","apr","may","iyun","iyul","avg","sen","okt","noy","dek"],ru:["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"]};
-const dstr=t=>{const d=new Date(t);return d.getDate()+" "+(MON[S.lang]||MON.uz)[d.getMonth()]};
 const initial=n=>(String(n).trim()[0]||"?").toUpperCase();
-function bal(cid){return S.tx.filter(x=>x.cid===cid).reduce((a,x)=>a+(x.type==="debt"?x.amount:-x.amount),0)}
-function openDues(cid){return bal(cid)>0?S.tx.filter(x=>x.cid===cid&&x.type==="debt"&&x.due).map(x=>x.due):[]}
-function overdueDays(cid){const d=openDues(cid).filter(x=>x<now());return d.length?Math.max(1,Math.floor((now()-Math.min(...d))/day)):0}
-function nextDue(cid){const d=openDues(cid).filter(x=>x>=now());return d.length?Math.min(...d):0}
-function lastTx(cid){const a=S.tx.filter(x=>x.cid===cid);return a.length?Math.max(...a.map(x=>x.date)):0}
+const sod=(t)=>{const d=t?new Date(t):new Date();d.setHours(0,0,0,0);return d.getTime()};
+function addMonths(ms,n){const d=new Date(ms),y=d.getFullYear(),m=d.getMonth()+n,dd=d.getDate(),last=new Date(y,m+1,0).getDate();return new Date(y,m,Math.min(dd,last)).getTime()}
+const ymd=ms=>{const d=new Date(ms);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const parseYmd=s=>{const p=String(s).split("-").map(Number);return new Date(p[0],p[1]-1,p[2]).getTime()};
+const digits=v=>String(v||"").replace(/\D/g,"").slice(0,13);
+const uuid=()=>(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16)});
 
+function readCfg(){
+  const w=window.DAFTAR_CONFIG||{};
+  if(w.url&&w.anonKey)return{url:w.url.trim(),anonKey:w.anonKey.trim(),fromFile:true};
+  try{const c=JSON.parse(ls.get(CFG_KEY)||"null");if(c&&c.url&&c.anonKey)return c}catch(e){}
+  return null;
+}
+let cfg=readCfg(),sb=null,user=null,pendingShop="";
+let S={lang:ls.get(LANG_KEY)==="ru"?"ru":"uz",shop:{name:"",card:""},customers:[],tx:[],inst:[],offline:false};
+const L=()=>T[S.lang]||T.uz;
+const dstr=t=>{const d=new Date(t);return d.getDate()+" "+(MON[S.lang]||MON.uz)[d.getMonth()]};
 let view={name:"list",filter:"owing",q:""};
-const app=document.getElementById("app"),tb=document.getElementById("tb"),dock=document.getElementById("dockin"),layer=document.getElementById("layer");
-window.addEventListener("scroll",()=>document.getElementById("topbar").classList.toggle("scrolled",scrollY>4),{passive:true});
-function render(){view.name==="detail"?renderDetail():renderList()}
 
-function rowHTML(r,l){
-  const cls=r.o?"late":(r.b<=0?"ok":"");
-  const sub=r.o?`<span class="pill">${r.o} ${l.lateBy}</span>`:(r.n?`<span class="pill due">${l.dueIn}: ${dstr(r.n)}</span>`:(r.t?`<span>${dstr(r.t)}</span>`:""));
-  return `<button class="row" data-c="${r.c.id}"><span class="av ${cls}">${esc(initial(r.c.name))}</span>
-   <span class="who"><div class="nm">${esc(r.c.name)}${r.c.ex?`<span class="example">${l.example}</span>`:""}</div><div class="sub">${sub}</div></span>
-   <span class="amt num ${r.b>0?"debt":"ok"}">${r.b>0?fmt(r.b):"✓"}</span></button>`;
+const app=document.getElementById("app"),tb=document.getElementById("tb"),dock=document.getElementById("dock"),dockin=document.getElementById("dockin"),layer=document.getElementById("layer");
+window.addEventListener("scroll",()=>document.getElementById("topbar").classList.toggle("scrolled",scrollY>4),{passive:true});
+const showDock=on=>{dock.hidden=!on};
+function setLang(lg){S.lang=lg;ls.set(LANG_KEY,lg);document.documentElement.lang=lg}
+
+/* ---------- data mapping ---------- */
+const mapC=r=>({id:r.id,name:r.name,phone:r.phone||"",limit:Number(r.limit_amount)||0});
+const mapT=r=>({id:r.id,cid:r.customer_id,iid:r.installment_id||null,type:r.type,amount:Number(r.amount),note:r.note||"",date:Date.parse(r.created_at),due:r.due_at?Date.parse(r.due_at):null});
+const mapI=r=>({id:r.id,cid:r.customer_id,title:r.title,total:Number(r.total),down:Number(r.down_payment)||0,months:Number(r.months),start:parseYmd(r.start_date)});
+
+async function run(q){const r=await q;if(r.error)throw r.error;return r.data}
+async function fetchAll(table){
+  let out=[],from=0;
+  for(;;){const data=await run(sb.from(table).select("*").order("created_at",{ascending:true}).range(from,from+999));out=out.concat(data);if(data.length<1000)break;from+=1000}
+  return out;
+}
+async function load(){
+  const [c,t,i,s]=await Promise.all([fetchAll("customers"),fetchAll("transactions"),fetchAll("installments"),run(sb.from("settings").select("*").maybeSingle())]);
+  S.customers=c.map(mapC);S.tx=t.map(mapT);S.inst=i.map(mapI);
+  if(s){S.shop={name:s.shop_name||"",card:s.card||""};if(s.lang)setLang(s.lang)}
+  else S.shop={name:"",card:""};
+}
+const cacheKey=()=>user?"daftar-cache-"+user.id:"";
+function saveCache(){if(user)ls.set(cacheKey(),JSON.stringify({shop:S.shop,customers:S.customers,tx:S.tx,inst:S.inst}))}
+function loadCache(){try{const c=JSON.parse(ls.get(cacheKey())||"null");if(!c)return false;S.shop=c.shop;S.customers=c.customers;S.tx=c.tx;S.inst=c.inst;return true}catch(e){return false}}
+function canWrite(){if(S.offline){toast(L().offlineNoSave);return false}return true}
+
+/* ---------- money logic ---------- */
+function planMonthly(principal,months){let base=Math.floor(principal/months/1000)*1000;if(base<=0)base=Math.floor(principal/months);return{base,last:principal-base*(months-1)}}
+function schedule(p){
+  const principal=p.total-p.down,{base,last}=planMonthly(principal,p.months);
+  const paid=S.tx.filter(x=>x.iid===p.id&&x.type==="pay").reduce((a,x)=>a+x.amount,0);
+  const today=sod();let cum=0;const items=[];
+  for(let i=1;i<=p.months;i++){
+    const amt=i===p.months?last:base,due=addMonths(p.start,i),part=Math.max(0,Math.min(amt,paid-cum));cum+=amt;
+    items.push({n:i,due,amt,part,st:part>=amt?"paid":(due<today?"late":(part>0?"part":"up"))});
+  }
+  const late=items.filter(x=>x.st==="late");
+  return{principal,base,paid,left:Math.max(0,principal-paid),items,next:items.find(x=>x.part<x.amt)||null,paidCount:items.filter(x=>x.st==="paid").length,late,lateSum:late.reduce((a,x)=>a+x.amt-x.part,0)};
+}
+function metrics(cid){
+  const tx=S.tx.filter(x=>x.cid===cid);let b=0,g=0;
+  for(const x of tx){const v=x.type==="debt"?x.amount:-x.amount;b+=v;if(!x.iid)g+=v}
+  const t0=now(),today=sod();let late=0,next=0;
+  if(g>0)for(const x of tx)if(x.type==="debt"&&!x.iid&&x.due){if(x.due<t0)late=Math.max(late,Math.max(1,Math.floor((t0-x.due)/day)));else next=next?Math.min(next,x.due):x.due}
+  const plans=S.inst.filter(p=>p.cid===cid).map(p=>({p,s:schedule(p)}));
+  for(const{s}of plans){if(s.left<=0)continue;if(s.late.length)late=Math.max(late,Math.max(1,Math.floor((today-s.late[0].due)/day)));else if(s.next)next=next?Math.min(next,s.next.due):s.next.due}
+  return{b,g,inst:b-g,late,next,t:tx.length?Math.max(...tx.map(x=>x.date)):0,plans,active:plans.filter(x=>x.s.left>0)};
+}
+function reminderText(c){
+  const m=metrics(c.id),l=L();let extra="";
+  const nx=m.active.map(x=>x.s.next).filter(Boolean).sort((a,b)=>a.due-b.due)[0];
+  if(nx)extra=l.nextLine(fmt(nx.amt-nx.part),dstr(nx.due));
+  return l.msg(c.name,S.shop.name||"",fmt(Math.max(0,m.b)),S.shop.card,extra);
 }
 
+/* ---------- screens ---------- */
+function langBtn(){return `<button class="ghost" id="lgb" aria-label="${L().lang}">${S.lang==="uz"?"RU":"UZ"}</button>`}
+function bindLangBtn(rerender){const b=document.getElementById("lgb");if(b)b.onclick=()=>{setLang(S.lang==="uz"?"ru":"uz");rerender()}}
+function brandTop(){return `<div class="shop"><b>Mahalla Daftar</b><span>${L().sub}</span></div>`}
+
+function renderMessage(text,retryFn){
+  showDock(false);tb.innerHTML=brandTop();
+  app.innerHTML=`<div class="center"><div class="panel"><div>${esc(text)}</div>${retryFn?`<button class="btn ink" id="rt">${L().retry}</button>`:""}</div></div>`;
+  if(retryFn)document.getElementById("rt").onclick=retryFn;
+}
+function renderLoading(){
+  showDock(false);tb.innerHTML=brandTop();
+  app.innerHTML=`<div class="center"><div class="panel"><div class="spin" role="progressbar" aria-label="${L().loading}"></div><div class="note">${L().loading}</div></div></div>`;
+}
+
+function renderSetup(errText){
+  const l=L();showDock(false);tb.innerHTML=brandTop()+langBtn();bindLangBtn(()=>renderSetup(errText));
+  app.innerHTML=`<section class="auth"><div class="auth-head"><img src="icon-192.png" alt=""><h1>${l.setupT}</h1></div>
+   <p class="lead">${l.setupLead}</p>
+   <form class="panel" id="sf" novalidate>
+    <label class="f">${l.url}<input id="s-url" inputmode="url" autocomplete="off" placeholder="https://xxxx.supabase.co" value="${esc(cfg?cfg.url:"")}"></label>
+    <label class="f">${l.key}<input id="s-key" autocomplete="off" placeholder="eyJhbGciOi… / sb_publishable_…" value="${esc(cfg?cfg.anonKey:"")}"></label>
+    <div class="err" id="s-err">${esc(errText||"")}</div>
+    <button class="btn ink" type="submit">${l.connect}</button></form></section>`;
+  document.getElementById("sf").onsubmit=e=>{e.preventDefault();
+    const url=document.getElementById("s-url").value.trim().replace(/\/+$/,""),key=document.getElementById("s-key").value.trim();
+    if(!/^https:\/\/[^\s]+$/.test(url)||key.length<20){document.getElementById("s-err").textContent=l.badCfg;return}
+    cfg={url,anonKey:key};ls.set(CFG_KEY,JSON.stringify(cfg));boot()};
+}
+
+let authMode="login",authEmail="",authErr="",authInfo="";
+function authError(e){
+  const l=L(),m=String((e&&e.message)||e||"");
+  if(/invalid login/i.test(m))return l.badLogin;
+  if(/not confirmed/i.test(m))return l.notConfirmed;
+  if(/already registered|already exists/i.test(m))return l.exists;
+  if(/at least|password/i.test(m)&&/6/.test(m))return l.shortPw;
+  if(/fetch|network|failed/i.test(m))return l.net;
+  return m||l.net;
+}
+function renderAuth(){
+  const l=L(),su=authMode==="signup";showDock(false);
+  tb.innerHTML=brandTop()+langBtn();bindLangBtn(renderAuth);
+  app.innerHTML=`<section class="auth">
+   <div class="auth-head"><img src="icon-192.png" alt=""><h1>Mahalla Daftar</h1></div>
+   <p class="lead">${l.authLead}</p>
+   <div class="seg two" role="group"><button data-am="login" aria-pressed="${!su}">${l.login}</button><button data-am="signup" aria-pressed="${su}">${l.signup}</button></div>
+   <form class="panel" id="af" novalidate>
+    ${su?`<label class="f">${l.shop}<input id="a-shop" autocomplete="organization" value="${esc(pendingShop)}"></label>`:""}
+    <label class="f">${l.email}<input id="a-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" value="${esc(authEmail)}"></label>
+    <label class="f">${l.password}<input id="a-pw" type="password" autocomplete="${su?"new-password":"current-password"}"></label>
+    <div class="err" id="a-err">${esc(authErr)}</div>
+    ${authInfo?`<div class="infobox">${esc(authInfo)}</div>`:""}
+    <button class="btn ink" type="submit" id="a-go">${su?l.signup:l.login}</button>
+   </form></section>`;
+  app.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{authEmail=document.getElementById("a-email").value;authMode=b.dataset.am;authErr="";authInfo="";renderAuth()});
+  document.getElementById("af").onsubmit=async e=>{
+    e.preventDefault();
+    const email=document.getElementById("a-email").value.trim(),pw=document.getElementById("a-pw").value,er=document.getElementById("a-err"),go=document.getElementById("a-go");
+    authEmail=email;const sh=document.getElementById("a-shop");if(sh)pendingShop=sh.value.trim();
+    if(!email||!pw){er.textContent=l.needEmail;return}
+    if(su&&pw.length<6){er.textContent=l.shortPw;return}
+    go.disabled=true;er.textContent="";
+    try{
+      if(su){
+        const r=await sb.auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname}});
+        if(r.error)throw r.error;
+        if(!r.data.session){authMode="login";authErr="";authInfo=l.checkMail(email);renderAuth()}
+      }else{
+        const r=await sb.auth.signInWithPassword({email,password:pw});
+        if(r.error)throw r.error;
+      }
+    }catch(err){authErr=authError(err);authInfo="";renderAuth()}
+  };
+}
+
+/* ---------- app start ---------- */
+let starting=false;
+async function startApp(){
+  if(starting)return;starting=true;renderLoading();
+  try{await load();S.offline=false;saveCache()}
+  catch(e){if(!loadCache()){starting=false;return renderMessage(L().net,()=>startApp())}S.offline=true}
+  starting=false;
+  if(pendingShop&&!S.shop.name&&!S.offline){
+    try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:pendingShop,lang:S.lang},{onConflict:"owner_id"}));S.shop.name=pendingShop;saveCache()}catch(e){}
+    pendingShop="";
+  }
+  view={name:"list",filter:"owing",q:""};render();
+}
+function resetData(){S.customers=[];S.tx=[];S.inst=[];S.shop={name:"",card:""};S.offline=false}
+
+async function boot(){
+  if(!window.supabase||!window.supabase.createClient)return renderMessage(L().libFail,()=>location.reload());
+  if(!cfg)return renderSetup();
+  try{sb=window.supabase.createClient(cfg.url,cfg.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"daftar-auth"}})}
+  catch(e){return renderSetup(L().badCfg)}
+  renderLoading();
+  let session=null;
+  try{const r=await sb.auth.getSession();session=r.data&&r.data.session}catch(e){}
+  if(session)user=session.user;
+  sb.auth.onAuthStateChange((ev,ses)=>{
+    if(ev==="SIGNED_OUT"){user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
+    else if(ses&&ses.user&&(!user||user.id!==ses.user.id)&&(ev==="SIGNED_IN"||ev==="INITIAL_SESSION")){user=ses.user;setTimeout(startApp,0)}
+  });
+  if(session)startApp();else renderAuth();
+}
+
+/* ---------- list ---------- */
+function render(){showDock(true);view.name==="detail"?renderDetail():renderList()}
+function offlineBanner(){return S.offline?`<div class="banner"><span>${L().offline}</span><button id="retry">${L().retry}</button></div>`:""}
+function bindOffline(){const r=document.getElementById("retry");if(r)r.onclick=()=>startApp()}
+function oldLocal(){
+  if(!user||S.offline||ls.get("daftar-imported"))return null;
+  try{const o=JSON.parse(ls.get(OLD_KEY)||"null");if(!o||!Array.isArray(o.customers))return null;
+    const cs=o.customers.filter(c=>!c.ex);return cs.length?{o,cs}:null}catch(e){return null}
+}
+function rowHTML(r,l){
+  const m=r.m,cls=m.late?"late":(m.b<=0?"ok":"");
+  const sub=m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:(m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:(m.t?`<span>${dstr(m.t)}</span>`:""));
+  return `<button class="row" data-c="${r.c.id}"><span class="av ${cls}">${esc(initial(r.c.name))}</span>
+   <span class="who"><div class="nm">${esc(r.c.name)}${m.active.length?`<span class="tag">${l.instTag}</span>`:""}</div><div class="sub">${sub}</div></span>
+   <span class="amt num ${m.b>0?"debt":"ok"}">${m.b>0?fmt(m.b):"✓"}</span></button>`;
+}
 function renderList(){
   const l=L();
   tb.innerHTML=`<div class="shop"><b>${esc(S.shop.name||"Mahalla Daftar")}</b><span>${l.sub}</span></div>
    <button class="ghost" id="set" aria-label="${l.settings}">⚙︎&nbsp;${S.lang.toUpperCase()}</button>`;
-  const rows=S.customers.map(c=>({c,b:bal(c.id),o:overdueDays(c.id),n:nextDue(c.id),t:lastTx(c.id)}));
-  const total=rows.reduce((a,r)=>a+Math.max(0,r.b),0);
-  const nDebt=rows.filter(r=>r.b>0).length,nLate=rows.filter(r=>r.o>0).length;
+  const rows=S.customers.map(c=>({c,m:metrics(c.id)}));
+  const total=rows.reduce((a,r)=>a+Math.max(0,r.m.b),0),nDebt=rows.filter(r=>r.m.b>0).length,nLate=rows.filter(r=>r.m.late>0).length;
   const q=view.q.trim().toLowerCase(),qd=q.replace(/\D/g,"");
-  let list=rows.filter(r=>!q||r.c.name.toLowerCase().includes(q)||(qd&&(r.c.phone||"").replace(/\D/g,"").includes(qd)));
-  if(view.filter==="owing")list=list.filter(r=>r.b>0);
-  if(view.filter==="late")list=list.filter(r=>r.o>0);
-  if(view.filter==="clear")list=list.filter(r=>r.b<=0);
-  const groups=[[l.gLate,"late",list.filter(r=>r.o>0).sort((a,b)=>b.o-a.o||b.b-a.b)],
-                [l.gOwe,"",list.filter(r=>r.b>0&&!r.o).sort((a,b)=>(a.n||9e15)-(b.n||9e15)||b.b-a.b)],
-                [l.gClear,"",list.filter(r=>r.b<=0).sort((a,b)=>b.t-a.t)]].filter(g=>g[2].length);
-  const hasEx=S.customers.some(c=>c.ex);
-  app.innerHTML=`
+  let list=rows.filter(r=>!q||r.c.name.toLowerCase().includes(q)||(qd&&r.c.phone.replace(/\D/g,"").includes(qd)));
+  if(view.filter==="owing")list=list.filter(r=>r.m.b>0);
+  if(view.filter==="late")list=list.filter(r=>r.m.late>0);
+  if(view.filter==="clear")list=list.filter(r=>r.m.b<=0);
+  const groups=[[l.gLate,"late",list.filter(r=>r.m.late>0).sort((a,b)=>b.m.late-a.m.late||b.m.b-a.m.b)],
+    [l.gOwe,"",list.filter(r=>r.m.b>0&&!r.m.late).sort((a,b)=>(a.m.next||9e15)-(b.m.next||9e15)||b.m.b-a.m.b)],
+    [l.gClear,"",list.filter(r=>r.m.b<=0).sort((a,b)=>b.m.t-a.m.t)]].filter(g=>g[2].length);
+  const old=oldLocal();
+  app.innerHTML=`${offlineBanner()}
+  ${old?`<div class="banner ink"><span>${l.importT(old.cs.length)}</span><span class="bb"><button id="imp">${l.importYes}</button><button id="impNo">${l.importNo}</button></span></div>`:""}
   <section class="hero" aria-live="polite">
    <div><div class="eyebrow">${l.total}</div><div class="big num">${fmt(total)}<small>so'm</small></div></div>
    <div class="stats">
@@ -303,61 +529,121 @@ function renderList(){
   </div>
   ${groups.length?groups.map(([title,cls,g])=>`<section class="group"><div class="gh ${cls}"><span>${title}</span><span class="num">${g.length}</span></div>
      <div class="rows">${g.map(r=>rowHTML(r,l)).join("")}</div></section>`).join("")
-   :`<div class="empty">${S.customers.length?l.nores:l.empty}</div>`}
-  ${hasEx?`<button class="linkish" id="wipe">${l.wipeEx}</button>`:""}`;
-  dock.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
-  const qi=document.getElementById("q");
-  qi.oninput=e=>{view.q=e.target.value;const p=e.target.selectionStart;renderList();const n=document.getElementById("q");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
+   :`<div class="empty">${S.customers.length?l.nores:l.empty}</div>`}`;
+  dockin.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
+  bindOffline();
+  document.getElementById("q").oninput=e=>{view.q=e.target.value;const p=e.target.selectionStart;renderList();const n=document.getElementById("q");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
   app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{view.filter=b.dataset.f;renderList()});
   app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{view={...view,name:"detail",cid:b.dataset.c};render();scrollTo(0,0)});
   document.getElementById("ad").onclick=()=>openEntry("debt");
   document.getElementById("ap").onclick=()=>openEntry("pay");
   document.getElementById("set").onclick=openSettings;
-  const w=document.getElementById("wipe");
-  if(w)w.onclick=()=>{S.customers=S.customers.filter(c=>!c.ex);S.tx=S.tx.filter(x=>!x.ex);persist();renderList()};
+  if(old){
+    document.getElementById("impNo").onclick=()=>{ls.set("daftar-imported","skip");renderList()};
+    document.getElementById("imp").onclick=e=>importOld(old,e.currentTarget);
+  }
+}
+async function importOld(old,btn){
+  if(!canWrite())return;btn.disabled=true;
+  const idMap={},custs=old.cs.map(c=>{const id=uuid();idMap[c.id]=id;return{id,name:String(c.name||"?").slice(0,120),phone:c.phone?String(c.phone).slice(0,40):null,limit_amount:Math.max(0,Number(c.limit)||0)}});
+  const txs=(old.o.tx||[]).filter(x=>idMap[x.cid]&&Number(x.amount)>0&&(x.type==="debt"||x.type==="pay")).map(x=>({customer_id:idMap[x.cid],type:x.type,amount:Math.round(Number(x.amount)),note:x.note?String(x.note).slice(0,300):null,created_at:new Date(x.date||now()).toISOString(),due_at:x.due?new Date(x.due).toISOString():null}));
+  try{
+    await run(sb.from("customers").insert(custs));
+    if(txs.length)await run(sb.from("transactions").insert(txs));
+    ls.set("daftar-imported","done");
+    await load();saveCache();renderList();toast(L().imported(custs.length));
+  }catch(e){btn.disabled=false;toast(L().saveFail)}
 }
 
-const reminderText=c=>L().msg(c.name,S.shop.name||"",fmt(bal(c.id)),S.shop.card);
-
+/* ---------- detail ---------- */
+function planCard(p,s,l){
+  const pct=s.principal?Math.min(100,s.paid/s.principal*100):0;
+  const right=s.left<=0?`<span class="pill ok">✓ ${l.done}</span>`:(s.late.length?`<span class="pill">${l.stLate}: ${fmt(s.lateSum)}</span>`:(s.next?`<span>${l.nextPay}: <b class="num">${fmt(s.next.amt-s.next.part)}</b> · ${dstr(s.next.due)}</span>`:""));
+  return `<button class="plan" data-plan="${p.id}">
+   <div class="pl-top"><b>${esc(p.title)}</b><span class="amt num ${s.left>0?"debt":"ok"}">${s.left>0?fmt(s.left):"✓"}</span></div>
+   <div class="bar"><i class="${s.left<=0?"ok":""}" style="width:${pct}%"></i></div>
+   <div class="pl-meta"><span>${l.paidOf(s.paidCount,p.months)}</span>${right}</div></button>`;
+}
 function renderDetail(){
   const l=L(),c=S.customers.find(x=>x.id===view.cid);
   if(!c){view.name="list";return renderList()}
-  const b=bal(c.id),o=overdueDays(c.id),n=nextDue(c.id);
+  const m=metrics(c.id),b=m.b;
   const hist=S.tx.filter(x=>x.cid===c.id).sort((a,z)=>z.date-a.date);
   const pct=c.limit?Math.min(100,Math.max(0,b/c.limit*100)):0;
   const msg=reminderText(c);
+  const titleOf=iid=>{const p=S.inst.find(x=>x.id===iid);return p?p.title:""};
   tb.innerHTML=`<button class="back" id="bk">${l.back}</button><span></span>`;
-  app.innerHTML=`
+  app.innerHTML=`${offlineBanner()}
   <section class="hero">
-   <div class="dh"><span class="av ${o?"late":(b<=0?"ok":"")}">${esc(initial(c.name))}</span>
-    <div style="min-width:0"><h1>${esc(c.name)}${c.ex?`<span class="example">${l.example}</span>`:""}</h1>${c.phone?`<div class="ph num">${esc(c.phone)}</div>`:""}</div></div>
+   <div class="dh"><span class="av ${m.late?"late":(b<=0?"ok":"")}">${esc(initial(c.name))}</span>
+    <div style="min-width:0"><h1>${esc(c.name)}</h1>${c.phone?`<div class="ph num">${esc(c.phone)}</div>`:""}</div></div>
    <div><div class="eyebrow">${b>0?l.balance:l.paid}</div><div class="big num" style="color:${b>0?"var(--debt)":"var(--pay)"}">${fmt(Math.max(0,b))}<small>so'm</small></div></div>
-   ${(o||n)?`<div class="status">${o?`<span class="pill">${o} ${l.lateBy}</span>`:""}${n?`<span class="pill due">${l.dueIn}: ${dstr(n)}</span>`:""}</div>`:""}
+   ${m.plans.length&&b>0?`<div class="split"><span>${l.splitGen}: <b class="num">${fmt(Math.max(0,m.g))}</b></span><span>${l.splitInst}: <b class="num">${fmt(Math.max(0,m.inst))}</b></span></div>`:""}
+   ${(m.late||m.next)?`<div class="status">${m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:""}${m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:""}</div>`:""}
    ${c.limit?`<div class="limit"><div class="row2"><span>${l.limit}: <span class="num">${fmt(c.limit)}</span></span><span class="num">${fmt(Math.max(0,c.limit-b))} ${l.left}</span></div><div class="bar"><i class="${pct>=90?"hot":""}" style="width:${pct}%"></i></div></div>`:""}
   </section>
-  ${b>0?`<div class="primary">
-    <a class="btn tg" href="https://t.me/share/url?url=${encodeURIComponent(" ")}&text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">✈︎&nbsp; ${l.remind}</a></div>
+  ${b>0?`<div class="primary"><a class="btn tg" href="https://t.me/share/url?url=${encodeURIComponent(" ")}&text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">✈︎&nbsp; ${l.remind}</a></div>
    <details class="box"><summary>${l.preview}</summary><div class="bd"><div class="msg" id="msg">${esc(msg)}</div><button class="btn soft" id="cp">${l.copy}</button></div></details>`:""}
+  ${m.plans.length?`<section class="group"><div class="gh"><span>${l.plansT}</span><span class="num">${m.plans.length}</span></div>
+   <div class="plans">${m.plans.map(({p,s})=>planCard(p,s,l)).join("")}</div></section>`:""}
   <section class="group"><div class="gh"><span>${l.history}</span><span class="num">${hist.length}</span></div>
    <div class="rows hist">${hist.map(x=>`<div class="h"><span class="dot ${x.type}">${x.type==="debt"?"+":"−"}</span>
-    <div class="n">${esc(x.note||(x.type==="debt"?l.debtT:l.payT))}</div>
+    <div class="n">${esc(x.note||(x.iid?titleOf(x.iid):(x.type==="debt"?l.debtT:l.payT)))}${x.iid?`<span class="tag">${l.instTag}</span>`:""}</div>
     <div class="x num ${x.type}">${x.type==="debt"?"+":"−"}${fmt(x.amount)}</div>
     <div class="d">${dstr(x.date)}${x.due&&x.type==="debt"?` · ${l.dueOn} ${dstr(x.due)}`:""}</div></div>`).join("")||`<div class="h"><span></span><div class="d">—</div></div>`}</div></section>
   <details class="box"><summary>${l.custSet}</summary><div class="bd">
    <label class="f" for="lim">${l.setLimit}</label>
    <div class="inl"><input id="lim" class="search" inputmode="numeric" value="${c.limit?fmt(c.limit):""}" placeholder="0"><button class="btn soft" id="sl">${l.save}</button></div>
-   <button class="linkish" id="del" style="color:var(--debt);text-align:left">${l.del}</button><div id="delc"></div></div></details>`;
-  dock.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
+   <button class="linkish" id="del" style="color:var(--debt)">${l.del}</button><div id="delc"></div></div></details>`;
+  dockin.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
+  bindOffline();
   document.getElementById("bk").onclick=()=>{view.name="list";render()};
   document.getElementById("ad").onclick=()=>openEntry("debt",c.id);
   document.getElementById("ap").onclick=()=>openEntry("pay",c.id);
+  app.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openPlan(b.dataset.plan));
   const cp=document.getElementById("cp");if(cp)cp.onclick=()=>copyText(msg,document.getElementById("msg"));
-  document.getElementById("sl").onclick=()=>{c.limit=parseInt(document.getElementById("lim").value.replace(/\D/g,""))||0;persist();renderDetail();toast(l.saved)};
-  document.getElementById("del").onclick=()=>{document.getElementById("delc").innerHTML=`<div class="inl" style="grid-template-columns:1fr 1fr"><button class="btn debt" id="dy">${l.delSure}</button><button class="btn soft" id="dn">${l.cancel}</button></div>`;
-    document.getElementById("dy").onclick=()=>{S.customers=S.customers.filter(x=>x.id!==c.id);S.tx=S.tx.filter(x=>x.cid!==c.id);persist();view.name="list";render()};
+  const lim=document.getElementById("lim");lim.oninput=e=>{const d=digits(e.target.value);e.target.value=d?fmt(d):""};
+  document.getElementById("sl").onclick=async e=>{
+    if(!canWrite())return;const v=parseInt(digits(lim.value))||0,btn=e.currentTarget;btn.disabled=true;
+    try{await run(sb.from("customers").update({limit_amount:v}).eq("id",c.id));c.limit=v;saveCache();renderDetail();toast(l.saved)}
+    catch(err){btn.disabled=false;toast(l.saveFail)}};
+  document.getElementById("del").onclick=()=>{
+    document.getElementById("delc").innerHTML=`<div class="inl" style="grid-template-columns:1fr 1fr"><button class="btn debt" id="dy">${l.delSure}</button><button class="btn soft" id="dn">${l.cancel}</button></div>`;
+    document.getElementById("dy").onclick=async e=>{
+      if(!canWrite())return;e.currentTarget.disabled=true;
+      try{await run(sb.from("customers").delete().eq("id",c.id));
+        S.customers=S.customers.filter(x=>x.id!==c.id);S.tx=S.tx.filter(x=>x.cid!==c.id);S.inst=S.inst.filter(x=>x.cid!==c.id);saveCache();view.name="list";render()}
+      catch(err){e.currentTarget.disabled=false;toast(l.saveFail)}};
     document.getElementById("dn").onclick=()=>document.getElementById("delc").innerHTML=""};
 }
 
+/* ---------- installment plan sheet ---------- */
+function openPlan(pid){
+  const l=L(),p=S.inst.find(x=>x.id===pid);if(!p)return;
+  const s=schedule(p),stTxt={paid:l.stPaid,late:l.stLate,part:l.stPart,up:l.stUp};
+  sheet(p.title,"ink",`
+   <div class="kv">
+    <span>${l.priceTotal}</span><b class="num">${fmt(p.total)}</b>
+    ${p.down?`<span>${l.downLbl}</span><b class="num">${fmt(p.down)}</b>`:""}
+    <span>${l.perMonth}</span><b class="num">${fmt(s.base)} × ${p.months}</b>
+    <span>${l.paidLbl}</span><b class="num" style="color:var(--pay)">${fmt(s.paid)}</b>
+    <span>${l.leftLbl}</span><b class="num" style="color:${s.left>0?"var(--debt)":"var(--pay)"}">${fmt(s.left)}</b>
+   </div>
+   <div class="gh" style="padding:0"><span>${l.schedT}</span><span>${l.paidOf(s.paidCount,p.months)}</span></div>
+   <div class="sched">${s.items.map(it=>`<div class="si ${s.next&&s.next.n===it.n&&it.st!=="late"?"next":""}"><span class="n num">${it.n}</span><span>${dstr(it.due)}</span>
+     <b class="num">${it.st==="part"||(it.st==="late"&&it.part>0)?`${fmt(it.part)} / `:""}${fmt(it.amt)}</b><span class="badge ${it.st}">${stTxt[it.st]}</span></div>`).join("")}</div>
+   ${s.left>0?`<div class="sticky"><button class="btn pay" id="acc">${l.acceptMonthly}${s.next?` · ${fmt(s.next.amt-s.next.part)}`:""}</button></div>`:""}
+   <details class="box"><summary>${l.delPlan}</summary><div class="bd"><button class="btn debt" id="pdel">${l.delSure}</button></div></details>`);
+  const acc=document.getElementById("acc");
+  if(acc)acc.onclick=()=>{closeSheet();openEntry("pay",p.cid,{iid:p.id,amount:s.next?s.next.amt-s.next.part:s.left})};
+  document.getElementById("pdel").onclick=async e=>{
+    if(!canWrite())return;e.currentTarget.disabled=true;
+    try{await run(sb.from("installments").delete().eq("id",p.id));
+      S.inst=S.inst.filter(x=>x.id!==p.id);S.tx=S.tx.filter(x=>x.iid!==p.id);saveCache();closeSheet();render()}
+    catch(err){e.currentTarget.disabled=false;toast(l.saveFail)}};
+}
+
+/* ---------- utilities ---------- */
 function copyText(text,el){
   const l=L(),fallback=()=>{if(!el)return;if(el.select){el.select();return}const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)};
   try{navigator.clipboard.writeText(text).then(()=>toast(l.copied),fallback)}catch(e){fallback()}
@@ -369,104 +655,195 @@ function toast(text,undoFn){
   t=document.createElement("div");t.className="toast";t.id="toast";t.setAttribute("role","status");
   t.innerHTML=`<span>${esc(text)}</span>${undoFn?`<button>${l.undo}</button>`:""}`;
   document.body.appendChild(t);
-  if(undoFn)t.querySelector("button").onclick=()=>{undoFn();t.remove();toast(l.undone)};
-  toastTimer=setTimeout(()=>t.remove(),undoFn?6000:2200);
+  if(undoFn)t.querySelector("button").onclick=async e=>{e.currentTarget.disabled=true;clearTimeout(toastTimer);
+    try{await undoFn();t.remove();toast(l.undone)}catch(err){t.remove();toast(l.saveFail)}};
+  toastTimer=setTimeout(()=>t.remove(),undoFn?6000:2400);
 }
 function closeSheet(){layer.innerHTML="";document.body.style.overflow=""}
-function onEsc(e){if(e.key==="Escape")closeSheet()}
-document.addEventListener("keydown",onEsc);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet()});
 function sheet(title,cls,html){
   layer.innerHTML=`<div class="scrim" id="scrim"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="in"><div class="grab"></div>
    <div class="sh-head"><h2 class="${cls}">${esc(title)}</h2><button class="x-btn" id="xb" aria-label="${L().cancel}">✕</button></div>${html}</div></div>`;
   document.body.style.overflow="hidden";
   document.getElementById("scrim").onclick=closeSheet;document.getElementById("xb").onclick=closeSheet;
 }
+async function ensureCustomer(st,allowCreate){
+  let cust=st.cid&&S.customers.find(x=>x.id===st.cid);
+  if(cust)return{cust,created:false};
+  const n=st.newName.trim();if(!n)return null;
+  cust=S.customers.find(x=>x.name.toLowerCase()===n.toLowerCase());
+  if(cust)return{cust,created:false};
+  if(!allowCreate)return null;
+  const row=await run(sb.from("customers").insert({name:n.slice(0,120),phone:st.phone.trim()||null}).select().single());
+  cust=mapC(row);S.customers.push(cust);return{cust,created:true};
+}
+async function dropCustomer(id){await run(sb.from("customers").delete().eq("id",id));S.customers=S.customers.filter(x=>x.id!==id);S.tx=S.tx.filter(x=>x.cid!==id);S.inst=S.inst.filter(x=>x.cid!==id)}
 
-function openEntry(type,cid){
-  const l=L();
-  const st={cid:cid||null,newName:"",phone:"",amount:"",due:0,note:""};
+/* ---------- entry sheet: debt / installment / payment ---------- */
+function openEntry(type,cid,opts){
+  opts=opts||{};const l=L();
+  const st={cid:cid||null,newName:"",phone:"",amount:opts.amount?String(opts.amount):"",due:0,note:"",
+    mode:"simple",title:"",price:"",down:"",months:6,iid:opts.iid!==undefined?opts.iid:"auto"};
   const draw=focus=>{
     const c=st.cid&&S.customers.find(x=>x.id===st.cid);
-    const recent=[...S.customers].sort((a,b)=>lastTx(b.id)-lastTx(a.id));
+    const m=c?metrics(c.id):null;
+    if(type==="pay"&&c&&st.iid==="auto")st.iid=(m.g>0||!m.active.length)?null:m.active[0].p.id;
+    const inst=type==="debt"&&st.mode==="inst";
+    const recent=[...S.customers].sort((a,b)=>metrics(b.id).t-metrics(a.id).t);
     const q=st.newName.trim().toLowerCase();
-    const pool=type==="pay"?recent.filter(x=>bal(x.id)>0):recent;
-    const sug=(q?recent.filter(x=>x.name.toLowerCase().includes(q)):pool).slice(0,5);
-    const exact=q&&S.customers.some(x=>x.name.toLowerCase()===q);
-    const amt=parseInt(st.amount)||0, cb=c?bal(c.id):0;
-    const willOver=c&&type==="debt"&&c.limit&&cb+amt>c.limit;
-    sheet(type==="debt"?l.debtT:l.payT,type,`
+    const sug=(q?recent.filter(x=>x.name.toLowerCase().includes(q)):(type==="pay"?recent.filter(x=>metrics(x.id).b>0):recent)).slice(0,5);
+    const exact=q&&S.customers.some(x=>x.name.toLowerCase()===q),canNew=q&&!exact&&type==="debt";
+    const amt=parseInt(st.amount)||0,cb=m?m.b:0;
+    const willOver=!inst&&c&&type==="debt"&&c.limit&&cb+amt>c.limit;
+    const tPlan=type==="pay"&&st.iid?m&&m.active.find(x=>x.p.id===st.iid):null;
+    const fullChips=type!=="pay"||!c?"":(tPlan?[[l.nextPay,tPlan.s.next?tPlan.s.next.amt-tPlan.s.next.part:0],[l.full,tPlan.s.left]]:[[l.full,Math.max(0,m.g)]]).filter(x=>x[1]>0).map(([lbl,v])=>`<button class="chip full num" data-v="${v}">${lbl}: ${fmt(v)}</button>`).join("");
+    const title=type==="pay"?l.payT:(inst?l.modeInst:l.debtT),cls=type==="pay"?"pay":(inst?"ink":"debt");
+    sheet(title,cls,`
+     ${type==="debt"?`<div class="seg two" role="group"><button data-mode="simple" aria-pressed="${!inst}">${l.modeSimple}</button><button data-mode="inst" aria-pressed="${inst}">${l.modeInst}</button></div>`:""}
      ${c?`<div class="picked"><span class="who"><span class="av">${esc(initial(c.name))}</span><span style="min-width:0"><div class="nm">${esc(c.name)}</div>
         <div class="sub num" style="color:${cb>0?"var(--debt)":"var(--pay)"}">${cb>0?fmt(cb)+" so'm":"✓"}</div></span></span><button id="chg">${l.change}</button></div>`
       :`<label class="f">${type==="debt"?l.who:l.whoPay}<input id="nm" placeholder="${l.whoPh}" value="${esc(st.newName)}" autocomplete="off"></label>
-        ${(sug.length||(q&&!exact&&type==="debt"))?`<div class="suggest">${sug.map(x=>`<button data-pick="${x.id}"><span>${esc(x.name)}</span><span class="amt num ${bal(x.id)>0?"debt":"ok"}" style="font-size:.95rem">${bal(x.id)>0?fmt(bal(x.id)):"✓"}</span></button>`).join("")}
-          ${q&&!exact&&type==="debt"?`<button class="new" data-new="1">＋ ${l.newC}: «${esc(st.newName.trim())}»</button>`:""}</div>`:""}
-        ${q&&!exact&&type==="debt"?`<label class="f">${l.phone}<input id="ph" inputmode="tel" placeholder="+998" value="${esc(st.phone)}"></label>`:""}`}
-     <label class="f">${l.amount}<input id="am" class="amount ${type}" inputmode="numeric" placeholder="0" value="${st.amount?fmt(st.amount):""}" autocomplete="off"></label>
-     <div class="chips">${type==="pay"&&cb>0?`<button class="chip full" data-v="${cb}">${l.full}: ${fmt(cb)}</button>`:""}
-      ${[5000,10000,20000,50000,100000].map(v=>`<button class="chip num" data-add="${v}">+${fmt(v)}</button>`).join("")}</div>
-     ${willOver?`<div class="warnbox">⚠︎ ${l.overLimit} (${fmt(c.limit)})</div>`:""}
-     ${type==="debt"?`<div class="f">${l.due}<div class="chips">${[["none",0],["d3",3],["w1",7],["m1",30]].map(([k,d])=>`<button class="chip" data-due="${d}" aria-pressed="${st.due===d}">${l[k]}</button>`).join("")}</div></div>`:""}
-     <label class="f">${l.note}<input id="nt" value="${esc(st.note)}" autocomplete="off"></label>
+        ${(sug.length||canNew)?`<div class="suggest">${sug.map(x=>{const b=metrics(x.id).b;return `<button data-pick="${x.id}"><span>${esc(x.name)}</span><span class="amt num ${b>0?"debt":"ok"}" style="font-size:.95rem">${b>0?fmt(b):"✓"}</span></button>`}).join("")}
+          ${canNew?`<button class="new" data-new="1">＋ ${l.newC}: «${esc(st.newName.trim())}»</button>`:""}</div>`:""}
+        ${canNew?`<label class="f">${l.phone}<input id="ph" inputmode="tel" placeholder="+998" value="${esc(st.phone)}"></label>`:""}`}
+     ${type==="pay"&&c&&m.active.length?`<div class="f">${l.target}<div class="chips">
+        <button class="chip" data-iid="" aria-pressed="${!st.iid}">${l.toGeneral}${m.g>0?` · ${fmt(m.g)}`:""}</button>
+        ${m.active.map(({p,s})=>`<button class="chip" data-iid="${p.id}" aria-pressed="${st.iid===p.id}">${esc(p.title)} · ${fmt(s.left)}</button>`).join("")}</div></div>`:""}
+     ${inst?`
+      <label class="f">${l.product}<input id="ti" value="${esc(st.title)}" autocomplete="off"></label>
+      <label class="f">${l.price}<input id="pr" class="amount ink" inputmode="numeric" placeholder="0" value="${st.price?fmt(st.price):""}" autocomplete="off"></label>
+      <label class="f">${l.downP}<input id="dn" inputmode="numeric" placeholder="0" value="${st.down?fmt(st.down):""}" autocomplete="off"></label>
+      <div class="f">${l.months}<div class="chips">${[3,6,9,12].map(n=>`<button class="chip" data-mo="${n}" aria-pressed="${st.months===n}">${n} ${l.mo}</button>`).join("")}
+        <input class="mini num" id="mo" inputmode="numeric" value="${[3,6,9,12].includes(st.months)?"":st.months}" placeholder="…" aria-label="${l.months}"></div></div>
+      <div class="prev" id="prev">${previewHTML()}</div>`
+     :`
+      <label class="f">${l.amount}<input id="am" class="amount ${type}" inputmode="numeric" placeholder="0" value="${st.amount?fmt(st.amount):""}" autocomplete="off"></label>
+      <div class="chips">${fullChips}${[5000,10000,20000,50000,100000].map(v=>`<button class="chip num" data-add="${v}">+${fmt(v)}</button>`).join("")}</div>
+      ${willOver?`<div class="warnbox">⚠︎ ${l.overLimit} (${fmt(c.limit)})</div>`:""}
+      ${type==="debt"?`<div class="f">${l.due}<div class="chips">${[["none",0],["d3",3],["w1",7],["m1",30]].map(([k,d])=>`<button class="chip" data-due="${d}" aria-pressed="${st.due===d}">${l[k]}</button>`).join("")}</div></div>`:""}
+      <label class="f">${l.note}<input id="nt" value="${esc(st.note)}" autocomplete="off"></label>`}
      <div class="err" id="er"></div>
-     <div class="sticky"><button class="btn ${type}" id="sv" style="width:100%">${type==="debt"?l.saveD:l.saveP}${amt?` · ${fmt(amt)}`:""}</button></div>`);
-    const nm=document.getElementById("nm"),am=document.getElementById("am");
+     <div class="sticky"><button class="btn ${cls}" id="sv">${saveLabel()}</button></div>`);
+    bind(focus,c,cb,willOver);
+  };
+  const saveLabel=()=>{
+    if(type==="debt"&&st.mode==="inst"){const pr=parseInt(st.price)||0,dn=parseInt(st.down)||0;return l.saveI+(pr>dn&&pr?` · ${fmt(pr-dn)}`:"")}
+    const v=parseInt(st.amount)||0;return(type==="debt"?l.saveD:l.saveP)+(v?` · ${fmt(v)}`:"");
+  };
+  function previewHTML(){
+    const pr=parseInt(st.price)||0,dn=parseInt(st.down)||0,mo=st.months;
+    if(!pr||dn>=pr||!(mo>=1&&mo<=60))return `<span>${l.perMonth}</span><span class="pm num">—</span>`;
+    const pc=planMonthly(pr-dn,mo),t0=sod();
+    return `<span>${l.perMonth}</span><span class="pm num">${fmt(pc.base)} × ${mo}</span>
+      <span>${l.toDebt}: <b class="num">${fmt(pr-dn)}</b></span>
+      <span>${l.firstPay}: ${dstr(addMonths(t0,1))} · ${l.lastPay}: ${dstr(addMonths(t0,mo))}${pc.last!==pc.base?` (${fmt(pc.last)})`:""}</span>`;
+  }
+  const refreshLive=()=>{const p=document.getElementById("prev");if(p)p.innerHTML=previewHTML();const s=document.getElementById("sv");if(s)s.textContent=saveLabel()};
+  function money(id,key,after){
+    const el=document.getElementById(id);if(!el)return;
+    el.oninput=e=>{const raw=digits(e.target.value);st[key]=raw;e.target.value=raw?fmt(raw):"";(after||refreshLive)()};
+  }
+  function bind(focus,c,cb,willOver){
+    layer.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.mode;draw(st.cid?(st.mode==="inst"?"ti":"am"):"nm")});
+    const nm=document.getElementById("nm");
     if(nm)nm.oninput=e=>{st.newName=e.target.value;const p=e.target.selectionStart;draw();const n=document.getElementById("nm");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
     const ph=document.getElementById("ph");if(ph)ph.oninput=e=>st.phone=e.target.value;
-    layer.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{st.cid=b.dataset.pick;st.newName="";draw("am")});
-    const nb=layer.querySelector("[data-new]");if(nb)nb.onclick=()=>document.getElementById(ph?"ph":"am").focus();
-    const chg=document.getElementById("chg");if(chg)chg.onclick=()=>{st.cid=null;st.newName="";draw("nm")};
-    am.oninput=e=>{const raw=e.target.value.replace(/\D/g,"").slice(0,12);st.amount=raw;e.target.value=raw?fmt(raw):"";
-      const v=parseInt(raw)||0;document.getElementById("sv").textContent=(type==="debt"?l.saveD:l.saveP)+(v?` · ${fmt(v)}`:"");
-      const over=!!(c&&type==="debt"&&c.limit&&cb+v>c.limit);if(over!==!!willOver){draw("am")}};
+    layer.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{st.cid=b.dataset.pick;st.newName="";if(opts.iid===undefined)st.iid="auto";draw(st.mode==="inst"?"ti":"am")});
+    const nb=layer.querySelector("[data-new]");if(nb)nb.onclick=()=>{const t=document.getElementById(ph?"ph":(st.mode==="inst"?"ti":"am"));if(t)t.focus()};
+    const chg=document.getElementById("chg");if(chg)chg.onclick=()=>{st.cid=null;st.newName="";if(opts.iid===undefined)st.iid="auto";draw("nm")};
+    layer.querySelectorAll("[data-iid]").forEach(b=>b.onclick=()=>{st.iid=b.dataset.iid||null;st.amount="";draw("am")});
+    money("am","amount",()=>{refreshLive();const v=parseInt(st.amount)||0;const over=!!(c&&type==="debt"&&c.limit&&cb+v>c.limit);if(over!==!!willOver)draw("am")});
+    money("pr","price");money("dn","down");
+    const ti=document.getElementById("ti");if(ti)ti.oninput=e=>st.title=e.target.value;
+    const mo=document.getElementById("mo");
+    if(mo)mo.oninput=e=>{const v=parseInt(digits(e.target.value).slice(0,2))||0;e.target.value=v||"";st.months=v;layer.querySelectorAll("[data-mo]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.mo===v)));refreshLive()};
+    layer.querySelectorAll("[data-mo]").forEach(b=>b.onclick=()=>{st.months=+b.dataset.mo;draw()});
     layer.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{st.amount=String((parseInt(st.amount)||0)+ +b.dataset.add);draw()});
     layer.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{st.amount=b.dataset.v;draw()});
     layer.querySelectorAll("[data-due]").forEach(b=>b.onclick=()=>{st.due=+b.dataset.due;draw()});
-    document.getElementById("nt").oninput=e=>st.note=e.target.value;
-    const save=()=>{
-      const er=document.getElementById("er"),amount=parseInt(st.amount)||0;
-      let cust=st.cid&&S.customers.find(x=>x.id===st.cid),created=false;
-      if(!cust){const n=st.newName.trim();if(!n){er.textContent=l.needWho;return}
-        cust=S.customers.find(x=>x.name.toLowerCase()===n.toLowerCase());
-        if(!cust&&type==="pay"){er.textContent=l.needWho;return}
-        if(!cust&&amount>0){cust={id:uid(),name:n,phone:st.phone.trim(),limit:0};created=true}}
-      if(amount<=0){er.textContent=l.needAmt;return}
-      if(created)S.customers.push(cust);
-      const tx={id:uid(),cid:cust.id,type,amount,note:st.note.trim(),date:now(),due:type==="debt"&&st.due?now()+st.due*day:null};
-      S.tx.push(tx);persist();closeSheet();render();
-      toast(`${type==="debt"?l.savedD:l.savedP} · ${cust.name} · ${fmt(amount)}`,()=>{S.tx=S.tx.filter(x=>x.id!==tx.id);
-        if(created)S.customers=S.customers.filter(x=>x.id!==cust.id);if(created&&view.cid===cust.id)view.name="list";persist();render()});
-    };
+    const nt=document.getElementById("nt");if(nt)nt.oninput=e=>st.note=e.target.value;
     document.getElementById("sv").onclick=save;
     layer.querySelectorAll(".sheet input").forEach(i=>i.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();save()}}));
-    const f=focus||(c?"am":"nm"),fe=document.getElementById(f);
-    if(fe&&focus!==undefined)setTimeout(()=>{fe.focus();try{fe.setSelectionRange(fe.value.length,fe.value.length)}catch(_){}},focus===null?80:0);
-  };
+    const target=focus===undefined?null:(focus||(st.cid?(st.mode==="inst"?"ti":"am"):"nm"));
+    const fe=target&&document.getElementById(target);
+    if(fe)setTimeout(()=>{fe.focus();try{fe.setSelectionRange(fe.value.length,fe.value.length)}catch(_){}},focus===null?80:0);
+  }
+  let saving=false;
+  async function save(){
+    if(saving)return;
+    const er=document.getElementById("er"),btn=document.getElementById("sv");
+    const fail=t=>{er.textContent=t;saving=false;btn.disabled=false};
+    const inst=type==="debt"&&st.mode==="inst";
+    const amount=parseInt(st.amount)||0,price=parseInt(st.price)||0,down=parseInt(st.down)||0;
+    if(!st.cid&&!st.newName.trim())return fail(l.needWho);
+    if(inst){
+      if(!st.title.trim())return fail(l.needProduct);
+      if(!price)return fail(l.needPrice);
+      if(down>=price)return fail(l.badDown);
+      if(!(st.months>=1&&st.months<=60))return fail(l.badMonths);
+    }else if(amount<=0)return fail(l.needAmt);
+    if(!canWrite())return;
+    saving=true;btn.disabled=true;er.textContent="";
+    let res;
+    try{res=await ensureCustomer(st,type==="debt");}catch(e){return fail(l.saveFail)}
+    if(!res)return fail(l.needWho);
+    const{cust,created}=res;
+    try{
+      if(inst){
+        const row=await run(sb.from("installments").insert({customer_id:cust.id,title:st.title.trim().slice(0,120),total:price,down_payment:down,months:st.months,start_date:ymd(now())}).select().single());
+        const p=mapI(row);
+        let trow;
+        try{trow=await run(sb.from("transactions").insert({customer_id:cust.id,installment_id:p.id,type:"debt",amount:price-down,note:p.title}).select().single())}
+        catch(e){await sb.from("installments").delete().eq("id",p.id);throw e}
+        S.inst.push(p);S.tx.push(mapT(trow));saveCache();closeSheet();render();
+        toast(`${l.savedI} · ${cust.name} · ${fmt(price-down)}`,async()=>{
+          await run(sb.from("installments").delete().eq("id",p.id));S.inst=S.inst.filter(x=>x.id!==p.id);S.tx=S.tx.filter(x=>x.iid!==p.id);
+          if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
+      }else{
+        const row=await run(sb.from("transactions").insert({customer_id:cust.id,installment_id:type==="pay"&&st.iid?st.iid:null,type,amount,
+          note:st.note.trim().slice(0,300)||null,due_at:type==="debt"&&st.due?new Date(now()+st.due*day).toISOString():null}).select().single());
+        const tx=mapT(row);S.tx.push(tx);saveCache();closeSheet();render();
+        toast(`${type==="debt"?l.savedD:l.savedP} · ${cust.name} · ${fmt(amount)}`,async()=>{
+          await run(sb.from("transactions").delete().eq("id",tx.id));S.tx=S.tx.filter(x=>x.id!==tx.id);
+          if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
+      }
+    }catch(e){
+      if(created){try{await dropCustomer(cust.id)}catch(_){}}
+      fail(l.saveFail);
+    }
+  }
   draw(null);
 }
 
+/* ---------- settings ---------- */
 function openSettings(){
   const l=L();
   sheet(l.settings,"ink",`
    <div class="f">${l.lang}<div class="chips"><button class="chip" data-l="uz" aria-pressed="${S.lang==="uz"}">O'zbekcha</button><button class="chip" data-l="ru" aria-pressed="${S.lang==="ru"}">Русский</button></div></div>
-   <label class="f">${l.shop}<input id="sn" value="${esc(S.shop.name)}"></label>
+   <label class="f">${l.shop}<input id="sn" value="${esc(S.shop.name)}" autocomplete="organization"></label>
    <label class="f">${l.card}<input id="sc" inputmode="numeric" value="${esc(S.shop.card)}" placeholder="8600 …"></label>
+   <div class="err" id="ser"></div>
    <button class="btn ink" id="ss">${l.save}</button>
-   <div class="gh" style="margin-top:10px;padding:0"><span>${l.backup}</span></div>
-   <div class="note">${l.stored}</div>
-   <button class="btn soft" id="bc">${l.bcopy}</button>
-   <textarea id="bt" placeholder="${l.bpaste}" aria-label="${l.bpaste}"></textarea>
-   <div class="err" id="ber"></div>
-   <button class="btn soft" id="br">${l.brestore}</button>`);
-  layer.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{S.lang=b.dataset.l;persist();render();openSettings()});
-  document.getElementById("ss").onclick=()=>{S.shop.name=document.getElementById("sn").value.trim();S.shop.card=document.getElementById("sc").value.trim();persist();closeSheet();render();toast(l.saved)};
-  document.getElementById("bc").onclick=()=>{const t=JSON.stringify(S),ta=document.getElementById("bt");ta.value=t;copyText(t,ta)};
-  document.getElementById("br").onclick=()=>{try{const d=JSON.parse(document.getElementById("bt").value);
-    if(!d||!Array.isArray(d.customers)||!Array.isArray(d.tx))throw 0;S=d;persist();closeSheet();view.name="list";render();toast(l.restored)}
-    catch(e){document.getElementById("ber").textContent=l.bad}};
+   <div class="gh" style="margin-top:8px;padding:0"><span>${l.account}</span></div>
+   <div class="kv"><span>${l.email}</span><b style="overflow-wrap:anywhere">${esc(user&&user.email||"")}</b></div>
+   <div class="note">${l.cloud}</div>
+   <button class="btn soft" id="lo">${l.logout}</button>`);
+  layer.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{
+    setLang(b.dataset.l);render();openSettings();
+    if(!S.offline&&user)sb.from("settings").upsert({owner_id:user.id,lang:S.lang,shop_name:S.shop.name||null,card:S.shop.card||null},{onConflict:"owner_id"}).then(()=>{},()=>{})});
+  document.getElementById("ss").onclick=async e=>{
+    if(!canWrite())return;const btn=e.currentTarget;btn.disabled=true;
+    const name=document.getElementById("sn").value.trim().slice(0,80),card=document.getElementById("sc").value.trim().slice(0,40);
+    try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:name||null,card:card||null,lang:S.lang,updated_at:new Date().toISOString()},{onConflict:"owner_id"}));
+      S.shop={name,card};saveCache();closeSheet();render();toast(l.saved)}
+    catch(err){btn.disabled=false;document.getElementById("ser").textContent=l.saveFail}};
+  document.getElementById("lo").onclick=async e=>{e.currentTarget.disabled=true;ls.del(cacheKey());try{await sb.auth.signOut()}catch(err){}
+    if(user){user=null;resetData();closeSheet();renderAuth()}};
 }
-render();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+setLang(S.lang);
+boot();
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 })();
 </script>
-
 </body></html>
