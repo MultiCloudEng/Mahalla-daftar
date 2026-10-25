@@ -59,11 +59,13 @@ create table if not exists public.settings (
   updated_at timestamptz not null default now()
 );
 
-create index if not exists customers_owner_idx    on public.customers (owner_id);
-create index if not exists installments_cust_idx  on public.installments (customer_id);
-create index if not exists transactions_owner_idx on public.transactions (owner_id, created_at desc);
-create index if not exists transactions_cust_idx  on public.transactions (customer_id);
-create index if not exists transactions_inst_idx  on public.transactions (installment_id);
+-- Indexes cover every foreign key (Supabase performance advisor)
+create index if not exists customers_owner_idx         on public.customers (owner_id);
+create index if not exists installments_owner_idx      on public.installments (owner_id);
+create index if not exists installments_cust_owner_idx on public.installments (customer_id, owner_id);
+create index if not exists transactions_owner_idx      on public.transactions (owner_id, created_at desc);
+create index if not exists transactions_cust_owner_idx on public.transactions (customer_id, owner_id);
+create index if not exists transactions_inst_owner_idx on public.transactions (installment_id, owner_id);
 
 -- Row Level Security: each user sees and changes only their own rows
 alter table public.customers    enable row level security;
