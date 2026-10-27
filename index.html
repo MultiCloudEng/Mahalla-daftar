@@ -257,7 +257,7 @@ const T={
   login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol (kamida 6 belgi)",
   authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
   badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
-  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",
+  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
   checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
   logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
   loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
@@ -291,7 +291,7 @@ const T={
   login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль (минимум 6 символов)",
   authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
   badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
-  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",
+  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
   checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
   logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
   loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
@@ -447,6 +447,10 @@ function renderSetup(errText){screen="setup";
 }
 
 let authMode="login",authEmail="",authErr="",authInfo="";
+const DOMAIN_FIX={"gmai.com":"gmail.com","gmial.com":"gmail.com","gmaill.com":"gmail.com","gmal.com":"gmail.com","gamil.com":"gmail.com","gmail.co":"gmail.com","gmail.ru":"gmail.com","gmail.cm":"gmail.com","gmail.con":"gmail.com","gmali.com":"gmail.com","gnail.com":"gmail.com","gmsil.com":"gmail.com",
+  "mail.r":"mail.ru","mial.ru":"mail.ru","mail.ry":"mail.ru","maill.ru":"mail.ru","yandex.r":"yandex.ru","yandeks.ru":"yandex.ru","yandx.ru":"yandex.ru","yahooo.com":"yahoo.com","yaho.com":"yahoo.com","icloud.co":"icloud.com","iclod.com":"icloud.com","icoud.com":"icloud.com","outlok.com":"outlook.com","hotmial.com":"hotmail.com"};
+function emailFix(email){const m=/^([^@\s]+)@([^@\s]+)$/.exec(email);if(!m)return null;const d=m[2].toLowerCase(),f=DOMAIN_FIX[d];return f?m[1]+"@"+f:null}
+let warnedEmail="";
 function authError(e){
   const l=L(),m=String((e&&e.message)||e||"");
   if(/invalid login/i.test(m))return l.badLogin;
@@ -479,12 +483,17 @@ function renderAuth(){
     const email=document.getElementById("a-email").value.trim(),pw=document.getElementById("a-pw").value,er=document.getElementById("a-err"),go=document.getElementById("a-go");
     authEmail=email;const sh=document.getElementById("a-shop");if(sh){pendingShop=sh.value.trim();ls.set("daftar-pending-shop",pendingShop)}
     if(!email||!pw){er.textContent=l.needEmail;return}
+    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
+    const fix=emailFix(email);
+    if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("a-email");ei.value=fix;authEmail=fix;ei.focus();return}
     if(su&&pw.length<6){er.textContent=l.shortPw;return}
     go.disabled=true;er.textContent="";
     try{
       if(su){
         const r=await sb.auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname}});
         if(r.error)throw r.error;
+        const ids=r.data.user&&r.data.user.identities;
+        if(!r.data.session&&Array.isArray(ids)&&ids.length===0){authMode="login";authInfo="";authErr=l.exists;renderAuth();return}
         if(!r.data.session){authMode="login";authErr="";authInfo=l.checkMail(email);renderAuth()}
       }else{
         const r=await sb.auth.signInWithPassword({email,password:pw});
