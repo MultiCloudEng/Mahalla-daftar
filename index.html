@@ -224,7 +224,7 @@ label.f,.f{display:flex;flex-direction:column;gap:6px;font-size:.84rem;font-weig
 <nav class="dock" id="dock" hidden><div class="dock-in" id="dockin"></div></nav>
 <div id="layer"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="vendor/supabase-2.45.4.js"></script>
 <script src="config.js"></script>
 <script>
 (function(){
@@ -255,10 +255,10 @@ const T={
   schedT:"To'lov jadvali",stPaid:"To'landi",stLate:"Kechikdi",stPart:"Qisman",stUp:"Kutilmoqda",acceptMonthly:"Oylik to'lovni qabul qilish",
   target:"Qaysi qarzga?",toGeneral:"Oddiy qarz",splitGen:"Oddiy",splitInst:"Muddatli",priceTotal:"Umumiy narx",downLbl:"Boshlang'ich",paidLbl:"To'landi",leftLbl:"Qoldi",
   nextLine:(a,d)=>`Navbatdagi muddatli to'lov: ${a} so'm (${d}).`,delPlan:"Muddatli to'lovni o'chirish",instTag:"muddatli",
-  login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol (kamida 6 belgi)",
+  login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol",
   authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
   badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
-  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",cur:"so'm",credit:"Avans (ortiqcha to'langan)",creditShort:"avans",overPay:a=>`Summa qarzdan ko'p (qarz: ${a}). Baribir yozish uchun yana bir bor bosing.`,forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 6 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
+  shortPw:"Parol kamida 8 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",linkCheckT:"Emailingizni tasdiqlang",linkCheck:"Havola sizniki ekanini tekshirish uchun u yuborilgan emailni yozing.",linkWrong:"Email mos kelmadi, havola qabul qilinmadi. Email va parol bilan kiring.",goOn:"Davom etish",prevSaved:a=>`Oldingi urinish saqlangan ekan (${a}). Tarixni tekshiring. Yana yozish kerak bo'lsa, qayta bosing.`,cur:"so'm",credit:"Avans (ortiqcha to'langan)",creditShort:"avans",overPay:a=>`Summa qarzdan ko'p (qarz: ${a}). Baribir yozish uchun yana bir bor bosing.`,forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 8 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
   checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
   logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
   loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
@@ -289,10 +289,10 @@ const T={
   schedT:"График платежей",stPaid:"Оплачено",stLate:"Просрочено",stPart:"Частично",stUp:"Ожидается",acceptMonthly:"Принять ежемесячный платёж",
   target:"В счёт какого долга?",toGeneral:"Обычный долг",splitGen:"Обычный",splitInst:"Рассрочка",priceTotal:"Полная цена",downLbl:"Первый взнос",paidLbl:"Оплачено",leftLbl:"Осталось",
   nextLine:(a,d)=>`Следующий платёж по рассрочке: ${a} сум (${d}).`,delPlan:"Удалить рассрочку",instTag:"рассрочка",
-  login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль (минимум 6 символов)",
+  login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль",
   authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
   badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
-  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",cur:"сум",credit:"Аванс (переплата)",creditShort:"аванс",overPay:a=>`Сумма больше долга (долг: ${a}). Чтобы всё равно записать, нажмите ещё раз.`,forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 6 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
+  shortPw:"Пароль минимум 8 символов.",needEmail:"Введите email и пароль.",linkCheckT:"Подтвердите email",linkCheck:"Чтобы проверить, что ссылка ваша, введите email, на который она пришла.",linkWrong:"Email не совпал, ссылка не принята. Войдите по email и паролю.",goOn:"Продолжить",prevSaved:a=>`Предыдущая попытка уже сохранена (${a}). Проверьте историю. Если нужно записать ещё раз, нажмите снова.`,cur:"сум",credit:"Аванс (переплата)",creditShort:"аванс",overPay:a=>`Сумма больше долга (долг: ${a}). Чтобы всё равно записать, нажмите ещё раз.`,forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 8 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
   checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
   logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
   loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
@@ -338,7 +338,7 @@ function setLang(lg){S.lang=lg;ls.set(LANG_KEY,lg);document.documentElement.lang
 /* ---------- data mapping ---------- */
 const mapC=r=>({id:r.id,name:r.name,phone:r.phone||"",limit:Number(r.limit_amount)||0});
 const mapT=r=>({id:r.id,cid:r.customer_id,iid:r.installment_id||null,type:r.type,amount:Number(r.amount),note:r.note||"",date:Date.parse(r.created_at),due:r.due_at?Date.parse(r.due_at):null});
-const mapI=r=>({id:r.id,cid:r.customer_id,title:r.title,total:Number(r.total),down:Number(r.down_payment)||0,months:Number(r.months),start:parseYmd(r.start_date)});
+const mapI=r=>({id:r.id,cid:r.customer_id,title:r.title,total:Number(r.total),down:Number(r.down_payment)||0,months:Number(r.months),start:parseYmd(r.start_date),monthly:Number(r.monthly_amount)||0});
 
 async function run(q){const r=await q;if(r.error)throw r.error;return r.data}
 async function fetchAll(table){
@@ -365,24 +365,34 @@ function planMonthly(principal,months){
   if(base<=0||base*(months-1)>=principal)base=Math.floor(principal/months);
   return{base,last:principal-base*(months-1)};
 }
-// Index of transactions/plans, rebuilt only when data or the day changes.
+// Plans store their monthly amount; plans made before that keep the old (rounded down) amounts.
+function planAmounts(p){
+  const principal=p.total-p.down;
+  if(p.monthly>0&&(p.months<=1||p.monthly*(p.months-1)<principal))return{base:p.monthly,last:p.months<=1?principal:principal-p.monthly*(p.months-1)};
+  if(p.months<=1)return{base:principal,last:principal};
+  let base=Math.floor(principal/p.months/1000)*1000;if(base<=0)base=Math.floor(principal/p.months);
+  return{base,last:principal-base*(p.months-1)};
+}
+// Index of transactions/plans, rebuilt when data changes, the day changes, or a due time passes.
 let IX=null;
 function ix(){
-  const today=sod();
-  if(IX&&IX.tx===S.tx&&IX.tl===S.tx.length&&IX.inst===S.inst&&IX.il===S.inst.length&&IX.day===today)return IX;
+  const today=sod(),t0=now();
+  if(IX&&IX.tx===S.tx&&IX.tl===S.tx.length&&IX.inst===S.inst&&IX.il===S.inst.length&&IX.day===today&&t0<IX.until)return IX;
+  let until=Infinity;for(const x of S.tx)if(x.due&&x.due>t0&&x.due<until)until=x.due;
   const byC=new Map(),planPaid=new Map(),plansByC=new Map(),extra=new Map();
   for(const x of S.tx){let a=byC.get(x.cid);if(!a)byC.set(x.cid,a=[]);a.push(x);if(x.iid&&x.type==="pay")planPaid.set(x.iid,(planPaid.get(x.iid)||0)+x.amount)}
-  for(const p of S.inst){let a=plansByC.get(p.cid);if(!a)plansByC.set(p.cid,a=[]);a.push(p)}
+  const planDebt=new Set();for(const x of S.tx)if(x.iid&&x.type==="debt")planDebt.add(x.iid);
+  for(const p of S.inst){if(!planDebt.has(p.id))continue;let a=plansByC.get(p.cid);if(!a)plansByC.set(p.cid,a=[]);a.push(p)}
   // Money paid as "general" beyond the general debt goes to the customer's plans, oldest plan first.
   for(const[cid,ps]of plansByC){
     let g=0;for(const x of byC.get(cid)||[])if(!x.iid)g+=x.type==="debt"?x.amount:-x.amount;
     let pool=Math.max(0,-g);if(!pool)continue;
     for(const p of[...ps].sort((a,z)=>a.start-z.start||(a.id<z.id?-1:1))){const need=Math.max(0,p.total-p.down-(planPaid.get(p.id)||0)),give=Math.min(need,pool);if(give)extra.set(p.id,give);pool-=give;if(!pool)break}
   }
-  return IX={tx:S.tx,tl:S.tx.length,inst:S.inst,il:S.inst.length,day:today,byC,planPaid,plansByC,extra,m:new Map()};
+  return IX={tx:S.tx,tl:S.tx.length,inst:S.inst,il:S.inst.length,day:today,until,byC,planPaid,plansByC,extra,m:new Map()};
 }
 function schedule(p){
-  const I=ix(),principal=p.total-p.down,{base,last}=planMonthly(principal,p.months);
+  const I=ix(),principal=p.total-p.down,{base,last}=planAmounts(p);
   const paid=(I.planPaid.get(p.id)||0)+(I.extra.get(p.id)||0);
   const today=sod();let cum=0;const items=[];
   for(let i=1;i<=p.months;i++){
@@ -405,7 +415,9 @@ function metrics(cid){
   const plans=(I.plansByC.get(cid)||[]).map(p=>({p,s:schedule(p)}));
   for(const{s}of plans){if(s.left<=0)continue;if(s.late.length)late=Math.max(late,Math.max(1,Math.floor((today-s.late[0].due)/day)));else if(s.next)next=next?Math.min(next,s.next.due):s.next.due}
   if(b<=0){late=0;next=0}
-  const r={b,g,inst:b-g,late,next,t,plans,active:plans.filter(x=>x.s.left>0)};
+  const active=plans.filter(x=>x.s.left>0),planLeft=active.reduce((a,x)=>a+x.s.left,0);
+  // inst = what is still open on plans; gOpen = the rest of the balance (general debt still open)
+  const r={b,g,gOpen:Math.max(0,b-planLeft),inst:planLeft,late,next,t,plans,active};
   I.m.set(cid,r);return r;
 }
 function reminderText(c){
@@ -485,7 +497,12 @@ const DOMAIN_FIX={"gmai.com":"gmail.com","gmial.com":"gmail.com","gmaill.com":"g
 function emailFix(email){const m=/^([^@\s]+)@([^@\s]+)$/.exec(email);if(!m)return null;const d=m[2].toLowerCase(),f=DOMAIN_FIX[d];return f?m[1]+"@"+f:null}
 let warnedEmail="";
 const BOOT_HASH=location.hash||"";
-let recoveryMode=/type=recovery/.test(BOOT_HASH);
+const HP=new URLSearchParams(BOOT_HASH.replace(/^#/,""));
+const LINK=HP.get("access_token")&&HP.get("refresh_token")?{at:HP.get("access_token"),rt:HP.get("refresh_token"),type:HP.get("type")||""}:null;
+if(BOOT_HASH){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+let recoveryMode=!!(LINK&&LINK.type==="recovery");
+const PENDING_AUTH="daftar-pending-auth";
+function markPendingAuth(email,hours){ls.set(PENDING_AUTH,JSON.stringify({email:email.toLowerCase(),exp:now()+hours*3600e3}))}
 if(/error_code=|error=access_denied/.test(BOOT_HASH)){authMode="reset";authErr=null;setTimeout(()=>{authErr=L().linkExpired;if(screen==="auth")renderAuth()},0)}
 function authError(e){
   const l=L(),m=String((e&&e.message)||e||"");
@@ -528,7 +545,7 @@ function renderAuth(){
     const fix=emailFix(email);
     if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("a-email");ei.value=fix;authEmail=fix;ei.focus();return}
     if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
-    if(su&&pw.length<6){er.textContent=l.shortPw;return}
+    if(su&&pw.length<8){er.textContent=l.shortPw;return}
     if(su&&pendingShop){pendingSignup={email:email.toLowerCase(),name:pendingShop.slice(0,80)};ls.set("daftar-pending-shop",JSON.stringify(pendingSignup))}
     go.disabled=true;er.textContent="";
     try{
@@ -537,7 +554,7 @@ function renderAuth(){
         if(r.error)throw r.error;
         const ids=r.data.user&&r.data.user.identities;
         if(!r.data.session&&Array.isArray(ids)&&ids.length===0){authMode="login";authInfo="";authErr=l.exists;renderAuth();return}
-        if(!r.data.session){authMode="login";authErr="";authInfo=l.checkMail(email);renderAuth()}
+        if(!r.data.session){markPendingAuth(email,24);authMode="login";authErr="";authInfo=l.checkMail(email);renderAuth()}
       }else{
         const r=await sb.auth.signInWithPassword({email,password:pw});
         if(r.error)throw r.error;
@@ -569,7 +586,7 @@ function renderReset(){
     if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("r-email");ei.value=fix;authEmail=fix;ei.focus();return}
     if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
     go.disabled=true;er.textContent="";
-    try{const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(r.error)throw r.error;
+    try{const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(r.error)throw r.error;markPendingAuth(email,1);
       authErr="";authInfo=l.resetSent(email);renderReset()}
     catch(err){authErr=authError(err);authInfo="";renderReset()}
   };
@@ -589,7 +606,7 @@ function renderNewPassword(){
   document.getElementById("nf").onsubmit=async e=>{
     e.preventDefault();
     const a=document.getElementById("n-pw").value,b=document.getElementById("n-pw2").value,er=document.getElementById("n-err"),go=document.getElementById("n-go");
-    if(a.length<6){er.textContent=l.shortPw;return}
+    if(a.length<8){er.textContent=l.shortPw;return}
     if(a!==b){er.textContent=l.pwMismatch;return}
     go.disabled=true;er.textContent="";
     try{const r=await sb.auth.updateUser({password:a});if(r.error)throw r.error;
@@ -599,12 +616,50 @@ function renderNewPassword(){
   };
 }
 
+/* ---------- email links (sign-up confirmation, password reset) ---------- */
+async function handleLink(){
+  renderLoading();
+  let tu=null;
+  try{const r=await withTimeout(sb.auth.getUser(LINK.at),10000);if(r.error||!r.data.user)throw r.error||new Error("no user");tu=r.data.user}
+  catch(e){recoveryMode=false;authMode="login";authErr=L().linkExpired;return renderAuth()}
+  let pend=null;try{pend=JSON.parse(ls.get(PENDING_AUTH)||"null")}catch(e){}
+  const email=String(tu.email||"").toLowerCase();
+  if(pend&&pend.email===email&&pend.exp>now())return acceptLink(tu);
+  renderLinkConfirm(tu,email);
+}
+async function acceptLink(tu){
+  renderLoading();user=tu;
+  try{const r=await sb.auth.setSession({access_token:LINK.at,refresh_token:LINK.rt});if(r.error||!r.data.session)throw r.error||new Error("no session");user=r.data.session.user}
+  catch(e){user=null;recoveryMode=false;authMode="login";authErr=L().linkExpired;return renderAuth()}
+  ls.del(PENDING_AUTH);
+  if(recoveryMode)renderNewPassword();else startApp();
+}
+// A link opened on a phone that did not ask for it (or in another browser) is accepted
+// only after the person types the same email: a stranger's link cannot log you into their account.
+function renderLinkConfirm(tu,email){
+  const l=L();showDock(false);screen="linkconfirm";tb.innerHTML=brandTop();
+  app.innerHTML=`<section class="auth">
+   <div class="auth-head"><img src="icon-192.png" alt=""><h1>${l.linkCheckT}</h1></div>
+   <p class="lead">${l.linkCheck}</p>
+   <form class="panel" id="lf" novalidate>
+    <label class="f">${l.email}<input id="l-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off"></label>
+    <div class="err" id="l-err"></div>
+    <button class="btn ink" type="submit">${l.goOn}</button>
+    <button class="linkish" type="button" id="l-back" style="align-self:center">${l.backToLogin}</button>
+   </form></section>`;
+  document.getElementById("l-back").onclick=()=>{recoveryMode=false;authMode="login";authErr="";renderAuth()};
+  document.getElementById("lf").onsubmit=e=>{e.preventDefault();
+    const typed=document.getElementById("l-email").value.trim().toLowerCase();
+    if(typed&&typed===email)acceptLink(tu);
+    else{recoveryMode=false;authMode="login";authInfo="";authErr=l.linkWrong;renderAuth()}};
+}
+
 /* ---------- app start ---------- */
 let starting=false;
 async function startApp(){
   if(starting)return;starting=true;renderLoading();
   try{await load();S.offline=false;saveCache()}
-  catch(e){if(!loadCache()){starting=false;return renderMessage(L().net,()=>startApp())}S.offline=true}
+  catch(e){if(!loadCache()){starting=false;return renderMessage(L().net,()=>retryOnline())}S.offline=true}
   starting=false;
   if(!S.offline){
     // The shop name typed at sign-up belongs only to the account with that same email.
@@ -616,6 +671,24 @@ async function startApp(){
   }
   view={name:"list",filter:"owing",q:""};render();
 }
+// The library may drop the login when Supabase answers with a server error during a token
+// refresh. We keep the last refresh token and check ourselves: only a real "invalid token"
+// answer sends the owner to the login screen; a temporary error keeps them in read-only mode.
+let lastSes=null,userLogout=false;
+function rememberSes(ses){if(ses&&ses.refresh_token)lastSes=ses}
+async function tryRefresh(){
+  if(!lastSes||!lastSes.refresh_token)return "dead";
+  try{const r=await withTimeout(sb.auth.refreshSession({refresh_token:lastSes.refresh_token}),10000);
+    if(r.data&&r.data.session){rememberSes(r.data.session);return "ok"}
+    const er=r.error||{};return(er.status&&er.status<500&&!/retryable|fetch|unknown/i.test(er.name||""))?"dead":"transient"}
+  catch(e){return "transient"}
+}
+function keepLoginForLater(){if(lastSes)ls.set("daftar-auth",JSON.stringify(lastSes))}
+async function retryOnline(){
+  let has=false;try{const r=await withTimeout(sb.auth.getSession(),8000);has=!!(r.data&&r.data.session)}catch(e){}
+  if(!has){const st=await tryRefresh();if(st==="dead"){user=null;resetData();authErr="";authInfo="";return renderAuth()}if(st==="transient"){keepLoginForLater();return offlineStart()}}
+  startApp();
+}
 function offlineStart(){
   if(loadCache()){S.offline=true;view={name:"list",filter:"owing",q:""};render()}
   else renderMessage(L().net,()=>location.reload());
@@ -625,21 +698,42 @@ function resetData(){S.customers=[];S.tx=[];S.inst=[];S.shop={name:"",card:""};S
 async function boot(){
   if(!window.supabase||!window.supabase.createClient)return renderMessage(L().libFail,()=>location.reload());
   if(!cfg)return renderSetup();
-  try{sb=window.supabase.createClient(cfg.url,cfg.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"daftar-auth"}})}
+  // Every request gives up after 15 s, so a hung connection never freezes the app.
+  const tfetch=(input,init)=>{init=init||{};const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),15000);
+    if(init.signal){if(init.signal.aborted)ctl.abort();else init.signal.addEventListener("abort",()=>ctl.abort())}
+    return fetch(input,Object.assign({},init,{signal:ctl.signal})).finally(()=>clearTimeout(t))};
+  const stored=storedSession();rememberSes(stored);
+  try{sb=window.supabase.createClient(cfg.url,cfg.anonKey,{global:{fetch:tfetch},auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"daftar-auth"}})}
   catch(e){return renderSetup(L().badCfg)}
   renderLoading();
   const listen=()=>sb.auth.onAuthStateChange((ev,ses)=>{
     if(ev==="PASSWORD_RECOVERY"){recoveryMode=true;if(ses)user=ses.user;setTimeout(renderNewPassword,0);return}
     if(recoveryMode)return;
-    if(ev==="SIGNED_OUT"){if(user)ls.del("daftar-cache-"+user.id);user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
+    if(ses)rememberSes(ses);
+    if(ev==="SIGNED_OUT"){
+      if(!userLogout&&user&&lastSes){
+        tryRefresh().then(st=>{
+          if(st==="ok")return;
+          if(st==="transient"){keepLoginForLater();if(!S.offline){S.offline=true;if(screen==="app")render()}return}
+          user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()});
+        return}
+      user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
     else if(ses&&ses.user&&(!user||user.id!==ses.user.id)&&(ev==="SIGNED_IN"||ev==="INITIAL_SESSION")){user=ses.user;setTimeout(startApp,0)}
   });
+  if(LINK){listen();return handleLink()}
   // Offline (or a very slow network) must not lock the owner out: open the last saved data read-only.
-  const stored=storedSession();
   if(stored&&!recoveryMode&&navigator.onLine===false){user=stored.user;listen();return offlineStart()}
-  let session=null,slow=false;
-  try{const r=await withTimeout(sb.auth.getSession(),8000);session=r.data&&r.data.session}catch(e){slow=true}
-  if(!session&&stored&&!recoveryMode&&(slow||navigator.onLine===false)){user=stored.user;listen();return offlineStart()}
+  let session=null,slow=false,retryable=false;
+  try{const r=await withTimeout(sb.auth.getSession(),8000);session=r.data&&r.data.session;
+    const er=r.error;if(er)retryable=/retryable|fetch|network|abort/i.test((er.name||"")+" "+(er.message||""))||!er.status||er.status>=500}
+  catch(e){slow=true}
+  if(!session&&stored&&!recoveryMode&&(slow||retryable||navigator.onLine===false)){user=stored.user;listen();keepLoginForLater();return offlineStart()}
+  if(!session&&stored&&!recoveryMode){
+    // the library dropped the saved login: was it really invalid, or did the server just fail?
+    const st=await tryRefresh();
+    if(st==="transient"){user=stored.user;listen();keepLoginForLater();return offlineStart()}
+    if(st==="ok"){try{const r=await sb.auth.getSession();session=r.data&&r.data.session}catch(e){}}
+  }
   if(session)user=session.user;
   listen();
   if(session&&recoveryMode)renderNewPassword();else if(session)startApp();else renderAuth();
@@ -648,7 +742,7 @@ async function boot(){
 /* ---------- list ---------- */
 function render(){showDock(true);screen="app";view.name==="detail"?renderDetail():renderList()}
 function offlineBanner(){return S.offline?`<div class="banner"><span>${L().offline}</span><button id="retry">${L().retry}</button></div>`:""}
-function bindOffline(){const r=document.getElementById("retry");if(r)r.onclick=()=>startApp()}
+function bindOffline(){const r=document.getElementById("retry");if(r)r.onclick=()=>{r.disabled=true;retryOnline()}}
 function oldLocal(){
   if(!user||S.offline||ls.get("daftar-imported"))return null;
   try{const o=JSON.parse(ls.get(OLD_KEY)||"null");if(!o||!Array.isArray(o.customers))return null;
@@ -706,7 +800,7 @@ function renderList(){
   }
 }
 async function importOld(old,btn){
-  if(!canWrite())return;btn.disabled=true;
+  if(!canWrite()||ls.get("daftar-imported"))return;btn.disabled=true;
   // Ids are fixed once and saved, so a retry after a failure never creates duplicates.
   const planKey="daftar-import-plan-"+user.id;let plan=null;
   try{plan=JSON.parse(ls.get(planKey)||"null")}catch(e){}
@@ -718,9 +812,10 @@ async function importOld(old,btn){
   try{
     await run(sb.from("customers").upsert(plan.custs,{onConflict:"id",ignoreDuplicates:true}));
     if(plan.txs.length)await run(sb.from("transactions").upsert(plan.txs,{onConflict:"id",ignoreDuplicates:true}));
-    ls.set("daftar-imported","done");ls.set(OLD_KEY+"-backup",ls.get(OLD_KEY)||"");ls.del(OLD_KEY);ls.del(planKey);
-    await load();saveCache();renderList();toast(L().imported(plan.custs.length));
-  }catch(e){btn.disabled=false;toast(L().saveFail)}
+    ls.set("daftar-imported","done");ls.del(OLD_KEY);ls.del(OLD_KEY+"-backup");ls.del(planKey);
+  }catch(e){btn.disabled=false;toast(L().saveFail);return}
+  try{await load();saveCache()}catch(e){}
+  renderList();toast(L().imported(plan.custs.length));
 }
 
 /* ---------- detail ---------- */
@@ -746,7 +841,7 @@ function renderDetail(){
    <div class="dh"><span class="av ${m.late?"late":(b<=0?"ok":"")}">${esc(initial(c.name))}</span>
     <div style="min-width:0"><h1>${esc(c.name)}</h1>${c.phone?`<div class="ph num">${esc(c.phone)}</div>`:""}</div></div>
    <div><div class="eyebrow">${b>0?l.balance:(b<0?l.credit:l.paid)}</div><div class="big num" style="color:${b>0?"var(--debt)":"var(--pay)"}">${b<0?"+":""}${fmt(Math.abs(b))}<small>${l.cur}</small></div></div>
-   ${m.plans.length&&b>0?`<div class="split"><span>${l.splitGen}: <b class="num">${fmt(Math.max(0,m.g))}</b></span><span>${l.splitInst}: <b class="num">${fmt(Math.max(0,m.inst))}</b></span></div>`:""}
+   ${m.plans.length&&b>0?`<div class="split"><span>${l.splitGen}: <b class="num">${fmt(m.gOpen)}</b></span><span>${l.splitInst}: <b class="num">${fmt(m.inst)}</b></span></div>`:""}
    ${(m.late||m.next)?`<div class="status">${m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:""}${m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:""}</div>`:""}
    ${c.limit?`<div class="limit"><div class="row2"><span>${l.limit}: <span class="num">${fmt(c.limit)}</span></span><span class="num">${fmt(Math.max(0,c.limit-b))} ${l.left}</span></div><div class="bar"><i class="${pct>=90?"hot":""}" style="width:${pct}%"></i></div></div>`:""}
   </section>
@@ -778,10 +873,10 @@ function renderDetail(){
   document.getElementById("del").onclick=()=>{
     document.getElementById("delc").innerHTML=`<div class="inl" style="grid-template-columns:1fr 1fr"><button class="btn debt" id="dy">${l.delSure}</button><button class="btn soft" id="dn">${l.cancel}</button></div>`;
     document.getElementById("dy").onclick=async e=>{
-      if(!canWrite())return;e.currentTarget.disabled=true;
+      if(!canWrite())return;const btn=e.currentTarget;btn.disabled=true;
       try{await run(sb.from("customers").delete().eq("id",c.id));
         S.customers=S.customers.filter(x=>x.id!==c.id);S.tx=S.tx.filter(x=>x.cid!==c.id);S.inst=S.inst.filter(x=>x.cid!==c.id);saveCache();view.name="list";render()}
-      catch(err){e.currentTarget.disabled=false;toast(l.saveFail)}};
+      catch(err){btn.disabled=false;toast(l.saveFail)}};
     document.getElementById("dn").onclick=()=>document.getElementById("delc").innerHTML=""};
 }
 
@@ -805,10 +900,10 @@ function openPlan(pid){
   const acc=document.getElementById("acc");
   if(acc)acc.onclick=()=>{closeSheet();openEntry("pay",p.cid,{iid:p.id,amount:s.next?s.next.amt-s.next.part:s.left})};
   document.getElementById("pdel").onclick=async e=>{
-    if(!canWrite())return;e.currentTarget.disabled=true;
+    if(!canWrite())return;const btn=e.currentTarget;btn.disabled=true;
     try{await run(sb.from("installments").delete().eq("id",p.id));
       S.inst=S.inst.filter(x=>x.id!==p.id);S.tx=S.tx.filter(x=>x.iid!==p.id);saveCache();closeSheet();render()}
-    catch(err){e.currentTarget.disabled=false;toast(l.saveFail)}};
+    catch(err){btn.disabled=false;toast(l.saveFail)}};
 }
 
 /* ---------- utilities ---------- */
@@ -823,11 +918,11 @@ function toast(text,undoFn){
   t=document.createElement("div");t.className="toast";t.id="toast";t.setAttribute("role","status");
   t.innerHTML=`<span>${esc(text)}</span>${undoFn?`<button>${l.undo}</button>`:""}`;
   document.body.appendChild(t);
-  if(undoFn)t.querySelector("button").onclick=async e=>{e.currentTarget.disabled=true;clearTimeout(toastTimer);
+  if(undoFn)t.querySelector("button").onclick=async e=>{const ub=e.currentTarget;ub.disabled=true;clearTimeout(toastTimer);
     try{await undoFn();t.remove();toast(l.undone)}catch(err){t.remove();toast(l.saveFail)}};
   toastTimer=setTimeout(()=>t.remove(),undoFn?6000:2400);
 }
-function closeSheet(){layer.innerHTML="";document.body.style.overflow=""}
+function closeSheet(){layer.innerHTML="";layer.onkeydown=null;document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet()});
 function sheet(title,cls,html){
   const old=layer.querySelector(".sheet"),top=old?old.scrollTop:0;
@@ -842,7 +937,7 @@ function sheet(title,cls,html){
 async function insertOnce(table,row){
   const r=await sb.from(table).insert(row).select().single();
   if(!r.error)return r.data;
-  if(r.error.code==="23505")return await run(sb.from(table).select("*").eq("id",row.id).single());
+  if(r.error.code==="23505"){const ex=await run(sb.from(table).select("*").eq("id",row.id).single());ex.__existed=true;return ex}
   throw r.error;
 }
 function findCustomer(st){
@@ -853,7 +948,12 @@ async function ensureCustomer(st,allowCreate){
   let cust=findCustomer(st);
   if(cust)return{cust,created:false};
   const n=st.newName.trim();if(!n||!allowCreate)return null;
-  const row=await insertOnce("customers",{id:st.ids.cust,name:n.slice(0,120),phone:st.phone.trim().slice(0,40)||null});
+  let row=await insertOnce("customers",{id:st.ids.cust,name:n.slice(0,120),phone:st.phone.trim().slice(0,40)||null});
+  if(row.__existed&&row.name!==n.slice(0,120)){
+    // an earlier attempt saved a customer under another name: keep it, make the new one separately
+    const old=mapC(row);if(!S.customers.some(x=>x.id===old.id))S.customers.push(old);
+    st.ids.cust=uuid();row=await insertOnce("customers",{id:st.ids.cust,name:n.slice(0,120),phone:st.phone.trim().slice(0,40)||null});
+  }
   cust=mapC(row);if(!S.customers.some(x=>x.id===cust.id))S.customers.push(cust);return{cust,created:true};
 }
 async function dropCustomer(id){await run(sb.from("customers").delete().eq("id",id));S.customers=S.customers.filter(x=>x.id!==id);S.tx=S.tx.filter(x=>x.cid!==id);S.inst=S.inst.filter(x=>x.cid!==id)}
@@ -881,12 +981,12 @@ function openEntry(type,cid,opts){
   const draw=focus=>{
     const c=st.cid&&S.customers.find(x=>x.id===st.cid);
     const m=c?metrics(c.id):null;
-    if(type==="pay"&&c&&st.iid==="auto")st.iid=(m.g>0||!m.active.length)?null:m.active[0].p.id;
+    if(type==="pay"&&c&&st.iid==="auto")st.iid=(m.gOpen>0||!m.active.length)?null:m.active[0].p.id;
     const inst=type==="debt"&&st.mode==="inst";
     const amt=parseInt(st.amount)||0,cb=m?m.b:0;
     const willOver=!inst&&c&&type==="debt"&&c.limit&&cb+amt>c.limit;
     const tPlan=type==="pay"&&st.iid?m&&m.active.find(x=>x.p.id===st.iid):null;
-    const fullChips=type!=="pay"||!c?"":(tPlan?[[l.nextPay,tPlan.s.next?tPlan.s.next.amt-tPlan.s.next.part:0],[l.full,tPlan.s.left]]:[[l.full,Math.max(0,m.g)]]).filter(x=>x[1]>0).map(([lbl,v])=>`<button class="chip full num" data-v="${v}">${lbl}: ${fmt(v)}</button>`).join("");
+    const fullChips=type!=="pay"||!c?"":(tPlan?[[l.nextPay,tPlan.s.next?tPlan.s.next.amt-tPlan.s.next.part:0],[l.full,tPlan.s.left]]:[[l.full,m.gOpen]]).filter(x=>x[1]>0).map(([lbl,v])=>`<button class="chip full num" data-v="${v}">${lbl}: ${fmt(v)}</button>`).join("");
     const title=type==="pay"?l.payT:(inst?l.modeInst:l.debtT),cls=type==="pay"?"pay":(inst?"ink":"debt");
     sheet(title,cls,`
      ${type==="debt"?`<div class="seg two" role="group"><button data-mode="simple" aria-pressed="${!inst}">${l.modeSimple}</button><button data-mode="inst" aria-pressed="${inst}">${l.modeInst}</button></div>`:""}
@@ -895,7 +995,7 @@ function openEntry(type,cid,opts){
       :`<label class="f">${type==="debt"?l.who:l.whoPay}<input id="nm" placeholder="${l.whoPh}" value="${esc(st.newName)}" autocomplete="off" maxlength="120"></label>
         <div id="sugbox" style="display:flex;flex-direction:column;gap:14px">${sugHTML()}</div>`}
      ${type==="pay"&&c&&m.active.length?`<div class="f">${l.target}<div class="chips">
-        <button class="chip" data-iid="" aria-pressed="${!st.iid}">${l.toGeneral}${m.g>0?` · ${fmt(m.g)}`:""}</button>
+        <button class="chip" data-iid="" aria-pressed="${!st.iid}">${l.toGeneral}${m.gOpen>0?` · ${fmt(m.gOpen)}`:""}</button>
         ${m.active.map(({p,s})=>`<button class="chip" data-iid="${p.id}" aria-pressed="${st.iid===p.id}">${esc(p.title)} · ${fmt(s.left)}</button>`).join("")}</div></div>`:""}
      ${inst?`
       <label class="f">${l.product}<input id="ti" value="${esc(st.title)}" autocomplete="off"></label>
@@ -972,12 +1072,13 @@ function openEntry(type,cid,opts){
     const known=findCustomer(st);
     if(type==="pay"&&!known)return fail(l.needWho);
     // A plan payment must belong to the same customer as the plan.
-    const iid=type==="pay"&&st.iid?st.iid:null;
+    const iid=type==="pay"&&st.iid&&st.iid!=="auto"?st.iid:null;
     if(iid&&!S.inst.some(p=>p.id===iid&&p.cid===known.id))return fail(l.saveFail);
     // Paying more than is owed is allowed only after a second tap (typo protection).
     if(type==="pay"){
       const m=metrics(known.id),tp=iid&&m.plans.find(x=>x.p.id===iid),cap=tp?tp.s.left:Math.max(0,m.b);
-      if(amount>cap&&st.overOk!==amount){st.overOk=amount;return fail(l.overPay(fmt(cap)))}
+      // the confirming tap must come a moment later, so a double-tap cannot skip the warning
+      if(amount>cap&&!(st.overOk&&st.overOk.a===amount&&now()-st.overOk.t>700)){if(!st.overOk||st.overOk.a!==amount)st.overOk={a:amount,t:now()};return fail(l.overPay(fmt(cap)))}
     }
     if(!canWrite())return;
     saving=true;btn.disabled=true;er.textContent="";
@@ -987,19 +1088,24 @@ function openEntry(type,cid,opts){
     const{cust,created}=res;
     try{
       if(inst){
-        const row=await insertOnce("installments",{id:st.ids.plan,customer_id:cust.id,title:st.title.trim().slice(0,120),total:price,down_payment:down,months:st.months,start_date:ymd(now())});
+        const row=await insertOnce("installments",{id:st.ids.plan,customer_id:cust.id,title:st.title.trim().slice(0,120),total:price,down_payment:down,months:st.months,start_date:ymd(now()),monthly_amount:planMonthly(price-down,st.months).base});
         const p=mapI(row);
+        if(row.__existed&&(p.cid!==cust.id||p.total!==price||p.down!==down||p.months!==st.months)){
+          if(!S.inst.some(x=>x.id===p.id))S.inst.push(p);st.ids.plan=uuid();st.ids.tx=uuid();saveCache();render();return fail(l.prevSaved(fmt(p.total-p.down)))}
         let trow;
         try{trow=await insertOnce("transactions",{id:st.ids.tx,customer_id:cust.id,installment_id:p.id,type:"debt",amount:price-down,note:p.title})}
-        catch(e){await sb.from("installments").delete().eq("id",p.id);throw e}
-        if(!S.inst.some(x=>x.id===p.id))S.inst.push(p);if(!S.tx.some(x=>x.id===trow.id))S.tx.push(mapT(trow));saveCache();closeSheet();render();
+        catch(e){try{await run(sb.from("installments").delete().eq("id",p.id))}catch(_){}throw e}
+        if(!S.inst.some(x=>x.id===p.id))S.inst.push(p);if(!S.tx.some(x=>x.id===trow.id))S.tx.push(mapT(trow));saveCache();if(layer.contains(btn))closeSheet();render();
         toast(`${l.savedI} · ${cust.name} · ${fmt(price-down)}`,async()=>{
           await run(sb.from("installments").delete().eq("id",p.id));S.inst=S.inst.filter(x=>x.id!==p.id);S.tx=S.tx.filter(x=>x.iid!==p.id);
           if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
       }else{
         const row=await insertOnce("transactions",{id:st.ids.tx,customer_id:cust.id,installment_id:iid,type,amount,
           note:st.note.trim().slice(0,300)||null,due_at:type==="debt"&&st.due?new Date(now()+st.due*day).toISOString():null});
-        const tx=mapT(row);if(!S.tx.some(x=>x.id===tx.id))S.tx.push(tx);saveCache();closeSheet();render();
+        const tx=mapT(row);
+        if(row.__existed&&(tx.amount!==amount||tx.cid!==cust.id||tx.type!==type)){
+          if(!S.tx.some(x=>x.id===tx.id))S.tx.push(tx);st.ids.tx=uuid();saveCache();render();return fail(l.prevSaved(fmt(tx.amount)))}
+        if(!S.tx.some(x=>x.id===tx.id))S.tx.push(tx);saveCache();if(layer.contains(btn))closeSheet();render();
         toast(`${type==="debt"?l.savedD:l.savedP} · ${cust.name} · ${fmt(amount)}`,async()=>{
           await run(sb.from("transactions").delete().eq("id",tx.id));S.tx=S.tx.filter(x=>x.id!==tx.id);
           if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
@@ -1034,11 +1140,12 @@ function openSettings(){
     try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:name||null,card:card||null,lang:S.lang,updated_at:new Date().toISOString()},{onConflict:"owner_id"}));
       S.shop={name,card};saveCache();closeSheet();render();toast(l.saved)}
     catch(err){btn.disabled=false;document.getElementById("ser").textContent=l.saveFail}};
-  document.getElementById("lo").onclick=async e=>{e.currentTarget.disabled=true;ls.del(cacheKey());
-    // scope:"local" always clears the saved session on this phone, even without internet.
-    try{await sb.auth.signOut({scope:"local"})}catch(err){}
-    ls.del("daftar-auth");
-    if(user){user=null;resetData();closeSheet();renderAuth()}};
+  document.getElementById("lo").onclick=async e=>{e.currentTarget.disabled=true;const uid=user&&user.id;userLogout=true;lastSes=null;
+    // scope:"local" clears the session on this phone; we do not wait more than 3 s for the network.
+    try{await withTimeout(sb.auth.signOut({scope:"local"}),3000)}catch(err){}
+    ls.del("daftar-auth");ls.del("daftar-pending-shop");ls.del(PENDING_AUTH);ls.del(OLD_KEY+"-backup");
+    if(uid){ls.del("daftar-cache-"+uid);ls.del("daftar-import-plan-"+uid)}
+    user=null;resetData();closeSheet();renderAuth();setTimeout(()=>{userLogout=false},4000)};
 }
 
 setLang(S.lang);
