@@ -215,6 +215,7 @@ label.f,.f{display:flex;flex-direction:column;gap:6px;font-size:.84rem;font-weig
   .toast{animation:tin .18s ease-out} @keyframes tin{from{opacity:0;transform:translate(-50%,8px)}}
 }
 @media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.sheet.still{animation:none!important}
 </style>
 </head>
 <body>
@@ -257,7 +258,7 @@ const T={
   login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol (kamida 6 belgi)",
   authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
   badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
-  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 6 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
+  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",cur:"so'm",credit:"Avans (ortiqcha to'langan)",creditShort:"avans",overPay:a=>`Summa qarzdan ko'p (qarz: ${a}). Baribir yozish uchun yana bir bor bosing.`,forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 6 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
   checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
   logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
   loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
@@ -291,7 +292,7 @@ const T={
   login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль (минимум 6 символов)",
   authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
   badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
-  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 6 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
+  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",cur:"сум",credit:"Аванс (переплата)",creditShort:"аванс",overPay:a=>`Сумма больше долга (долг: ${a}). Чтобы всё равно записать, нажмите ещё раз.`,forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 6 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
   checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
   logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
   loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
@@ -320,10 +321,13 @@ function readCfg(){
   try{const c=JSON.parse(ls.get(CFG_KEY)||"null");if(c&&c.url&&c.anonKey)return c}catch(e){}
   return null;
 }
-let cfg=readCfg(),sb=null,user=null,pendingShop=ls.get("daftar-pending-shop")||"";
+let cfg=readCfg(),sb=null,user=null,pendingShop="";
+let pendingSignup=(()=>{try{const v=JSON.parse(ls.get("daftar-pending-shop")||"null");return v&&v.email&&v.name?v:null}catch(e){return null}})();
 let S={lang:ls.get(LANG_KEY)==="ru"?"ru":"uz",shop:{name:"",card:""},customers:[],tx:[],inst:[],offline:false};
 const L=()=>T[S.lang]||T.uz;
-const dstr=t=>{const d=new Date(t);return d.getDate()+" "+(MON[S.lang]||MON.uz)[d.getMonth()]};
+const dstr=t=>{const d=new Date(t);let s=d.getDate()+" "+(MON[S.lang]||MON.uz)[d.getMonth()];if(d.getFullYear()!==new Date().getFullYear())s+=" "+d.getFullYear();return s};
+const withTimeout=(p,ms)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")),ms))]);
+function storedSession(){try{const v=JSON.parse(ls.get("daftar-auth")||"null");return v&&v.user&&v.user.id?v:null}catch(e){return null}}
 let view={name:"list",filter:"owing",q:""};
 
 const app=document.getElementById("app"),tb=document.getElementById("tb"),dock=document.getElementById("dock"),dockin=document.getElementById("dockin"),layer=document.getElementById("layer");
@@ -343,7 +347,7 @@ async function fetchAll(table){
   return out;
 }
 async function load(){
-  const [c,t,i,s]=await Promise.all([fetchAll("customers"),fetchAll("transactions"),fetchAll("installments"),run(sb.from("settings").select("*").maybeSingle())]);
+  const [c,t,i,s]=await withTimeout(Promise.all([fetchAll("customers"),fetchAll("transactions"),fetchAll("installments"),run(sb.from("settings").select("*").maybeSingle())]),15000);
   S.customers=c.map(mapC);S.tx=t.map(mapT);S.inst=i.map(mapI);
   if(s){S.shop={name:s.shop_name||"",card:s.card||""};if(s.lang)setLang(s.lang)}
   else S.shop={name:"",card:""};
@@ -354,10 +358,32 @@ function loadCache(){try{const c=JSON.parse(ls.get(cacheKey())||"null");if(!c)re
 function canWrite(){if(S.offline){toast(L().offlineNoSave);return false}return true}
 
 /* ---------- money logic ---------- */
-function planMonthly(principal,months){let base=Math.floor(principal/months/1000)*1000;if(base<=0)base=Math.floor(principal/months);return{base,last:principal-base*(months-1)}}
+// Monthly amount is rounded UP to 1 000 so the last month is never bigger than the others.
+function planMonthly(principal,months){
+  if(months<=1)return{base:principal,last:principal};
+  let base=Math.ceil(principal/months/1000)*1000;
+  if(base<=0||base*(months-1)>=principal)base=Math.floor(principal/months);
+  return{base,last:principal-base*(months-1)};
+}
+// Index of transactions/plans, rebuilt only when data or the day changes.
+let IX=null;
+function ix(){
+  const today=sod();
+  if(IX&&IX.tx===S.tx&&IX.tl===S.tx.length&&IX.inst===S.inst&&IX.il===S.inst.length&&IX.day===today)return IX;
+  const byC=new Map(),planPaid=new Map(),plansByC=new Map(),extra=new Map();
+  for(const x of S.tx){let a=byC.get(x.cid);if(!a)byC.set(x.cid,a=[]);a.push(x);if(x.iid&&x.type==="pay")planPaid.set(x.iid,(planPaid.get(x.iid)||0)+x.amount)}
+  for(const p of S.inst){let a=plansByC.get(p.cid);if(!a)plansByC.set(p.cid,a=[]);a.push(p)}
+  // Money paid as "general" beyond the general debt goes to the customer's plans, oldest plan first.
+  for(const[cid,ps]of plansByC){
+    let g=0;for(const x of byC.get(cid)||[])if(!x.iid)g+=x.type==="debt"?x.amount:-x.amount;
+    let pool=Math.max(0,-g);if(!pool)continue;
+    for(const p of[...ps].sort((a,z)=>a.start-z.start||(a.id<z.id?-1:1))){const need=Math.max(0,p.total-p.down-(planPaid.get(p.id)||0)),give=Math.min(need,pool);if(give)extra.set(p.id,give);pool-=give;if(!pool)break}
+  }
+  return IX={tx:S.tx,tl:S.tx.length,inst:S.inst,il:S.inst.length,day:today,byC,planPaid,plansByC,extra,m:new Map()};
+}
 function schedule(p){
-  const principal=p.total-p.down,{base,last}=planMonthly(principal,p.months);
-  const paid=S.tx.filter(x=>x.iid===p.id&&x.type==="pay").reduce((a,x)=>a+x.amount,0);
+  const I=ix(),principal=p.total-p.down,{base,last}=planMonthly(principal,p.months);
+  const paid=(I.planPaid.get(p.id)||0)+(I.extra.get(p.id)||0);
   const today=sod();let cum=0;const items=[];
   for(let i=1;i<=p.months;i++){
     const amt=i===p.months?last:base,due=addMonths(p.start,i),part=Math.max(0,Math.min(amt,paid-cum));cum+=amt;
@@ -367,13 +393,20 @@ function schedule(p){
   return{principal,base,paid,left:Math.max(0,principal-paid),items,next:items.find(x=>x.part<x.amt)||null,paidCount:items.filter(x=>x.st==="paid").length,late,lateSum:late.reduce((a,x)=>a+x.amt-x.part,0)};
 }
 function metrics(cid){
-  const tx=S.tx.filter(x=>x.cid===cid);let b=0,g=0;
-  for(const x of tx){const v=x.type==="debt"?x.amount:-x.amount;b+=v;if(!x.iid)g+=v}
-  const t0=now(),today=sod();let late=0,next=0;
-  if(g>0)for(const x of tx)if(x.type==="debt"&&!x.iid&&x.due){if(x.due<t0)late=Math.max(late,Math.max(1,Math.floor((t0-x.due)/day)));else next=next?Math.min(next,x.due):x.due}
-  const plans=S.inst.filter(p=>p.cid===cid).map(p=>({p,s:schedule(p)}));
+  const I=ix(),hit=I.m.get(cid);if(hit)return hit;
+  const tx=I.byC.get(cid)||[];let b=0,g=0,payPool=0,t=0;
+  for(const x of tx){const v=x.type==="debt"?x.amount:-x.amount;b+=v;if(!x.iid){g+=v;if(x.type==="pay")payPool+=x.amount}if(x.date>t)t=x.date}
+  const t0=now(),today=I.day;let late=0,next=0;
+  // General payments close general debts oldest first; only debts still open can be late or upcoming.
+  for(const d of tx.filter(x=>!x.iid&&x.type==="debt").sort((a,z)=>a.date-z.date)){
+    const cover=Math.min(payPool,d.amount);payPool-=cover;
+    if(d.amount-cover>0&&d.due){if(d.due<t0)late=Math.max(late,Math.max(1,Math.floor((t0-d.due)/day)));else next=next?Math.min(next,d.due):d.due}
+  }
+  const plans=(I.plansByC.get(cid)||[]).map(p=>({p,s:schedule(p)}));
   for(const{s}of plans){if(s.left<=0)continue;if(s.late.length)late=Math.max(late,Math.max(1,Math.floor((today-s.late[0].due)/day)));else if(s.next)next=next?Math.min(next,s.next.due):s.next.due}
-  return{b,g,inst:b-g,late,next,t:tx.length?Math.max(...tx.map(x=>x.date)):0,plans,active:plans.filter(x=>x.s.left>0)};
+  if(b<=0){late=0;next=0}
+  const r={b,g,inst:b-g,late,next,t,plans,active:plans.filter(x=>x.s.left>0)};
+  I.m.set(cid,r);return r;
 }
 function reminderText(c){
   const m=metrics(c.id),l=L();let extra="";
@@ -490,12 +523,13 @@ function renderAuth(){
   document.getElementById("af").onsubmit=async e=>{
     e.preventDefault();
     const email=document.getElementById("a-email").value.trim(),pw=document.getElementById("a-pw").value,er=document.getElementById("a-err"),go=document.getElementById("a-go");
-    authEmail=email;const sh=document.getElementById("a-shop");if(sh){pendingShop=sh.value.trim();ls.set("daftar-pending-shop",pendingShop)}
+    authEmail=email;const sh=document.getElementById("a-shop");if(sh)pendingShop=sh.value.trim();
     if(!email||!pw){er.textContent=l.needEmail;return}
-    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
     const fix=emailFix(email);
     if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("a-email");ei.value=fix;authEmail=fix;ei.focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
     if(su&&pw.length<6){er.textContent=l.shortPw;return}
+    if(su&&pendingShop){pendingSignup={email:email.toLowerCase(),name:pendingShop.slice(0,80)};ls.set("daftar-pending-shop",JSON.stringify(pendingSignup))}
     go.disabled=true;er.textContent="";
     try{
       if(su){
@@ -531,9 +565,9 @@ function renderReset(){
     const email=document.getElementById("r-email").value.trim(),er=document.getElementById("r-err"),go=document.getElementById("r-go");
     authEmail=email;
     if(!email){er.textContent=l.needEmailOnly;return}
-    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
     const fix=emailFix(email);
     if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("r-email");ei.value=fix;authEmail=fix;ei.focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
     go.disabled=true;er.textContent="";
     try{const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(r.error)throw r.error;
       authErr="";authInfo=l.resetSent(email);renderReset()}
@@ -572,11 +606,19 @@ async function startApp(){
   try{await load();S.offline=false;saveCache()}
   catch(e){if(!loadCache()){starting=false;return renderMessage(L().net,()=>startApp())}S.offline=true}
   starting=false;
-  if(pendingShop&&!S.shop.name&&!S.offline){
-    try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:pendingShop,lang:S.lang},{onConflict:"owner_id"}));S.shop.name=pendingShop;saveCache()}catch(e){}
-    pendingShop="";ls.del("daftar-pending-shop");
+  if(!S.offline){
+    // The shop name typed at sign-up belongs only to the account with that same email.
+    const ps=pendingSignup;
+    if(ps&&user&&user.email&&ps.email===user.email.toLowerCase()&&!S.shop.name){
+      try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:ps.name,lang:S.lang},{onConflict:"owner_id"}));S.shop.name=ps.name;saveCache()}catch(e){}
+    }
+    pendingSignup=null;pendingShop="";ls.del("daftar-pending-shop");
   }
   view={name:"list",filter:"owing",q:""};render();
+}
+function offlineStart(){
+  if(loadCache()){S.offline=true;view={name:"list",filter:"owing",q:""};render()}
+  else renderMessage(L().net,()=>location.reload());
 }
 function resetData(){S.customers=[];S.tx=[];S.inst=[];S.shop={name:"",card:""};S.offline=false}
 
@@ -586,15 +628,20 @@ async function boot(){
   try{sb=window.supabase.createClient(cfg.url,cfg.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"daftar-auth"}})}
   catch(e){return renderSetup(L().badCfg)}
   renderLoading();
-  let session=null;
-  try{const r=await sb.auth.getSession();session=r.data&&r.data.session}catch(e){}
-  if(session)user=session.user;
-  sb.auth.onAuthStateChange((ev,ses)=>{
+  const listen=()=>sb.auth.onAuthStateChange((ev,ses)=>{
     if(ev==="PASSWORD_RECOVERY"){recoveryMode=true;if(ses)user=ses.user;setTimeout(renderNewPassword,0);return}
     if(recoveryMode)return;
-    if(ev==="SIGNED_OUT"){user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
+    if(ev==="SIGNED_OUT"){if(user)ls.del("daftar-cache-"+user.id);user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
     else if(ses&&ses.user&&(!user||user.id!==ses.user.id)&&(ev==="SIGNED_IN"||ev==="INITIAL_SESSION")){user=ses.user;setTimeout(startApp,0)}
   });
+  // Offline (or a very slow network) must not lock the owner out: open the last saved data read-only.
+  const stored=storedSession();
+  if(stored&&!recoveryMode&&navigator.onLine===false){user=stored.user;listen();return offlineStart()}
+  let session=null,slow=false;
+  try{const r=await withTimeout(sb.auth.getSession(),8000);session=r.data&&r.data.session}catch(e){slow=true}
+  if(!session&&stored&&!recoveryMode&&(slow||navigator.onLine===false)){user=stored.user;listen();return offlineStart()}
+  if(session)user=session.user;
+  listen();
   if(session&&recoveryMode)renderNewPassword();else if(session)startApp();else renderAuth();
 }
 
@@ -609,10 +656,10 @@ function oldLocal(){
 }
 function rowHTML(r,l){
   const m=r.m,cls=m.late?"late":(m.b<=0?"ok":"");
-  const sub=m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:(m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:(m.t?`<span>${dstr(m.t)}</span>`:""));
+  const sub=m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:(m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:(m.b<0?`<span class="pill ok">${l.creditShort}</span>`:(m.t?`<span>${dstr(m.t)}</span>`:"")));
   return `<button class="row" data-c="${r.c.id}"><span class="av ${cls}">${esc(initial(r.c.name))}</span>
    <span class="who"><div class="nm">${esc(r.c.name)}${m.active.length?`<span class="tag">${l.instTag}</span>`:""}</div><div class="sub">${sub}</div></span>
-   <span class="amt num ${m.b>0?"debt":"ok"}">${m.b>0?fmt(m.b):"✓"}</span></button>`;
+   <span class="amt num ${m.b>0?"debt":"ok"}">${m.b>0?fmt(m.b):(m.b<0?"+"+fmt(-m.b):"✓")}</span></button>`;
 }
 function renderList(){
   const l=L();
@@ -632,7 +679,7 @@ function renderList(){
   app.innerHTML=`${offlineBanner()}${installBanner()}
   ${old?`<div class="banner ink"><span>${l.importT(old.cs.length)}</span><span class="bb"><button id="imp">${l.importYes}</button><button id="impNo">${l.importNo}</button></span></div>`:""}
   <section class="hero" aria-live="polite">
-   <div><div class="eyebrow">${l.total}</div><div class="big num">${fmt(total)}<small>so'm</small></div></div>
+   <div><div class="eyebrow">${l.total}</div><div class="big num">${fmt(total)}<small>${l.cur}</small></div></div>
    <div class="stats">
     ${nDebt?`<button class="stat" data-f="owing"><b class="num">${nDebt}</b> ${l.debtors}</button>`:`<span class="stat ok">✓ ${l.allPaid}</span>`}
     ${nLate?`<button class="stat late" data-f="late"><b class="num">${nLate}</b> ${l.overdue}</button>`:""}
@@ -660,13 +707,19 @@ function renderList(){
 }
 async function importOld(old,btn){
   if(!canWrite())return;btn.disabled=true;
-  const idMap={},custs=old.cs.map(c=>{const id=uuid();idMap[c.id]=id;return{id,name:String(c.name||"?").slice(0,120),phone:c.phone?String(c.phone).slice(0,40):null,limit_amount:Math.max(0,Number(c.limit)||0)}});
-  const txs=(old.o.tx||[]).filter(x=>idMap[x.cid]&&Number(x.amount)>0&&(x.type==="debt"||x.type==="pay")).map(x=>({customer_id:idMap[x.cid],type:x.type,amount:Math.round(Number(x.amount)),note:x.note?String(x.note).slice(0,300):null,created_at:new Date(x.date||now()).toISOString(),due_at:x.due?new Date(x.due).toISOString():null}));
+  // Ids are fixed once and saved, so a retry after a failure never creates duplicates.
+  const planKey="daftar-import-plan-"+user.id;let plan=null;
+  try{plan=JSON.parse(ls.get(planKey)||"null")}catch(e){}
+  if(!plan){
+    const idMap={},custs=old.cs.map(c=>{const id=uuid();idMap[c.id]=id;return{id,name:(String(c.name||"").trim()||"?").slice(0,120),phone:c.phone?String(c.phone).slice(0,40):null,limit_amount:Math.max(0,Math.round(Number(c.limit)||0))}});
+    const txs=(old.o.tx||[]).filter(x=>idMap[x.cid]&&Number(x.amount)>0&&(x.type==="debt"||x.type==="pay")).map(x=>({id:uuid(),customer_id:idMap[x.cid],type:x.type,amount:Math.round(Number(x.amount)),note:x.note?String(x.note).slice(0,300):null,created_at:new Date(x.date||now()).toISOString(),due_at:x.due?new Date(x.due).toISOString():null}));
+    plan={custs,txs};ls.set(planKey,JSON.stringify(plan));
+  }
   try{
-    await run(sb.from("customers").insert(custs));
-    if(txs.length)await run(sb.from("transactions").insert(txs));
-    ls.set("daftar-imported","done");
-    await load();saveCache();renderList();toast(L().imported(custs.length));
+    await run(sb.from("customers").upsert(plan.custs,{onConflict:"id",ignoreDuplicates:true}));
+    if(plan.txs.length)await run(sb.from("transactions").upsert(plan.txs,{onConflict:"id",ignoreDuplicates:true}));
+    ls.set("daftar-imported","done");ls.set(OLD_KEY+"-backup",ls.get(OLD_KEY)||"");ls.del(OLD_KEY);ls.del(planKey);
+    await load();saveCache();renderList();toast(L().imported(plan.custs.length));
   }catch(e){btn.disabled=false;toast(L().saveFail)}
 }
 
@@ -692,7 +745,7 @@ function renderDetail(){
   <section class="hero">
    <div class="dh"><span class="av ${m.late?"late":(b<=0?"ok":"")}">${esc(initial(c.name))}</span>
     <div style="min-width:0"><h1>${esc(c.name)}</h1>${c.phone?`<div class="ph num">${esc(c.phone)}</div>`:""}</div></div>
-   <div><div class="eyebrow">${b>0?l.balance:l.paid}</div><div class="big num" style="color:${b>0?"var(--debt)":"var(--pay)"}">${fmt(Math.max(0,b))}<small>so'm</small></div></div>
+   <div><div class="eyebrow">${b>0?l.balance:(b<0?l.credit:l.paid)}</div><div class="big num" style="color:${b>0?"var(--debt)":"var(--pay)"}">${b<0?"+":""}${fmt(Math.abs(b))}<small>${l.cur}</small></div></div>
    ${m.plans.length&&b>0?`<div class="split"><span>${l.splitGen}: <b class="num">${fmt(Math.max(0,m.g))}</b></span><span>${l.splitInst}: <b class="num">${fmt(Math.max(0,m.inst))}</b></span></div>`:""}
    ${(m.late||m.next)?`<div class="status">${m.late?`<span class="pill">${m.late} ${l.lateBy}</span>`:""}${m.next?`<span class="pill due">${l.dueIn}: ${dstr(m.next)}</span>`:""}</div>`:""}
    ${c.limit?`<div class="limit"><div class="row2"><span>${l.limit}: <span class="num">${fmt(c.limit)}</span></span><span class="num">${fmt(Math.max(0,c.limit-b))} ${l.left}</span></div><div class="bar"><i class="${pct>=90?"hot":""}" style="width:${pct}%"></i></div></div>`:""}
@@ -777,20 +830,31 @@ function toast(text,undoFn){
 function closeSheet(){layer.innerHTML="";document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet()});
 function sheet(title,cls,html){
-  layer.innerHTML=`<div class="scrim" id="scrim"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="in"><div class="grab"></div>
+  const old=layer.querySelector(".sheet"),top=old?old.scrollTop:0;
+  layer.innerHTML=`<div class="scrim" id="scrim"></div><div class="sheet${old?" still":""}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="in"><div class="grab"></div>
    <div class="sh-head"><h2 class="${cls}">${esc(title)}</h2><button class="x-btn" id="xb" aria-label="${L().cancel}">✕</button></div>${html}</div></div>`;
+  if(old)layer.querySelector(".sheet").scrollTop=top;
   document.body.style.overflow="hidden";
   document.getElementById("scrim").onclick=closeSheet;document.getElementById("xb").onclick=closeSheet;
 }
+// Insert with a client-made id. If the first try was saved but the answer got lost,
+// the retry hits the same id and we read the saved row instead of making a duplicate.
+async function insertOnce(table,row){
+  const r=await sb.from(table).insert(row).select().single();
+  if(!r.error)return r.data;
+  if(r.error.code==="23505")return await run(sb.from(table).select("*").eq("id",row.id).single());
+  throw r.error;
+}
+function findCustomer(st){
+  if(st.cid)return S.customers.find(x=>x.id===st.cid)||null;
+  const n=st.newName.trim().toLowerCase();return n?S.customers.find(x=>x.name.toLowerCase()===n)||null:null;
+}
 async function ensureCustomer(st,allowCreate){
-  let cust=st.cid&&S.customers.find(x=>x.id===st.cid);
+  let cust=findCustomer(st);
   if(cust)return{cust,created:false};
-  const n=st.newName.trim();if(!n)return null;
-  cust=S.customers.find(x=>x.name.toLowerCase()===n.toLowerCase());
-  if(cust)return{cust,created:false};
-  if(!allowCreate)return null;
-  const row=await run(sb.from("customers").insert({name:n.slice(0,120),phone:st.phone.trim()||null}).select().single());
-  cust=mapC(row);S.customers.push(cust);return{cust,created:true};
+  const n=st.newName.trim();if(!n||!allowCreate)return null;
+  const row=await insertOnce("customers",{id:st.ids.cust,name:n.slice(0,120),phone:st.phone.trim().slice(0,40)||null});
+  cust=mapC(row);if(!S.customers.some(x=>x.id===cust.id))S.customers.push(cust);return{cust,created:true};
 }
 async function dropCustomer(id){await run(sb.from("customers").delete().eq("id",id));S.customers=S.customers.filter(x=>x.id!==id);S.tx=S.tx.filter(x=>x.cid!==id);S.inst=S.inst.filter(x=>x.cid!==id)}
 
@@ -798,16 +862,27 @@ async function dropCustomer(id){await run(sb.from("customers").delete().eq("id",
 function openEntry(type,cid,opts){
   opts=opts||{};const l=L();
   const st={cid:cid||null,newName:"",phone:"",amount:opts.amount?String(opts.amount):"",due:0,note:"",
-    mode:"simple",title:"",price:"",down:"",months:6,iid:opts.iid!==undefined?opts.iid:"auto"};
+    mode:"simple",title:"",price:"",down:"",months:6,iid:opts.iid!==undefined?opts.iid:"auto",overOk:0,
+    ids:{cust:uuid(),plan:uuid(),tx:uuid()}};
+  const sugHTML=()=>{
+    const q=st.newName.trim().toLowerCase();
+    const recent=[...S.customers].sort((a,b)=>metrics(b.id).t-metrics(a.id).t);
+    const sug=(q?recent.filter(x=>x.name.toLowerCase().includes(q)):(type==="pay"?recent.filter(x=>metrics(x.id).b>0):recent)).slice(0,5);
+    const exact=q&&S.customers.some(x=>x.name.toLowerCase()===q),canNew=q&&!exact&&type==="debt";
+    return `${(sug.length||canNew)?`<div class="suggest">${sug.map(x=>{const b=metrics(x.id).b;return `<button data-pick="${x.id}"><span>${esc(x.name)}</span><span class="amt num ${b>0?"debt":"ok"}" style="font-size:.95rem">${b>0?fmt(b):"✓"}</span></button>`}).join("")}
+      ${canNew?`<button class="new" data-new="1">＋ ${l.newC}: «${esc(st.newName.trim())}»</button>`:""}</div>`:""}
+      ${canNew?`<label class="f">${l.phone}<input id="ph" inputmode="tel" maxlength="40" placeholder="+998" value="${esc(st.phone)}"></label>`:""}`;
+  };
+  const bindSug=()=>{
+    const ph=document.getElementById("ph");if(ph)ph.oninput=e=>st.phone=e.target.value;
+    layer.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{st.cid=b.dataset.pick;st.newName="";st.iid="auto";st.overOk=0;draw(st.mode==="inst"?"ti":"am")});
+    const nb=layer.querySelector("[data-new]");if(nb)nb.onclick=()=>{const t=document.getElementById(ph?"ph":(st.mode==="inst"?"ti":"am"));if(t)t.focus()};
+  };
   const draw=focus=>{
     const c=st.cid&&S.customers.find(x=>x.id===st.cid);
     const m=c?metrics(c.id):null;
     if(type==="pay"&&c&&st.iid==="auto")st.iid=(m.g>0||!m.active.length)?null:m.active[0].p.id;
     const inst=type==="debt"&&st.mode==="inst";
-    const recent=[...S.customers].sort((a,b)=>metrics(b.id).t-metrics(a.id).t);
-    const q=st.newName.trim().toLowerCase();
-    const sug=(q?recent.filter(x=>x.name.toLowerCase().includes(q)):(type==="pay"?recent.filter(x=>metrics(x.id).b>0):recent)).slice(0,5);
-    const exact=q&&S.customers.some(x=>x.name.toLowerCase()===q),canNew=q&&!exact&&type==="debt";
     const amt=parseInt(st.amount)||0,cb=m?m.b:0;
     const willOver=!inst&&c&&type==="debt"&&c.limit&&cb+amt>c.limit;
     const tPlan=type==="pay"&&st.iid?m&&m.active.find(x=>x.p.id===st.iid):null;
@@ -816,11 +891,9 @@ function openEntry(type,cid,opts){
     sheet(title,cls,`
      ${type==="debt"?`<div class="seg two" role="group"><button data-mode="simple" aria-pressed="${!inst}">${l.modeSimple}</button><button data-mode="inst" aria-pressed="${inst}">${l.modeInst}</button></div>`:""}
      ${c?`<div class="picked"><span class="who"><span class="av">${esc(initial(c.name))}</span><span style="min-width:0"><div class="nm">${esc(c.name)}</div>
-        <div class="sub num" style="color:${cb>0?"var(--debt)":"var(--pay)"}">${cb>0?fmt(cb)+" so'm":"✓"}</div></span></span><button id="chg">${l.change}</button></div>`
-      :`<label class="f">${type==="debt"?l.who:l.whoPay}<input id="nm" placeholder="${l.whoPh}" value="${esc(st.newName)}" autocomplete="off"></label>
-        ${(sug.length||canNew)?`<div class="suggest">${sug.map(x=>{const b=metrics(x.id).b;return `<button data-pick="${x.id}"><span>${esc(x.name)}</span><span class="amt num ${b>0?"debt":"ok"}" style="font-size:.95rem">${b>0?fmt(b):"✓"}</span></button>`}).join("")}
-          ${canNew?`<button class="new" data-new="1">＋ ${l.newC}: «${esc(st.newName.trim())}»</button>`:""}</div>`:""}
-        ${canNew?`<label class="f">${l.phone}<input id="ph" inputmode="tel" placeholder="+998" value="${esc(st.phone)}"></label>`:""}`}
+        <div class="sub num" style="color:${cb>0?"var(--debt)":"var(--pay)"}">${cb>0?fmt(cb)+" "+l.cur:(cb<0?l.creditShort+" +"+fmt(-cb):"✓")}</div></span></span><button id="chg">${l.change}</button></div>`
+      :`<label class="f">${type==="debt"?l.who:l.whoPay}<input id="nm" placeholder="${l.whoPh}" value="${esc(st.newName)}" autocomplete="off" maxlength="120"></label>
+        <div id="sugbox" style="display:flex;flex-direction:column;gap:14px">${sugHTML()}</div>`}
      ${type==="pay"&&c&&m.active.length?`<div class="f">${l.target}<div class="chips">
         <button class="chip" data-iid="" aria-pressed="${!st.iid}">${l.toGeneral}${m.g>0?` · ${fmt(m.g)}`:""}</button>
         ${m.active.map(({p,s})=>`<button class="chip" data-iid="${p.id}" aria-pressed="${st.iid===p.id}">${esc(p.title)} · ${fmt(s.left)}</button>`).join("")}</div></div>`:""}
@@ -860,13 +933,12 @@ function openEntry(type,cid,opts){
   }
   function bind(focus,c,cb,willOver){
     layer.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.mode;draw(st.cid?(st.mode==="inst"?"ti":"am"):"nm")});
+    // Typing a name only refreshes the suggestion list, so the input itself (and the keyboard) is never replaced.
     const nm=document.getElementById("nm");
-    if(nm)nm.oninput=e=>{st.newName=e.target.value;const p=e.target.selectionStart;draw();const n=document.getElementById("nm");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
-    const ph=document.getElementById("ph");if(ph)ph.oninput=e=>st.phone=e.target.value;
-    layer.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{st.cid=b.dataset.pick;st.newName="";if(opts.iid===undefined)st.iid="auto";draw(st.mode==="inst"?"ti":"am")});
-    const nb=layer.querySelector("[data-new]");if(nb)nb.onclick=()=>{const t=document.getElementById(ph?"ph":(st.mode==="inst"?"ti":"am"));if(t)t.focus()};
-    const chg=document.getElementById("chg");if(chg)chg.onclick=()=>{st.cid=null;st.newName="";if(opts.iid===undefined)st.iid="auto";draw("nm")};
-    layer.querySelectorAll("[data-iid]").forEach(b=>b.onclick=()=>{st.iid=b.dataset.iid||null;st.amount="";draw("am")});
+    if(nm)nm.oninput=e=>{st.newName=e.target.value;const box=document.getElementById("sugbox");if(box){box.innerHTML=sugHTML();bindSug()}};
+    bindSug();
+    const chg=document.getElementById("chg");if(chg)chg.onclick=()=>{st.cid=null;st.newName="";st.iid="auto";st.overOk=0;draw("nm")};
+    layer.querySelectorAll("[data-iid]").forEach(b=>b.onclick=()=>{st.iid=b.dataset.iid||null;st.amount="";st.overOk=0;draw("am")});
     money("am","amount",()=>{refreshLive();const v=parseInt(st.amount)||0;const over=!!(c&&type==="debt"&&c.limit&&cb+v>c.limit);if(over!==!!willOver)draw("am")});
     money("pr","price");money("dn","down");
     const ti=document.getElementById("ti");if(ti)ti.oninput=e=>st.title=e.target.value;
@@ -878,7 +950,7 @@ function openEntry(type,cid,opts){
     layer.querySelectorAll("[data-due]").forEach(b=>b.onclick=()=>{st.due=+b.dataset.due;draw()});
     const nt=document.getElementById("nt");if(nt)nt.oninput=e=>st.note=e.target.value;
     document.getElementById("sv").onclick=save;
-    layer.querySelectorAll(".sheet input").forEach(i=>i.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();save()}}));
+    layer.onkeydown=e=>{if(e.key==="Enter"&&e.target&&e.target.tagName==="INPUT"){e.preventDefault();save()}};
     const target=focus===undefined?null:(focus||(st.cid?(st.mode==="inst"?"ti":"am"):"nm"));
     const fe=target&&document.getElementById(target);
     if(fe)setTimeout(()=>{fe.focus();try{fe.setSelectionRange(fe.value.length,fe.value.length)}catch(_){}},focus===null?80:0);
@@ -897,6 +969,16 @@ function openEntry(type,cid,opts){
       if(down>=price)return fail(l.badDown);
       if(!(st.months>=1&&st.months<=60))return fail(l.badMonths);
     }else if(amount<=0)return fail(l.needAmt);
+    const known=findCustomer(st);
+    if(type==="pay"&&!known)return fail(l.needWho);
+    // A plan payment must belong to the same customer as the plan.
+    const iid=type==="pay"&&st.iid?st.iid:null;
+    if(iid&&!S.inst.some(p=>p.id===iid&&p.cid===known.id))return fail(l.saveFail);
+    // Paying more than is owed is allowed only after a second tap (typo protection).
+    if(type==="pay"){
+      const m=metrics(known.id),tp=iid&&m.plans.find(x=>x.p.id===iid),cap=tp?tp.s.left:Math.max(0,m.b);
+      if(amount>cap&&st.overOk!==amount){st.overOk=amount;return fail(l.overPay(fmt(cap)))}
+    }
     if(!canWrite())return;
     saving=true;btn.disabled=true;er.textContent="";
     let res;
@@ -905,19 +987,19 @@ function openEntry(type,cid,opts){
     const{cust,created}=res;
     try{
       if(inst){
-        const row=await run(sb.from("installments").insert({customer_id:cust.id,title:st.title.trim().slice(0,120),total:price,down_payment:down,months:st.months,start_date:ymd(now())}).select().single());
+        const row=await insertOnce("installments",{id:st.ids.plan,customer_id:cust.id,title:st.title.trim().slice(0,120),total:price,down_payment:down,months:st.months,start_date:ymd(now())});
         const p=mapI(row);
         let trow;
-        try{trow=await run(sb.from("transactions").insert({customer_id:cust.id,installment_id:p.id,type:"debt",amount:price-down,note:p.title}).select().single())}
+        try{trow=await insertOnce("transactions",{id:st.ids.tx,customer_id:cust.id,installment_id:p.id,type:"debt",amount:price-down,note:p.title})}
         catch(e){await sb.from("installments").delete().eq("id",p.id);throw e}
-        S.inst.push(p);S.tx.push(mapT(trow));saveCache();closeSheet();render();
+        if(!S.inst.some(x=>x.id===p.id))S.inst.push(p);if(!S.tx.some(x=>x.id===trow.id))S.tx.push(mapT(trow));saveCache();closeSheet();render();
         toast(`${l.savedI} · ${cust.name} · ${fmt(price-down)}`,async()=>{
           await run(sb.from("installments").delete().eq("id",p.id));S.inst=S.inst.filter(x=>x.id!==p.id);S.tx=S.tx.filter(x=>x.iid!==p.id);
           if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
       }else{
-        const row=await run(sb.from("transactions").insert({customer_id:cust.id,installment_id:type==="pay"&&st.iid?st.iid:null,type,amount,
-          note:st.note.trim().slice(0,300)||null,due_at:type==="debt"&&st.due?new Date(now()+st.due*day).toISOString():null}).select().single());
-        const tx=mapT(row);S.tx.push(tx);saveCache();closeSheet();render();
+        const row=await insertOnce("transactions",{id:st.ids.tx,customer_id:cust.id,installment_id:iid,type,amount,
+          note:st.note.trim().slice(0,300)||null,due_at:type==="debt"&&st.due?new Date(now()+st.due*day).toISOString():null});
+        const tx=mapT(row);if(!S.tx.some(x=>x.id===tx.id))S.tx.push(tx);saveCache();closeSheet();render();
         toast(`${type==="debt"?l.savedD:l.savedP} · ${cust.name} · ${fmt(amount)}`,async()=>{
           await run(sb.from("transactions").delete().eq("id",tx.id));S.tx=S.tx.filter(x=>x.id!==tx.id);
           if(created)await dropCustomer(cust.id);if(created&&view.cid===cust.id)view.name="list";saveCache();render()});
@@ -952,7 +1034,10 @@ function openSettings(){
     try{await run(sb.from("settings").upsert({owner_id:user.id,shop_name:name||null,card:card||null,lang:S.lang,updated_at:new Date().toISOString()},{onConflict:"owner_id"}));
       S.shop={name,card};saveCache();closeSheet();render();toast(l.saved)}
     catch(err){btn.disabled=false;document.getElementById("ser").textContent=l.saveFail}};
-  document.getElementById("lo").onclick=async e=>{e.currentTarget.disabled=true;ls.del(cacheKey());try{await sb.auth.signOut()}catch(err){}
+  document.getElementById("lo").onclick=async e=>{e.currentTarget.disabled=true;ls.del(cacheKey());
+    // scope:"local" always clears the saved session on this phone, even without internet.
+    try{await sb.auth.signOut({scope:"local"})}catch(err){}
+    ls.del("daftar-auth");
     if(user){user=null;resetData();closeSheet();renderAuth()}};
 }
 

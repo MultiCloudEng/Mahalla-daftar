@@ -32,6 +32,7 @@ create table if not exists public.installments (
   start_date   date not null default current_date,
   created_at   timestamptz not null default now(),
   unique (id, owner_id),
+  unique (id, customer_id, owner_id),
   foreign key (customer_id, owner_id) references public.customers(id, owner_id) on delete cascade
 );
 
@@ -47,7 +48,9 @@ create table if not exists public.transactions (
   due_at         timestamptz,
   created_at     timestamptz not null default now(),
   foreign key (customer_id, owner_id) references public.customers(id, owner_id) on delete cascade,
-  foreign key (installment_id, owner_id) references public.installments(id, owner_id) on delete cascade
+  foreign key (installment_id, owner_id) references public.installments(id, owner_id) on delete cascade,
+  -- a plan payment must belong to the plan's own customer
+  foreign key (installment_id, customer_id, owner_id) references public.installments(id, customer_id, owner_id) on delete cascade
 );
 
 -- One settings row per shop owner
@@ -66,6 +69,7 @@ create index if not exists installments_cust_owner_idx on public.installments (c
 create index if not exists transactions_owner_idx      on public.transactions (owner_id, created_at desc);
 create index if not exists transactions_cust_owner_idx on public.transactions (customer_id, owner_id);
 create index if not exists transactions_inst_owner_idx on public.transactions (installment_id, owner_id);
+create index if not exists transactions_plan_cust_owner_idx on public.transactions (installment_id, customer_id, owner_id);
 
 -- Row Level Security: each user sees and changes only their own rows
 alter table public.customers    enable row level security;
