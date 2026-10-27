@@ -257,7 +257,7 @@ const T={
   login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol (kamida 6 belgi)",
   authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
   badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
-  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
+  shortPw:"Parol kamida 6 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 6 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
   checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
   logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
   loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
@@ -291,7 +291,7 @@ const T={
   login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль (минимум 6 символов)",
   authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
   badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
-  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
+  shortPw:"Пароль минимум 6 символов.",needEmail:"Введите email и пароль.",forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 6 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
   checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
   logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
   loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
@@ -451,16 +451,23 @@ const DOMAIN_FIX={"gmai.com":"gmail.com","gmial.com":"gmail.com","gmaill.com":"g
   "mail.r":"mail.ru","mial.ru":"mail.ru","mail.ry":"mail.ru","maill.ru":"mail.ru","yandex.r":"yandex.ru","yandeks.ru":"yandex.ru","yandx.ru":"yandex.ru","yahooo.com":"yahoo.com","yaho.com":"yahoo.com","icloud.co":"icloud.com","iclod.com":"icloud.com","icoud.com":"icloud.com","outlok.com":"outlook.com","hotmial.com":"hotmail.com"};
 function emailFix(email){const m=/^([^@\s]+)@([^@\s]+)$/.exec(email);if(!m)return null;const d=m[2].toLowerCase(),f=DOMAIN_FIX[d];return f?m[1]+"@"+f:null}
 let warnedEmail="";
+const BOOT_HASH=location.hash||"";
+let recoveryMode=/type=recovery/.test(BOOT_HASH);
+if(/error_code=|error=access_denied/.test(BOOT_HASH)){authMode="reset";authErr=null;setTimeout(()=>{authErr=L().linkExpired;if(screen==="auth")renderAuth()},0)}
 function authError(e){
   const l=L(),m=String((e&&e.message)||e||"");
   if(/invalid login/i.test(m))return l.badLogin;
   if(/not confirmed/i.test(m))return l.notConfirmed;
   if(/already registered|already exists/i.test(m))return l.exists;
   if(/at least|password/i.test(m)&&/6/.test(m))return l.shortPw;
+  if(/rate limit|too many/i.test(m))return l.rateLimit;
+  if(/same password|different from the old/i.test(m))return l.samePw;
+  if(/expired|invalid.*(token|link|otp)/i.test(m))return l.linkExpired;
   if(/fetch|network|failed/i.test(m))return l.net;
   return m||l.net;
 }
 function renderAuth(){
+  if(authMode==="reset")return renderReset();
   const l=L(),su=authMode==="signup";showDock(false);screen="auth";
   tb.innerHTML=brandTop()+langBtn();bindLangBtn(renderAuth);
   app.innerHTML=`<section class="auth">
@@ -475,8 +482,10 @@ function renderAuth(){
     <div class="err" id="a-err">${esc(authErr)}</div>
     ${authInfo?`<div class="infobox">${esc(authInfo)}</div>`:""}
     <button class="btn ink" type="submit" id="a-go">${su?l.signup:l.login}</button>
+    ${su?"":`<button class="linkish" type="button" id="a-forgot" style="align-self:center">${l.forgot}</button>`}
    </form></section>`;
   bindInstall();
+  const fg=document.getElementById("a-forgot");if(fg)fg.onclick=()=>{authEmail=document.getElementById("a-email").value.trim();authMode="reset";authErr="";authInfo="";renderAuth()};
   app.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{authEmail=document.getElementById("a-email").value;authMode=b.dataset.am;authErr="";authInfo="";renderAuth()});
   document.getElementById("af").onsubmit=async e=>{
     e.preventDefault();
@@ -500,6 +509,59 @@ function renderAuth(){
         if(r.error)throw r.error;
       }
     }catch(err){authErr=authError(err);authInfo="";renderAuth()}
+  };
+}
+
+function renderReset(){
+  const l=L();showDock(false);screen="auth";
+  tb.innerHTML=brandTop()+langBtn();bindLangBtn(renderAuth);
+  app.innerHTML=`<section class="auth">
+   <div class="auth-head"><img src="icon-192.png" alt=""><h1>${l.resetT}</h1></div>
+   <p class="lead">${l.resetLead}</p>
+   <form class="panel" id="rf" novalidate>
+    <label class="f">${l.email}<input id="r-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" value="${esc(authEmail)}"></label>
+    <div class="err" id="r-err">${esc(authErr||"")}</div>
+    ${authInfo?`<div class="infobox">${esc(authInfo)}</div>`:""}
+    <button class="btn ink" type="submit" id="r-go">${l.sendLink}</button>
+    <button class="linkish" type="button" id="r-back" style="align-self:center">${l.backToLogin}</button>
+   </form></section>`;
+  document.getElementById("r-back").onclick=()=>{authEmail=document.getElementById("r-email").value.trim();authMode="login";authErr="";authInfo="";renderAuth()};
+  document.getElementById("rf").onsubmit=async e=>{
+    e.preventDefault();
+    const email=document.getElementById("r-email").value.trim(),er=document.getElementById("r-err"),go=document.getElementById("r-go");
+    authEmail=email;
+    if(!email){er.textContent=l.needEmailOnly;return}
+    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent=l.badEmail;return}
+    const fix=emailFix(email);
+    if(fix&&warnedEmail!==email){warnedEmail=email;er.textContent=l.didYouMean(fix);const ei=document.getElementById("r-email");ei.value=fix;authEmail=fix;ei.focus();return}
+    go.disabled=true;er.textContent="";
+    try{const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(r.error)throw r.error;
+      authErr="";authInfo=l.resetSent(email);renderReset()}
+    catch(err){authErr=authError(err);authInfo="";renderReset()}
+  };
+}
+function renderNewPassword(){
+  const l=L();showDock(false);screen="newpw";closeSheet();
+  tb.innerHTML=brandTop();
+  app.innerHTML=`<section class="auth">
+   <div class="auth-head"><img src="icon-192.png" alt=""><h1>${l.newPwT}</h1></div>
+   <form class="panel" id="nf" novalidate>
+    <label class="f">${l.newPw}<input id="n-pw" type="password" autocomplete="new-password"></label>
+    <label class="f">${l.newPw2}<input id="n-pw2" type="password" autocomplete="new-password"></label>
+    <div class="err" id="n-err"></div>
+    <button class="btn ink" type="submit" id="n-go">${l.savePw}</button>
+   </form></section>`;
+  setTimeout(()=>{const i=document.getElementById("n-pw");if(i)i.focus()},60);
+  document.getElementById("nf").onsubmit=async e=>{
+    e.preventDefault();
+    const a=document.getElementById("n-pw").value,b=document.getElementById("n-pw2").value,er=document.getElementById("n-err"),go=document.getElementById("n-go");
+    if(a.length<6){er.textContent=l.shortPw;return}
+    if(a!==b){er.textContent=l.pwMismatch;return}
+    go.disabled=true;er.textContent="";
+    try{const r=await sb.auth.updateUser({password:a});if(r.error)throw r.error;
+      recoveryMode=false;try{history.replaceState(null,"",location.pathname)}catch(_){}
+      toast(l.pwSaved);startApp()}
+    catch(err){go.disabled=false;er.textContent=authError(err)}
   };
 }
 
@@ -528,10 +590,12 @@ async function boot(){
   try{const r=await sb.auth.getSession();session=r.data&&r.data.session}catch(e){}
   if(session)user=session.user;
   sb.auth.onAuthStateChange((ev,ses)=>{
+    if(ev==="PASSWORD_RECOVERY"){recoveryMode=true;if(ses)user=ses.user;setTimeout(renderNewPassword,0);return}
+    if(recoveryMode)return;
     if(ev==="SIGNED_OUT"){user=null;resetData();closeSheet();authInfo="";authErr="";renderAuth()}
     else if(ses&&ses.user&&(!user||user.id!==ses.user.id)&&(ev==="SIGNED_IN"||ev==="INITIAL_SESSION")){user=ses.user;setTimeout(startApp,0)}
   });
-  if(session)startApp();else renderAuth();
+  if(session&&recoveryMode)renderNewPassword();else if(session)startApp();else renderAuth();
 }
 
 /* ---------- list ---------- */
