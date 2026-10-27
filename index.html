@@ -98,7 +98,8 @@ button{cursor:pointer;touch-action:manipulation}
 
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:8;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
-.dock-in{max-width:528px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
+.dock-in{max-width:528px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px}
+.dock-in .btn{font-size:.98rem;padding:0 6px;white-space:nowrap}
 .btn{height:56px;border:0;border-radius:16px;font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center;padding:0 12px;width:100%}
 .btn.debt{background:var(--debt);color:#fff8f2}
 .btn.pay{background:var(--pay);color:#f6fbf3}
@@ -236,7 +237,7 @@ const T={
  uz:{sub:"Qarz daftari",total:"Jami qarz",debtors:"qarzdor",overdue:"muddati o'tgan",allPaid:"Hammasi to'langan",search:"Ism yoki telefon…",
   all:"Hammasi",owing:"Qarzdor",late:"Kechikkan",clear:"To'lagan",addDebt:"+ Qarz yozish",addPay:"To'lov",
   gLate:"Muddati o'tgan",gOwe:"Qarzdorlar",gClear:"Qarzi yo'q",
-  empty:"Hali mijoz yo'q. Pastdagi «Qarz yozish» tugmasi bilan birinchi yozuvni qiling.",nores:"Hech kim topilmadi.",
+  empty:"Hali mijoz yo'q. Pastdagi «+ Qarz» yoki «+ Muddatli» tugmasi bilan birinchi yozuvni qiling.",nores:"Hech kim topilmadi.",
   back:"← Orqaga",balance:"Qarz qoldig'i",paid:"Qarzi yo'q",limit:"Limit",history:"Tarix",left:"qoldi",
   remind:"Telegramda eslatish",copy:"Matnni nusxalash",copied:"Nusxalandi",preview:"Eslatma matnini ko'rish",
   debtT:"Qarz yozish",payT:"To'lov qabul qilish",who:"Kim oldi?",whoPay:"Kim to'ladi?",whoPh:"Ism yozing…",newC:"Yangi mijoz",
@@ -258,7 +259,7 @@ const T={
   login:"Kirish",signup:"Ro'yxatdan o'tish",email:"Email",password:"Parol",
   authLead:"Har bir do'kon o'z hisobiga kiradi. Yozuvlaringizni faqat siz ko'rasiz.",
   badLogin:"Email yoki parol noto'g'ri.",notConfirmed:"Email hali tasdiqlanmagan. Pochtangizdagi xatni oching.",exists:"Bu email bilan hisob bor. «Kirish» ni tanlang.",
-  shortPw:"Parol kamida 8 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",linkCheckT:"Emailingizni tasdiqlang",linkCheck:"Havola sizniki ekanini tekshirish uchun u yuborilgan emailni yozing.",linkWrong:"Email mos kelmadi, havola qabul qilinmadi. Email va parol bilan kiring.",goOn:"Davom etish",prevSaved:a=>`Oldingi urinish saqlangan ekan (${a}). Tarixni tekshiring. Yana yozish kerak bo'lsa, qayta bosing.`,cur:"so'm",credit:"Avans (ortiqcha to'langan)",creditShort:"avans",overPay:a=>`Summa qarzdan ko'p (qarz: ${a}). Baribir yozish uchun yana bir bor bosing.`,forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 8 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
+  shortPw:"Parol kamida 8 belgi bo'lsin.",needEmail:"Email va parolni kiriting.",dockDebt:"+ Qarz",dockInst:"+ Muddatli",linkCheckT:"Emailingizni tasdiqlang",linkCheck:"Havola sizniki ekanini tekshirish uchun u yuborilgan emailni yozing.",linkWrong:"Email mos kelmadi, havola qabul qilinmadi. Email va parol bilan kiring.",goOn:"Davom etish",prevSaved:a=>`Oldingi urinish saqlangan ekan (${a}). Tarixni tekshiring. Yana yozish kerak bo'lsa, qayta bosing.`,cur:"so'm",credit:"Avans (ortiqcha to'langan)",creditShort:"avans",overPay:a=>`Summa qarzdan ko'p (qarz: ${a}). Baribir yozish uchun yana bir bor bosing.`,forgot:"Parolni unutdingizmi?",resetT:"Parolni tiklash",resetLead:"Emailingizni yozing. Yangi parol qo'yish uchun havola yuboramiz.",sendLink:"Havolani yuborish",resetSent:e=>`${e} manziliga havola yuborildi. Xatni oching (Spam papkasini ham tekshiring) va havolani bosing.`,backToLogin:"← Kirishga qaytish",newPwT:"Yangi parol qo'ying",newPw:"Yangi parol (kamida 8 belgi)",newPw2:"Yangi parolni takrorlang",savePw:"Parolni saqlash",pwMismatch:"Parollar bir xil emas.",pwSaved:"Parol yangilandi",linkExpired:"Havola eskirgan yoki ishlatilgan. Yangisini so'rang.",rateLimit:"Juda ko'p urinish. Bir oz kutib, qayta urinib ko'ring.",samePw:"Yangi parol eskisidan farq qilishi kerak.",needEmailOnly:"Emailingizni kiriting.",badEmail:"Email noto'g'ri yozilgan. Masalan: ism@gmail.com",didYouMean:e=>`Balki ${e} demoqchisiz? Tuzatib qo'ydim, yana bir bor bosing.`,
   checkMail:e=>`${e} manziliga tasdiqlash xati yuborildi. Xatdagi havolani bosing, keyin shu yerda kiring.`,
   logout:"Hisobdan chiqish",account:"Hisob",cloud:"Yozuvlar bulutda saqlanadi: telefon almashsa ham yo'qolmaydi.",
   loading:"Yuklanmoqda…",net:"Internet yo'q yoki server javob bermadi.",saveFail:"Saqlanmadi. Internetni tekshiring.",
@@ -270,7 +271,7 @@ const T={
  ru:{sub:"Долговая тетрадь",total:"Всего долгов",debtors:"должников",overdue:"просрочено",allPaid:"Все оплатили",search:"Имя или телефон…",
   all:"Все",owing:"Должны",late:"Просрочка",clear:"Оплатили",addDebt:"+ Записать долг",addPay:"Оплата",
   gLate:"Просрочено",gOwe:"Должники",gClear:"Без долга",
-  empty:"Клиентов пока нет. Нажмите «Записать долг» внизу.",nores:"Никого не найдено.",
+  empty:"Клиентов пока нет. Нажмите внизу «+ Долг» или «+ Рассрочка».",nores:"Никого не найдено.",
   back:"← Назад",balance:"Остаток долга",paid:"Долга нет",limit:"Лимит",history:"История",left:"осталось",
   remind:"Напомнить в Telegram",copy:"Скопировать текст",copied:"Скопировано",preview:"Показать текст напоминания",
   debtT:"Записать долг",payT:"Принять оплату",who:"Кто взял?",whoPay:"Кто платит?",whoPh:"Введите имя…",newC:"Новый клиент",
@@ -292,7 +293,7 @@ const T={
   login:"Войти",signup:"Регистрация",email:"Email",password:"Пароль",
   authLead:"Каждый магазин входит в свой аккаунт. Ваши записи видите только вы.",
   badLogin:"Неверный email или пароль.",notConfirmed:"Email ещё не подтверждён. Откройте письмо в почте.",exists:"Аккаунт с этим email уже есть. Выберите «Войти».",
-  shortPw:"Пароль минимум 8 символов.",needEmail:"Введите email и пароль.",linkCheckT:"Подтвердите email",linkCheck:"Чтобы проверить, что ссылка ваша, введите email, на который она пришла.",linkWrong:"Email не совпал, ссылка не принята. Войдите по email и паролю.",goOn:"Продолжить",prevSaved:a=>`Предыдущая попытка уже сохранена (${a}). Проверьте историю. Если нужно записать ещё раз, нажмите снова.`,cur:"сум",credit:"Аванс (переплата)",creditShort:"аванс",overPay:a=>`Сумма больше долга (долг: ${a}). Чтобы всё равно записать, нажмите ещё раз.`,forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 8 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
+  shortPw:"Пароль минимум 8 символов.",needEmail:"Введите email и пароль.",dockDebt:"+ Долг",dockInst:"+ Рассрочка",linkCheckT:"Подтвердите email",linkCheck:"Чтобы проверить, что ссылка ваша, введите email, на который она пришла.",linkWrong:"Email не совпал, ссылка не принята. Войдите по email и паролю.",goOn:"Продолжить",prevSaved:a=>`Предыдущая попытка уже сохранена (${a}). Проверьте историю. Если нужно записать ещё раз, нажмите снова.`,cur:"сум",credit:"Аванс (переплата)",creditShort:"аванс",overPay:a=>`Сумма больше долга (долг: ${a}). Чтобы всё равно записать, нажмите ещё раз.`,forgot:"Забыли пароль?",resetT:"Восстановление пароля",resetLead:"Введите email. Мы отправим ссылку, чтобы задать новый пароль.",sendLink:"Отправить ссылку",resetSent:e=>`Ссылка отправлена на ${e}. Откройте письмо (проверьте и «Спам») и нажмите ссылку.`,backToLogin:"← Назад ко входу",newPwT:"Задайте новый пароль",newPw:"Новый пароль (минимум 8 символов)",newPw2:"Повторите новый пароль",savePw:"Сохранить пароль",pwMismatch:"Пароли не совпадают.",pwSaved:"Пароль обновлён",linkExpired:"Ссылка устарела или уже использована. Запросите новую.",rateLimit:"Слишком много попыток. Подождите и попробуйте снова.",samePw:"Новый пароль должен отличаться от старого.",needEmailOnly:"Введите email.",badEmail:"Email написан неверно. Например: name@gmail.com",didYouMean:e=>`Возможно, вы имели в виду ${e}? Я исправил, нажмите ещё раз.`,
   checkMail:e=>`На ${e} отправлено письмо для подтверждения. Нажмите ссылку в письме, затем войдите здесь.`,
   logout:"Выйти из аккаунта",account:"Аккаунт",cloud:"Записи хранятся в облаке: не пропадут при смене телефона.",
   loading:"Загрузка…",net:"Нет интернета или сервер не отвечает.",saveFail:"Не сохранено. Проверьте интернет.",
@@ -786,12 +787,13 @@ function renderList(){
   ${groups.length?groups.map(([title,cls,g])=>`<section class="group"><div class="gh ${cls}"><span>${title}</span><span class="num">${g.length}</span></div>
      <div class="rows">${g.map(r=>rowHTML(r,l)).join("")}</div></section>`).join("")
    :`<div class="empty">${S.customers.length?l.nores:l.empty}</div>`}`;
-  dockin.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
+  dockin.innerHTML=`<button class="btn debt" id="ad">${l.dockDebt}</button><button class="btn ink" id="ai">${l.dockInst}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
   bindOffline();bindInstall();
   document.getElementById("q").oninput=e=>{view.q=e.target.value;const p=e.target.selectionStart;renderList();const n=document.getElementById("q");n.focus();try{n.setSelectionRange(p,p)}catch(_){}};
   app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{view.filter=b.dataset.f;renderList()});
   app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{view={...view,name:"detail",cid:b.dataset.c};render();scrollTo(0,0)});
   document.getElementById("ad").onclick=()=>openEntry("debt");
+  document.getElementById("ai").onclick=()=>openEntry("debt",null,{mode:"inst"});
   document.getElementById("ap").onclick=()=>openEntry("pay");
   document.getElementById("set").onclick=openSettings;
   if(old){
@@ -858,10 +860,11 @@ function renderDetail(){
    <label class="f" for="lim">${l.setLimit}</label>
    <div class="inl"><input id="lim" class="search" inputmode="numeric" value="${c.limit?fmt(c.limit):""}" placeholder="0"><button class="btn soft" id="sl">${l.save}</button></div>
    <button class="linkish" id="del" style="color:var(--debt)">${l.del}</button><div id="delc"></div></div></details>`;
-  dockin.innerHTML=`<button class="btn debt" id="ad">${l.addDebt}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
+  dockin.innerHTML=`<button class="btn debt" id="ad">${l.dockDebt}</button><button class="btn ink" id="ai">${l.dockInst}</button><button class="btn pay" id="ap">${l.addPay}</button>`;
   bindOffline();
   document.getElementById("bk").onclick=()=>{view.name="list";render()};
   document.getElementById("ad").onclick=()=>openEntry("debt",c.id);
+  document.getElementById("ai").onclick=()=>openEntry("debt",c.id,{mode:"inst"});
   document.getElementById("ap").onclick=()=>openEntry("pay",c.id);
   app.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openPlan(b.dataset.plan));
   const cp=document.getElementById("cp");if(cp)cp.onclick=()=>copyText(msg,document.getElementById("msg"));
@@ -962,7 +965,7 @@ async function dropCustomer(id){await run(sb.from("customers").delete().eq("id",
 function openEntry(type,cid,opts){
   opts=opts||{};const l=L();
   const st={cid:cid||null,newName:"",phone:"",amount:opts.amount?String(opts.amount):"",due:0,note:"",
-    mode:"simple",title:"",price:"",down:"",months:6,iid:opts.iid!==undefined?opts.iid:"auto",overOk:0,
+    mode:opts.mode==="inst"?"inst":"simple",title:"",price:"",down:"",months:6,iid:opts.iid!==undefined?opts.iid:"auto",overOk:0,
     ids:{cust:uuid(),plan:uuid(),tx:uuid()}};
   const sugHTML=()=>{
     const q=st.newName.trim().toLowerCase();
